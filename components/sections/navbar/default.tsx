@@ -2,13 +2,14 @@
 
 import { type VariantProps } from "class-variance-authority";
 import { Menu } from "lucide-react";
-import { ReactNode, useEffect, useState, useRef } from "react";
+import { useState, useEffect, useRef, type ReactNode } from "react";
 import { motion } from "motion/react";
 
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
 import { GripIcon } from "../../icons";
+import { ModeToggle } from "../../ui/mode-toggle";
 import { Button, buttonVariants } from "../../ui/button";
 import {
   Navbar as NavbarComponent,
@@ -131,6 +132,37 @@ function AnimatedLink({
   );
 }
 
+function RouletteLink({ href, text, className }: { href: string; text: string; className?: string }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const spins = 5;
+
+  return (
+    <a
+      href={href}
+      className={className}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      style={{ position: "relative", overflow: "hidden", display: "inline-block", height: "1em" }}
+    >
+      <motion.div
+        style={{ display: "flex", flexDirection: "column" }}
+        initial={{ y: 0 }}
+        animate={{ y: isHovered ? `-${spins}em` : "0em" }}
+        transition={{
+          duration: 0.5,
+          ease: [0.25, 0.1, 0.25, 1],
+        }}
+      >
+        {Array.from({ length: spins + 1 }).map((_, i) => (
+          <span key={i} style={{ height: "1em", display: "flex", alignItems: "center" }}>
+            {text}
+          </span>
+        ))}
+      </motion.div>
+    </a>
+  );
+}
+
 interface NavbarLink {
   text: string;
   href: string;
@@ -177,8 +209,8 @@ export default function Navbar({
   className,
 }: NavbarProps) {
   return (
-    <header className={cn("sticky top-0 z-50 border-b-[3px] border-foreground bg-background", className)}>
-      <div className="max-w-container mx-auto px-4 py-0.5">
+    <header className={cn("sticky top-0 z-50 border-b-[2px] border-foreground/30 bg-background", className)}>
+      <div className="max-w-container mx-auto px-6 py-0.5">
         <NavbarComponent>
           <NavbarLeft>
             {/* <a
@@ -222,20 +254,24 @@ export default function Navbar({
                     {action.iconRight}
                   </a>
                 </Button>
-              ) : (
+              ) : action.text === "/" ? (
                 <a
                   key={index}
                   href={action.href}
-                  className={cn(
-                    "hidden md:block tracking-tight uppercase",
-                    action.text === "/" ? "text-xl rotate-12 font-mono font-normal" : "text-lg"
-                  )}
-                  style={action.text === "/" ? {} : { fontWeight: 550 }}
+                  className="hidden md:block tracking-tight uppercase text-xl rotate-[20deg] font-mono font-normal"
                 >
                   {action.text}
                 </a>
+              ) : (
+                <RouletteLink
+                  key={index}
+                  href={action.href}
+                  text={action.text}
+                  className="hidden md:block tracking-tight uppercase text-lg"
+                />
               ),
             )}
+            <ModeToggle />
             <Sheet>
               <SheetTrigger asChild>
                 <Button
