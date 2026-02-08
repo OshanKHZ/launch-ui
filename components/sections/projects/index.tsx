@@ -1,111 +1,173 @@
-import { type ReactNode } from "react";
-import { cn } from "@/lib/utils";
-import { BentoGrid, BentoLarge, BentoSmall } from "@/components/ui/bento-grid";
-import TechStackCarousel from "@/components/sections/logos/tech-stack";
+"use client";
 
+import { useRef } from "react";
+import { motion, useScroll, useTransform, MotionValue } from "motion/react";
 import { ExternalLink, Github } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { ActionButton } from "@/components/ui/action-button";
 
-interface ProjectCardProps {
-  children: ReactNode;
-  className?: string;
-  isLarge?: boolean;
-  liveUrl?: string;
-  codeUrl?: string;
+interface Project {
+  title: string;
+  category: string;
+  description: string;
+  src: string;
+  link: string;
+  code: string;
+  tech: string[];
 }
 
-function ProjectCard({ children, className, isLarge = false, liveUrl, codeUrl }: ProjectCardProps) {
-  return (
-    <div className={cn("relative p-1 group/card", isLarge ? "col-span-3 row-span-2" : "col-span-3", className)}>
-      {/* Cantoneiras nas 4 pontas - fixas fora do conteúdo */}
-      <div className="absolute top-0 left-0 w-3 h-3 border-l-2 border-t-2 border-foreground/60 pointer-events-none" />
-      <div className="absolute top-0 right-0 w-3 h-3 border-r-2 border-t-2 border-foreground/60 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-3 h-3 border-l-2 border-b-2 border-foreground/60 pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-3 h-3 border-r-2 border-b-2 border-foreground/60 pointer-events-none" />
-      {children}
-
-      {/* Buttons Overlay */}
-      {(liveUrl || codeUrl) && (
-        <div className="absolute bottom-5 right-5 flex gap-3 z-20">
-          {liveUrl && (
-            <a
-              href={liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-3 py-1.5 text-xs font-mono uppercase font-bold tracking-wider border border-foreground bg-transparent text-foreground transition-all duration-200 hover:bg-white hover:text-black hover:border-white hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[3px_3px_0_0_#000000]"
-            >
-              <ExternalLink className="w-3 h-3" />
-              Live
-            </a>
-          )}
-          {codeUrl && (
-            <a
-              href={codeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-3 py-1.5 text-xs font-mono uppercase font-bold tracking-wider border border-foreground bg-foreground text-background transition-all duration-200 hover:bg-primary hover:text-primary-foreground hover:border-primary hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[3px_3px_0_0_#000000]"
-            >
-              <Github className="w-3 h-3" />
-              Code
-            </a>
-          )}
-        </div>
-      )}
-    </div>
-  );
-}
+const projects: Project[] = [
+  {
+    title: "Sogai",
+    category: "AI Platform",
+    description: "A revolutionary AI platform that transforms how we interact with data. Built with performance and scalability in mind using the latest web technologies.",
+    src: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=2574&auto=format&fit=crop",
+    link: "https://google.com",
+    code: "https://github.com",
+    tech: ["Next.js", "OpenAI", "Supabase"]
+  },
+  {
+    title: "Mammoth",
+    category: "Creative Agency",
+    description: "Digital experience platform for a leading creative agency. Features immersive animations, WebGL interactions, and a custom CMS.",
+    src: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?q=80&w=2700&auto=format&fit=crop",
+    link: "https://google.com",
+    code: "https://github.com",
+    tech: ["React", "WebGL", "GSAP"]
+  },
+  {
+    title: "Architecture",
+    category: "Portfolio",
+    description: "Minimalist portfolio for an award-winning architecture firm. Focus on large typography, whitespace, and smooth transitions.",
+    src: "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2700&auto=format&fit=crop",
+    link: "https://google.com",
+    code: "https://github.com",
+    tech: ["Vue", "Nuxt", "Storyblok"]
+  },
+  {
+    title: "Daily Goods",
+    category: "E-Commerce",
+    description: "Modern e-commerce solution with real-time inventory, seamless checkout, and a highly optimized mobile experience.",
+    src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2700&auto=format&fit=crop",
+    link: "https://google.com",
+    code: "https://github.com",
+    tech: ["Shopify", "React", "Tailwind"]
+  }
+];
 
 export default function Projects() {
+  const container = useRef(null);
+
   return (
-    <section id="projects" className="py-20">
-      <div className="max-w-container mx-auto px-6">
-        <div className="flex flex-col gap-2 mb-8">
-          <span className="text-sm font-medium tracking-widest text-muted-foreground uppercase">/ Projects</span>
-          <div className="w-full h-[1.5px] bg-muted-foreground" />
+    <section ref={container} className="relative bg-background" id="projects">
+      {/* Section Label */}
+      <div className="max-w-container mx-auto px-6 py-20">
+        <div className="flex flex-col gap-2">
+          <span className="text-sm font-medium tracking-widest text-muted-foreground uppercase">/ Selected Work</span>
+          <div className="w-full h-[1.5px] bg-muted-foreground/30" />
         </div>
-        <BentoGrid className="gap-3">
-          {/* Esquerda - 2 retângulos grandes (3 col cada, 2 linhas) */}
-          <ProjectCard isLarge liveUrl="#" codeUrl="#">
-            <div className="bg-card min-h-[400px] w-full h-full flex items-center justify-center">
-              <span className="text-card-foreground">Project A1 (Large)</span>
-            </div>
-          </ProjectCard>
-          <ProjectCard isLarge>
-            <div className="bg-card min-h-[400px] w-full h-full flex items-center justify-center">
-              <span className="text-card-foreground">Project A2 (Large)</span>
-            </div>
-          </ProjectCard>
-
-          {/* Direita - 4 retângulos pequenos (3 col cada, 1 linha) - linha 1 */}
-          <ProjectCard>
-            <div className="bg-card min-h-[194px] w-full h-full flex items-center justify-center">
-              <span className="text-card-foreground">Project A3</span>
-            </div>
-          </ProjectCard>
-          <ProjectCard>
-            <div className="bg-card min-h-[194px] w-full h-full flex items-center justify-center">
-              <span className="text-card-foreground">Project A4</span>
-            </div>
-          </ProjectCard>
-
-          {/* Direita - 4 retângulos pequenos (3 col cada, 1 linha) - linha 2 */}
-          <ProjectCard>
-            <div className="bg-card min-h-[194px] w-full h-full flex items-center justify-center">
-              <span className="text-card-foreground">Project B3</span>
-            </div>
-          </ProjectCard>
-          <ProjectCard>
-            <div className="bg-card min-h-[194px] w-full h-full flex items-center justify-center">
-              <span className="text-card-foreground">Project B4</span>
-            </div>
-          </ProjectCard>
-
-          {/* New row for Carousel */}
-          <div className="col-span-12 py-8">
-            <TechStackCarousel />
-          </div>
-
-        </BentoGrid>
       </div>
+
+      <div className="flex flex-col">
+        {projects.map((project, i) => {
+          // Calculate scale target for stacking effect
+          const targetScale = 1 - ((projects.length - i) * 0.05);
+          return (
+            <Card
+              key={i}
+              i={i}
+              {...project}
+              progress={null} // We handle internal progress if needed, or pass from parent.
+              // Actually simplest is sticky stacking without parent scroll link for now.
+              range={[i * 0.25, 1]}
+              targetScale={targetScale}
+              total={projects.length}
+            />
+          );
+        })}
+      </div>
+      {/* Spacer at bottom */}
+      <div className="h-[20vh]" />
     </section>
   );
 }
+
+interface CardProps extends Project {
+  i: number;
+  progress: MotionValue<number> | null;
+  range: [number, number];
+  targetScale: number;
+  total: number;
+}
+
+const Card = ({ i, title, category, description, src, link, code, tech, targetScale, total }: CardProps) => {
+  const container = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ["start end", "start start"]
+  });
+
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1.3, 1]);
+  //   const scale = useTransform(progress, range, [1, targetScale]); // Re-enable if using parent progress
+
+  return (
+    <div
+      ref={container}
+      className="h-[350px] sticky flex items-start justify-center p-2 md:p-6"
+      style={{ top: `calc(4rem + ${i * 50}px)` }}
+    >
+      <motion.div
+        className="w-full h-full md:h-[320px] grid grid-cols-1 md:grid-cols-12 bg-background border-t-2 border-foreground overflow-hidden relative pt-4"
+      >
+        {/* Left Image - 6 Cols */}
+        <div className="md:col-span-6 h-full relative overflow-hidden group border-r border-border">
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors z-10" />
+          <motion.div style={{ scale: imageScale }} className="w-full h-full">
+            <img
+              src={src}
+              alt={title}
+              className="object-cover w-full h-full"
+            />
+          </motion.div>
+        </div>
+
+        {/* Right Content - 6 Cols */}
+        <div className="md:col-span-6 h-full flex flex-col justify-between bg-background relative z-10">
+          {/* Header inside Right Col */}
+          <div className="w-full flex justify-between items-start pl-6 pr-6">
+            <h2 className="text-2xl md:text-4xl font-mono uppercase tracking-tighter font-bold leading-none mt-[-0.2em]">{title}</h2>
+            <span className="font-mono text-xs tracking-widest uppercase hidden md:block border border-border px-2 py-1 rounded-full">{category}</span>
+          </div>
+
+          <div className="flex-1 flex flex-col pl-6 pr-6 pb-0">
+            {/* Spacer to push everything to bottom */}
+            <div className="flex-1" />
+
+            {/* 1. Buttons */}
+            <div className="flex items-center gap-4 mb-6">
+              <ActionButton href={link} label="Live Site" Icon={ExternalLink} variant="outline" />
+              <ActionButton href={code} label="Source Code" Icon={Github} variant="solid" />
+            </div>
+
+            {/* 2. Description */}
+            <p className="text-base md:text-lg text-muted-foreground line-clamp-3 text-landing-body mb-4">
+              {description}
+            </p>
+
+            {/* 3. Bottom Stack Section */}
+            <div className="w-full border-t-2 border-border pt-2 pb-2 mt-0 flex items-center gap-4">
+              <span className="text-sm font-mono uppercase font-bold tracking-wider shrink-0 leading-none">Stack:</span>
+              <div className="flex flex-wrap gap-x-4 items-center">
+                {tech.map((t, idx) => (
+                  <span key={idx} className="text-sm font-mono uppercase tracking-wider text-muted-foreground leading-none">
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+};

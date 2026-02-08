@@ -258,7 +258,8 @@
 }
 
 body {
-  letter-spacing: var(--tracking-normal);
+  letter-spacing: -0.03em;
+  line-height: 1.1em;
 }
 
 @layer base {
@@ -278,5 +279,10 @@ body {
 
   .font-monorama {
     font-family: 'Monorama', monospace;
+  }
+
+  .text-landing-body {
+    letter-spacing: -0.03em;
+    line-height: 1.1em;
   }
 }

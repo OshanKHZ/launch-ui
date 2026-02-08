@@ -97,7 +97,7 @@ function AnimatedLink({
   return (
     <a
       href={href}
-      className="flex items-center gap-1.5 bg-badge px-3 py-2 h-9 relative overflow-hidden"
+      className="flex items-center gap-1.5 bg-badge px-3 py-2 h-9 relative overflow-hidden rounded-[2px]"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -197,7 +197,7 @@ export default function Navbar({
   actions = [
     { text: "Projects", href: "#projects", isButton: false },
     { text: "/", href: "#", isButton: false },
-    { text: "About", href: "#about", isButton: false },
+    { text: "About Me", href: "#about", isButton: false },
     // {
     //   text: "Get Started",
     //   href: siteConfig.url,
@@ -225,7 +225,7 @@ export default function Navbar({
               <div className="flex items-center gap-1 font-mono text-base tracking-tight leading-none font-semibold">
                 <a
                   href={homeUrl}
-                  className="flex items-center justify-center gap-1.5 bg-badge px-3 py-2 h-9 hover:bg-badge-hover transition-colors group"
+                  className="flex items-center justify-center gap-1.5 bg-badge px-3 py-2 h-9 hover:bg-badge-hover transition-colors group rounded-[2px]"
                 >
                   <GripIcon size={18} className="text-foreground group-hover:text-white transition-colors" />
                 </a>

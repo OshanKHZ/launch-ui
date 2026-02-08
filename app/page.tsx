@@ -6,7 +6,9 @@ import Items from "../components/sections/items/default";
 import Logos from "../components/sections/logos/default";
 import Navbar from "../components/sections/navbar/default";
 import Pricing from "../components/sections/pricing/default";
+import Skills from "../components/sections/skills";
 import Projects from "../components/sections/projects";
+import TechStackCarousel from "../components/sections/logos/tech-stack";
 import Stats from "../components/sections/stats/default";
 import { LayoutLines } from "../components/ui/layout-lines";
 
@@ -19,6 +21,8 @@ export default function Home() {
       <Logos />
       <Items />
       <Stats />
+      <TechStackCarousel />
+      <Skills />
       <Projects />
       <Pricing />
       <FAQ />
@@ -27,3 +31,4 @@ export default function Home() {
     </main>
   );
 }
+
