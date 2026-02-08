@@ -223,6 +223,9 @@ const ScrollStack = ({
     const setupLenis = useCallback(() => {
         // Lenis instance logic
         let lenis: Lenis;
+        let lastScrollY = 0;
+        let lastTime = Date.now();
+        let velocityTimeout: NodeJS.Timeout;
 
         if (useWindowScroll) {
             lenis = new Lenis({
@@ -233,7 +236,33 @@ const ScrollStack = ({
                 // Actually, let's keep it simple as provided.
             });
 
-            lenis.on('scroll', handleScroll);
+            lenis.on('scroll', ({ scroll, velocity }) => {
+                handleScroll();
+
+                // Calculate velocity and dispatch custom event
+                const currentTime = Date.now();
+                const deltaY = Math.abs(scroll - lastScrollY);
+                const deltaTime = currentTime - lastTime;
+
+                if (deltaTime > 0) {
+                    const calculatedVelocity = deltaY / deltaTime;
+                    console.log('Dispatching velocity event:', calculatedVelocity);
+                    window.dispatchEvent(new CustomEvent('lenis-velocity', {
+                        detail: { velocity: calculatedVelocity }
+                    }));
+                }
+
+                lastScrollY = scroll;
+                lastTime = currentTime;
+
+                // Clear existing timeout and set new one for decay
+                clearTimeout(velocityTimeout);
+                velocityTimeout = setTimeout(() => {
+                    window.dispatchEvent(new CustomEvent('lenis-velocity', {
+                        detail: { velocity: 0 }
+                    }));
+                }, 100);
+            });
 
             const raf = (time: number) => {
                 lenis.raf(time);
@@ -254,7 +283,33 @@ const ScrollStack = ({
                 easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             });
 
-            lenis.on('scroll', handleScroll);
+            lenis.on('scroll', ({ scroll, velocity }) => {
+                handleScroll();
+
+                // Calculate velocity and dispatch custom event
+                const currentTime = Date.now();
+                const deltaY = Math.abs(scroll - lastScrollY);
+                const deltaTime = currentTime - lastTime;
+
+                if (deltaTime > 0) {
+                    const calculatedVelocity = deltaY / deltaTime;
+                    console.log('Dispatching velocity event:', calculatedVelocity);
+                    window.dispatchEvent(new CustomEvent('lenis-velocity', {
+                        detail: { velocity: calculatedVelocity }
+                    }));
+                }
+
+                lastScrollY = scroll;
+                lastTime = currentTime;
+
+                // Clear existing timeout and set new one for decay
+                clearTimeout(velocityTimeout);
+                velocityTimeout = setTimeout(() => {
+                    window.dispatchEvent(new CustomEvent('lenis-velocity', {
+                        detail: { velocity: 0 }
+                    }));
+                }, 100);
+            });
 
             const raf = (time: number) => {
                 lenis.raf(time);

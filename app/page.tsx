@@ -17,7 +17,7 @@ export default function Home() {
     <main className="bg-background text-foreground min-h-screen w-full">
       <LayoutLines />
       <Navbar />
-      <Hero />
+      {/* <Hero /> */}
       {/* <Logos /> */}
       {/* <Items /> */}
       {/* <Stats /> */}
