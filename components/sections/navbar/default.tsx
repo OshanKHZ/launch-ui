@@ -209,8 +209,9 @@ export default function Navbar({
   className,
 }: NavbarProps) {
   return (
-    <header className={cn("sticky top-0 z-50 border-b-[2px] border-foreground/30 bg-background", className)}>
-      <div className="max-w-container mx-auto px-6 py-0.5">
+    <header className={cn("sticky top-0 z-50 -mb-4 px-4 pb-4", className)}>
+      <div className="absolute left-0 h-30 w-full bg-gradient-to-b from-background from-45% to-transparent"></div>
+      <div className="relative mx-auto max-w-container">
         <NavbarComponent>
           <NavbarLeft>
             {/* <a

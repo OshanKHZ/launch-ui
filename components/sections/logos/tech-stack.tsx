@@ -57,6 +57,18 @@ const logos = [
         className: "h-16 w-auto grayscale brightness-50 contrast-200 mix-blend-multiply",
         isImage: true
     },
+    {
+        name: "Claude Code",
+        src: "https://upload.wikimedia.org/wikipedia/commons/b/b0/Claude_AI_symbol.svg",
+        className: "h-16 w-auto grayscale brightness-50 contrast-200 mix-blend-multiply",
+        isImage: true
+    },
+    {
+        name: "Supabase",
+        src: "/logos/supabase.svg",
+        className: "h-18 w-auto grayscale brightness-50 contrast-400 mix-blend-multiply",
+        isImage: true
+    },
 ];
 
 interface FilmCarouselProps {
