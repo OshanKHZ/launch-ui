@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, MotionValue } from "motion/react";
 import { ExternalLink, Github } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { ActionButton } from "@/components/ui/action-button";
 
 interface Project {
@@ -18,8 +17,8 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: "Sogai",
-    category: "AI Platform",
+    title: "Custom CRM",
+    category: "SaaS",
     description: "A revolutionary AI platform that transforms how we interact with data. Built with performance and scalability in mind using the latest web technologies.",
     src: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=2574&auto=format&fit=crop",
     link: "https://google.com",
@@ -27,8 +26,8 @@ const projects: Project[] = [
     tech: ["Next.js", "OpenAI", "Supabase"]
   },
   {
-    title: "Mammoth",
-    category: "Creative Agency",
+    title: "Participa DF",
+    category: "Government Ombudsman",
     description: "Digital experience platform for a leading creative agency. Features immersive animations, WebGL interactions, and a custom CMS.",
     src: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?q=80&w=2700&auto=format&fit=crop",
     link: "https://google.com",
@@ -36,8 +35,8 @@ const projects: Project[] = [
     tech: ["React", "WebGL", "GSAP"]
   },
   {
-    title: "Architecture",
-    category: "Portfolio",
+    title: "Supavisor",
+    category: "Supabase Tool",
     description: "Minimalist portfolio for an award-winning architecture firm. Focus on large typography, whitespace, and smooth transitions.",
     src: "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2700&auto=format&fit=crop",
     link: "https://google.com",
@@ -45,7 +44,7 @@ const projects: Project[] = [
     tech: ["Vue", "Nuxt", "Storyblok"]
   },
   {
-    title: "Daily Goods",
+    title: "Stephany Rocha",
     category: "E-Commerce",
     description: "Modern e-commerce solution with real-time inventory, seamless checkout, and a highly optimized mobile experience.",
     src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2700&auto=format&fit=crop",
@@ -113,11 +112,11 @@ const Card = ({ i, title, category, description, src, link, code, tech, targetSc
   return (
     <div
       ref={container}
-      className="h-[350px] sticky flex items-start justify-center p-2 md:p-6"
+      className="h-[370px] sticky flex items-start justify-center p-2 md:p-6"
       style={{ top: `calc(4rem + ${i * 50}px)` }}
     >
       <motion.div
-        className="w-full h-full md:h-[320px] grid grid-cols-1 md:grid-cols-12 bg-background border-t-2 border-foreground overflow-hidden relative pt-4"
+        className="w-full h-full md:h-[350px] grid grid-cols-1 md:grid-cols-12 bg-background border-t-2 border-foreground overflow-hidden relative pt-4"
       >
         {/* Left Image - 6 Cols */}
         <div className="md:col-span-6 h-full relative overflow-hidden group border-r border-border">
@@ -134,9 +133,9 @@ const Card = ({ i, title, category, description, src, link, code, tech, targetSc
         {/* Right Content - 6 Cols */}
         <div className="md:col-span-6 h-full flex flex-col justify-between bg-background relative z-10">
           {/* Header inside Right Col */}
-          <div className="w-full flex justify-between items-start pl-6 pr-6">
+          <div className="w-full flex justify-between items-center pl-6 pr-6">
             <h2 className="text-2xl md:text-4xl font-mono uppercase tracking-tighter font-bold leading-none mt-[-0.2em]">{title}</h2>
-            <span className="font-mono text-xs tracking-widest uppercase hidden md:block border border-border px-2 py-1 rounded-full">{category}</span>
+            <span className="font-mono text-xs tracking-widest uppercase hidden md:block text-muted-foreground">{category}</span>
           </div>
 
           <div className="flex-1 flex flex-col pl-6 pr-6 pb-0">
@@ -155,15 +154,11 @@ const Card = ({ i, title, category, description, src, link, code, tech, targetSc
             </p>
 
             {/* 3. Bottom Stack Section */}
-            <div className="w-full border-t-2 border-border pt-2 pb-2 mt-0 flex items-center gap-4">
+            <div className="w-full border-t-2 border-border pt-2 pb-2 mt-0 flex items-center justify-between gap-4">
               <span className="text-sm font-mono uppercase font-bold tracking-wider shrink-0 leading-none">Stack:</span>
-              <div className="flex flex-wrap gap-x-4 items-center">
-                {tech.map((t, idx) => (
-                  <span key={idx} className="text-sm font-mono uppercase tracking-wider text-muted-foreground leading-none">
-                    {t}
-                  </span>
-                ))}
-              </div>
+              <span className="text-sm font-mono uppercase tracking-wider text-muted-foreground leading-none text-right truncate">
+                {tech.join(", ")}
+              </span>
             </div>
           </div>
         </div>
