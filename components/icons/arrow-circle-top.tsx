@@ -1,5 +1,7 @@
+"use client";
 
 import { cn } from "@/lib/utils";
+import { motion, SVGMotionProps } from "motion/react";
 
 export const ArrowCircleTopIcon = ({
     className,
@@ -8,9 +10,9 @@ export const ArrowCircleTopIcon = ({
 }: {
     className?: string;
     size?: number;
-} & React.SVGProps<SVGSVGElement>) => {
+} & SVGMotionProps<SVGSVGElement>) => {
     return (
-        <svg
+        <motion.svg
             width={size}
             height={size}
             viewBox="0 0 512 512"
@@ -18,18 +20,31 @@ export const ArrowCircleTopIcon = ({
             className={cn("", className)}
             {...props}
         >
-            <circle
+            {/* Outline Circle - Animates fill from transparent to orange */}
+            <motion.circle
                 cx="256"
                 cy="256"
                 r="240"
-                fill="none"
+                fill="rgba(170, 83, 46, 0)"
                 strokeWidth="32"
-                className="icon-circle stroke-current text-foreground"
+                stroke="currentColor"
+                className="icon-circle"
+                variants={{
+                    hover: { fill: "#aa532e" }
+                }}
+                transition={{ duration: 0.3 }}
             />
-            <polygon
+
+            {/* Arrow - Animates to white */}
+            <motion.polygon
                 points="142.319 241.027 164.947 263.654 240 188.602 240 376 272 376 272 188.602 347.053 263.654 369.681 241.027 256 127.347 142.319 241.027"
-                className="icon-arrow fill-current text-foreground"
+                fill="currentColor"
+                variants={{
+                    hover: { fill: "#FFFFFF" }
+                }}
+                transition={{ duration: 0.3 }}
+                className="icon-arrow relative z-10"
             />
-        </svg>
+        </motion.svg>
     );
 };

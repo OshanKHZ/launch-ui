@@ -41,7 +41,7 @@ const projects: Project[] = [
   {
     title: "Supavisor",
     category: "SQL Linter",
-    description: "Fast SQL linter for Supabase migrations. Detects RLS issues, performance bottlenecks, and generates automatic fixes for better DX.",
+    description: "Developed a fast SQL linter for Supabase migrations that detects RLS issues and performance bottlenecks, generating automatic fixes to improve developer experience.",
     src: "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2700&auto=format&fit=crop",
     link: "https://www.npmjs.com/package/supavisor", // Placeholder for NPM link request
     code: "https://github.com/OshanKHZ/supavisor",

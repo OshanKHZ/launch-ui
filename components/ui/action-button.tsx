@@ -8,6 +8,7 @@ interface ActionButtonProps {
     href: string;
     label: string;
     Icon?: LucideIcon;
+    IconRight?: LucideIcon;
     variant?: "outline" | "solid" | "cta";
     className?: string;
     target?: string;
@@ -17,6 +18,7 @@ export function ActionButton({
     href,
     label,
     Icon,
+    IconRight,
     variant = "outline",
     className,
     target = "_blank"
@@ -26,7 +28,7 @@ export function ActionButton({
             href={href}
             target={target}
             className={cn(
-                "flex items-center gap-2 px-3 py-1.5 text-xs font-mono uppercase font-bold tracking-wider border border-foreground transition-all duration-200",
+                "group/btn flex items-center gap-2 px-3 py-1.5 text-xs font-mono uppercase font-bold tracking-wider border border-foreground transition-all duration-300",
 
                 // Base Hover Effects (Move + Hard Shadow in Black)
                 "hover:-translate-y-1 hover:-translate-x-1",
@@ -46,6 +48,7 @@ export function ActionButton({
         >
             {Icon && <Icon size={12} />}
             <span>{label}</span>
+            {IconRight && <IconRight size={12} className="transition-transform duration-300 group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5" />}
         </Link>
     );
 }

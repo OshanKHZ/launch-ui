@@ -1,4 +1,7 @@
+"use client";
+
 import { ReactNode } from "react";
+import { ArrowUpRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -62,6 +65,8 @@ export default function CTA({
                 label={buttons[0].label}
                 variant={buttons[0].variant || "solid"}
                 target="_self"
+                className="inline-flex"
+                IconRight={ArrowUpRight}
               />
             )}
           </div>

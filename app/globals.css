@@ -52,6 +52,7 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-inverted-muted: var(--inverted-muted);
 
   --font-sans: var(--font-sans);
   --font-mono: 'Space Mono', monospace;
@@ -178,6 +179,7 @@
   --sidebar-accent-foreground: #282e32;
   --sidebar-border: #ababa3;
   --sidebar-ring: #aa532e;
+  --inverted-muted: #CDC9B9;
   --font-sans: 'Favorit', sans-serif;
   --font-serif: 'Georgia', serif;
   --font-mono: 'Space Mono', monospace;
@@ -237,6 +239,7 @@
   --sidebar-accent-foreground: #282e32;
   --sidebar-border: #323a3f;
   --sidebar-ring: #aa532e;
+  --inverted-muted: #CDC9B9;
   --font-sans: 'Favorit', sans-serif;
   --font-serif: 'Georgia', serif;
   --font-mono: 'Space Mono', monospace;

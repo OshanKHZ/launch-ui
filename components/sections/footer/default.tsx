@@ -38,9 +38,9 @@ export default function FooterSection({
   className,
 }: FooterProps) {
   const links = socialLinks || {
-    instagram: "https://instagram.com/lucas.oshan",
-    linkedin: "https://linkedin.com/in/lucasoshan",
-    github: "https://github.com/lucasshan",
+    instagram: "https://instagram.com/oshan.ia",
+    linkedin: "https://www.linkedin.com/in/lucas-lima-oshan/",
+    github: "https://github.com/oshankhz",
   };
 
   return (

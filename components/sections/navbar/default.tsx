@@ -278,12 +278,7 @@ export default function Navbar({
             </a> */}
             {showNavigation && (
               <div className="flex items-center gap-1 font-mono text-base tracking-tight leading-none font-semibold">
-                <a
-                  href={homeUrl}
-                  className="flex items-center justify-center gap-1.5 bg-badge/50 backdrop-blur-md border border-badge/50 px-3 py-1.5 h-8 hover:bg-badge-hover transition-colors group rounded-[2px]"
-                >
-                  <GripIcon size={18} className="text-foreground group-hover:text-white transition-colors" />
-                </a>
+
                 <AnimatedLink href="#components" index={"📍"}>
                   RJ, BRAZIL
                 </AnimatedLink>
@@ -324,11 +319,12 @@ export default function Navbar({
             )}
             <motion.button
               className="shrink-0 hidden md:flex group size-10 items-center justify-center rounded-md hover:bg-transparent cursor-pointer"
-              whileHover={{ scale: 1.05 }}
+              variants={{ hover: { scale: 1.05 } }}
+              whileHover="hover"
               transition={{ duration: 0.3, ease: [0.87, 0, 0.13, 1] }}
             >
               <ArrowCircleTopIcon
-                className="rotate-[-135deg] transition-transform duration-300 group-hover:rotate-[-180deg] [&_.icon-circle]:transition-colors [&_.icon-circle]:duration-500 [&_.icon-circle]:ease-out [&_.icon-circle]:group-hover:fill-[#aa532e] [&_.icon-circle]:group-hover:stroke-[#aa532e] [&_.icon-arrow]:transition-colors [&_.icon-arrow]:duration-300 [&_.icon-arrow]:group-hover:text-white"
+                className="rotate-[-135deg] transition-transform duration-300 group-hover:rotate-[-180deg] text-[#aa532e]"
                 size={24}
               />
             </motion.button>
