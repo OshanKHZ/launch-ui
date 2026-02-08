@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, MotionValue } from "motion/react";
 import { ExternalLink, Github } from "lucide-react";
 import { ActionButton } from "@/components/ui/action-button";
+import { SectionHeader } from "@/components/ui/section-header";
 
 interface Project {
   title: string;
@@ -13,6 +14,7 @@ interface Project {
   link: string;
   code: string;
   tech: string[];
+  role: string;
 }
 
 const projects: Project[] = [
@@ -23,7 +25,8 @@ const projects: Project[] = [
     src: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=2574&auto=format&fit=crop",
     link: "https://google.com",
     code: "https://github.com",
-    tech: ["Next.js", "OpenAI", "Supabase"]
+    tech: ["Next.js", "OpenAI", "Supabase"],
+    role: "Full Stack Developer"
   },
   {
     title: "Participa DF",
@@ -32,7 +35,8 @@ const projects: Project[] = [
     src: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?q=80&w=2700&auto=format&fit=crop",
     link: "https://google.com",
     code: "https://github.com",
-    tech: ["React", "WebGL", "GSAP"]
+    tech: ["React", "WebGL", "GSAP"],
+    role: "Frontend Developer"
   },
   {
     title: "Supavisor",
@@ -41,7 +45,8 @@ const projects: Project[] = [
     src: "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2700&auto=format&fit=crop",
     link: "https://google.com",
     code: "https://github.com",
-    tech: ["Vue", "Nuxt", "Storyblok"]
+    tech: ["Vue", "Nuxt", "Storyblok"],
+    role: "Full Stack Developer"
   },
   {
     title: "Stephany Rocha",
@@ -50,7 +55,8 @@ const projects: Project[] = [
     src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2700&auto=format&fit=crop",
     link: "https://google.com",
     code: "https://github.com",
-    tech: ["Shopify", "React", "Tailwind"]
+    tech: ["Shopify", "React", "Tailwind"],
+    role: "Frontend Developer"
   }
 ];
 
@@ -60,11 +66,8 @@ export default function Projects() {
   return (
     <section ref={container} className="relative bg-background" id="projects">
       {/* Section Label */}
-      <div className="max-w-container mx-auto px-6 py-20">
-        <div className="flex flex-col gap-2">
-          <span className="text-sm font-medium tracking-widest text-muted-foreground uppercase">/ Selected Work</span>
-          <div className="w-full h-[1.5px] bg-muted-foreground/30" />
-        </div>
+      <div className="max-w-container mx-auto px-6 pt-20">
+        <SectionHeader title="Selected_Work" />
       </div>
 
       <div className="flex flex-col">
@@ -99,7 +102,7 @@ interface CardProps extends Project {
   total: number;
 }
 
-const Card = ({ i, title, category, description, src, link, code, tech, targetScale, total }: CardProps) => {
+const Card = ({ i, title, category, description, src, link, code, tech, role, targetScale, total }: CardProps) => {
   const container = useRef(null);
   const { scrollYProgress } = useScroll({
     target: container,
@@ -158,6 +161,14 @@ const Card = ({ i, title, category, description, src, link, code, tech, targetSc
               <span className="text-sm font-mono uppercase font-bold tracking-wider shrink-0 leading-none">Stack:</span>
               <span className="text-sm font-mono uppercase tracking-wider text-muted-foreground leading-none text-right truncate">
                 {tech.join(", ")}
+              </span>
+            </div>
+
+            {/* 4. Role Section */}
+            <div className="w-full border-t-2 border-border pt-2 pb-2 mt-0 flex items-center justify-between gap-4">
+              <span className="text-sm font-mono uppercase font-bold tracking-wider shrink-0 leading-none">Role:</span>
+              <span className="text-sm font-mono uppercase tracking-wider text-muted-foreground leading-none text-right truncate">
+                {role}
               </span>
             </div>
           </div>

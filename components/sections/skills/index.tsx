@@ -1,6 +1,7 @@
 import { type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { BentoGrid } from "@/components/ui/bento-grid";
+import { SectionHeader } from "@/components/ui/section-header";
 
 import { ExternalLink, Github } from "lucide-react";
 
@@ -57,10 +58,7 @@ export default function Skills() {
   return (
     <section id="skills" className="py-20">
       <div className="max-w-container mx-auto px-6">
-        <div className="flex flex-col gap-2 mb-8">
-          <span className="text-sm font-medium tracking-widest text-muted-foreground uppercase">/ Skills</span>
-          <div className="w-full h-[1.5px] bg-muted-foreground" />
-        </div>
+        <SectionHeader title="Skills" />
         <BentoGrid className="gap-3">
           {/* Esquerda - 2 retângulos grandes (3 col cada, 2 linhas) */}
           <ProjectCard isLarge liveUrl="#" codeUrl="#">

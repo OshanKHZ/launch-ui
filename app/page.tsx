@@ -21,8 +21,8 @@ export default function Home() {
       <Logos />
       <Items />
       <Stats />
-      <TechStackCarousel />
       <Skills />
+      <TechStackCarousel />
       <Projects />
       <Pricing />
       <FAQ />

@@ -8,9 +8,14 @@ import { motion } from "motion/react";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
-import { GripIcon } from "../../icons";
-import { ModeToggle } from "../../ui/mode-toggle";
+import { GripIcon, ArrowCircleTopIcon } from "../../icons";
 import { Button, buttonVariants } from "../../ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../../ui/dropdown-menu";
 import {
   Navbar as NavbarComponent,
   NavbarLeft,
@@ -90,14 +95,14 @@ function AnimatedLink({
 }: {
   href: string;
   children: string;
-  index: number;
+  index: number | string;
 }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <a
       href={href}
-      className="flex items-center gap-1.5 bg-badge px-3 py-2 h-9 relative overflow-hidden rounded-[2px]"
+      className="flex items-center gap-1.5 bg-badge/50 backdrop-blur-md border border-badge/50 px-3 py-1.5 h-8 relative overflow-hidden rounded-[2px]"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -129,6 +134,57 @@ function AnimatedLink({
         transition={{ duration, ease: easing }}
       />
     </a>
+  );
+}
+
+function ThemeSelector() {
+  const [isHovered, setIsHovered] = useState(false);
+  const [theme, setTheme] = useState("System");
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <a
+          className="flex items-center gap-1.5 bg-badge/50 backdrop-blur-md border border-badge/50 px-3 py-1.5 h-8 relative overflow-hidden rounded-[2px] cursor-pointer"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <span
+            className="relative z-10"
+            style={{
+              color: isHovered ? "rgb(255 255 255)" : "hsl(var(--badge-foreground))"
+            }}
+          >
+            THEME:
+          </span>
+          <span
+            className="relative z-10 transition-colors"
+            style={{
+              color: isHovered ? "rgb(255 255 255)" : "hsl(var(--badge-foreground))",
+              opacity: isHovered ? 0.6 : 0.7
+            }}
+          >
+            {" "}
+            <DecryptedText
+              text={theme.toUpperCase()}
+              speed={35}
+              isActive={isHovered}
+            />
+          </span>
+          <motion.div
+            className="absolute inset-y-0 left-0 bg-badge-hover"
+            initial={{ width: "0%" }}
+            animate={{ width: isHovered ? "100%" : "0%" }}
+            transition={{ duration: 0.35, ease: [0.87, 0, 0.13, 1] }}
+          />
+        </a>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="start">
+        <DropdownMenuItem onClick={() => setTheme("Light")}>Light</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("Dark")}>Dark</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("System")}>System</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
 
@@ -209,10 +265,10 @@ export default function Navbar({
   className,
 }: NavbarProps) {
   return (
-    <header className={cn("sticky top-0 z-50 -mb-4 px-4 pb-4", className)}>
+    <header className={cn("sticky top-0 z-50 -mb-4 pb-2", className)}>
       <div className="absolute left-0 h-30 w-full bg-gradient-to-b from-background from-45% to-transparent"></div>
-      <div className="relative mx-auto max-w-container">
-        <NavbarComponent>
+      <div className="relative mx-auto max-w-container px-2 md:px-6">
+        <NavbarComponent className="py-2">
           <NavbarLeft>
             {/* <a
               href={homeUrl}
@@ -225,19 +281,17 @@ export default function Navbar({
               <div className="flex items-center gap-1 font-mono text-base tracking-tight leading-none font-semibold">
                 <a
                   href={homeUrl}
-                  className="flex items-center justify-center gap-1.5 bg-badge px-3 py-2 h-9 hover:bg-badge-hover transition-colors group rounded-[2px]"
+                  className="flex items-center justify-center gap-1.5 bg-badge/50 backdrop-blur-md border border-badge/50 px-3 py-1.5 h-8 hover:bg-badge-hover transition-colors group rounded-[2px]"
                 >
                   <GripIcon size={18} className="text-foreground group-hover:text-white transition-colors" />
                 </a>
                 <AnimatedLink href="#getting-started" index={0}>
                   GETTING STARTED
                 </AnimatedLink>
-                <AnimatedLink href="#components" index={1}>
-                  COMPONENTS
+                <AnimatedLink href="#components" index={"📍"}>
+                  RJ, BRAZIL
                 </AnimatedLink>
-                <AnimatedLink href="#documentation" index={2}>
-                  DOCUMENTATION
-                </AnimatedLink>
+                <ThemeSelector />
               </div>
             )}
           </NavbarLeft>
@@ -272,7 +326,16 @@ export default function Navbar({
                 />
               ),
             )}
-            <ModeToggle />
+            <motion.button
+              className="shrink-0 hidden md:flex group size-10 items-center justify-center rounded-md hover:bg-transparent"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3, ease: [0.87, 0, 0.13, 1] }}
+            >
+              <ArrowCircleTopIcon
+                className="rotate-[-135deg] transition-transform duration-300 group-hover:rotate-[-180deg] [&_.icon-circle]:transition-colors [&_.icon-circle]:duration-500 [&_.icon-circle]:ease-out [&_.icon-circle]:group-hover:fill-[#aa532e] [&_.icon-circle]:group-hover:stroke-[#aa532e] [&_.icon-arrow]:transition-colors [&_.icon-arrow]:duration-300 [&_.icon-arrow]:group-hover:text-white"
+                size={24}
+              />
+            </motion.button>
             <Sheet>
               <SheetTrigger asChild>
                 <Button
