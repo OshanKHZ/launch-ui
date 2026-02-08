@@ -1,0 +1,79 @@
+import { type ReactNode } from "react";
+import { cn } from "@/lib/utils";
+import { BentoGrid, BentoLarge, BentoSmall } from "@/components/ui/bento-grid";
+import TechStackCarousel from "@/components/sections/logos/tech-stack";
+
+interface ProjectCardProps {
+  children: ReactNode;
+  className?: string;
+  isLarge?: boolean;
+}
+
+function ProjectCard({ children, className, isLarge = false }: ProjectCardProps) {
+  return (
+    <div className={cn("relative p-1", isLarge ? "col-span-3 row-span-2" : "col-span-3", className)}>
+      {/* Cantoneiras nas 4 pontas - fixas fora do conteúdo */}
+      <div className="absolute top-0 left-0 w-3 h-3 border-l-2 border-t-2 border-foreground/60 pointer-events-none" />
+      <div className="absolute top-0 right-0 w-3 h-3 border-r-2 border-t-2 border-foreground/60 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-3 h-3 border-l-2 border-b-2 border-foreground/60 pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-3 h-3 border-r-2 border-b-2 border-foreground/60 pointer-events-none" />
+      {children}
+    </div>
+  );
+}
+
+export default function Projects() {
+  return (
+    <section id="projects" className="py-20">
+      <div className="max-w-container mx-auto px-6">
+        <div className="flex flex-col gap-2 mb-8">
+          <span className="text-sm font-medium tracking-widest text-muted-foreground uppercase">/ Projects</span>
+          <div className="w-full h-[1.5px] bg-muted-foreground" />
+        </div>
+        <BentoGrid className="gap-3">
+          {/* Esquerda - 2 retângulos grandes (3 col cada, 2 linhas) */}
+          <ProjectCard isLarge>
+            <div className="bg-card min-h-[400px] w-full h-full flex items-center justify-center">
+              <span className="text-card-foreground">Project A1 (Large)</span>
+            </div>
+          </ProjectCard>
+          <ProjectCard isLarge>
+            <div className="bg-card min-h-[400px] w-full h-full flex items-center justify-center">
+              <span className="text-card-foreground">Project A2 (Large)</span>
+            </div>
+          </ProjectCard>
+
+          {/* Direita - 4 retângulos pequenos (3 col cada, 1 linha) - linha 1 */}
+          <ProjectCard>
+            <div className="bg-card min-h-[194px] w-full h-full flex items-center justify-center">
+              <span className="text-card-foreground">Project A3</span>
+            </div>
+          </ProjectCard>
+          <ProjectCard>
+            <div className="bg-card min-h-[194px] w-full h-full flex items-center justify-center">
+              <span className="text-card-foreground">Project A4</span>
+            </div>
+          </ProjectCard>
+
+          {/* Direita - 4 retângulos pequenos (3 col cada, 1 linha) - linha 2 */}
+          <ProjectCard>
+            <div className="bg-card min-h-[194px] w-full h-full flex items-center justify-center">
+              <span className="text-card-foreground">Project B3</span>
+            </div>
+          </ProjectCard>
+          <ProjectCard>
+            <div className="bg-card min-h-[194px] w-full h-full flex items-center justify-center">
+              <span className="text-card-foreground">Project B4</span>
+            </div>
+          </ProjectCard>
+
+          {/* New row for Carousel */}
+          <div className="col-span-12 py-8">
+            <TechStackCarousel />
+          </div>
+
+        </BentoGrid>
+      </div>
+    </section>
+  );
+}

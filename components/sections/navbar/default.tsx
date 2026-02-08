@@ -221,7 +221,7 @@ export default function Navbar({
               {name}
             </a> */}
             {showNavigation && (
-              <div className="flex items-center gap-1 font-mono text-base tracking-tight leading-none" style={{ fontWeight: 550 }}>
+              <div className="flex items-center gap-1 font-mono text-base tracking-tight leading-none font-semibold">
                 <a
                   href={homeUrl}
                   className="flex items-center justify-center gap-1.5 bg-badge px-3 py-2 h-9 hover:bg-badge-hover transition-colors group"

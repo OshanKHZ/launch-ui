@@ -6,6 +6,7 @@ import Items from "../components/sections/items/default";
 import Logos from "../components/sections/logos/default";
 import Navbar from "../components/sections/navbar/default";
 import Pricing from "../components/sections/pricing/default";
+import Projects from "../components/sections/projects";
 import Stats from "../components/sections/stats/default";
 import { LayoutLines } from "../components/ui/layout-lines";
 
@@ -18,6 +19,7 @@ export default function Home() {
       <Logos />
       <Items />
       <Stats />
+      <Projects />
       <Pricing />
       <FAQ />
       <CTA />

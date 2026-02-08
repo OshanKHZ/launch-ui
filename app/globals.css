@@ -54,7 +54,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
 
   --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono);
+  --font-mono: 'Space Mono', monospace;
   --font-serif: var(--font-serif);
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -94,38 +94,46 @@
     from {
       height: 0;
     }
+
     to {
       height: var(--radix-accordion-content-height);
     }
   }
+
   @keyframes accordion-up {
     from {
       height: var(--radix-accordion-content-height);
     }
+
     to {
       height: 0;
     }
   }
+
   @keyframes appear {
     0% {
       opacity: 0;
       transform: translateY(1rem);
       filter: blur(0.5rem);
     }
+
     50% {
       filter: blur(0);
     }
+
     100% {
       opacity: 1;
       transform: translateY(0);
       filter: blur(0);
     }
   }
+
   @keyframes appear-zoom {
     0% {
       opacity: 0;
       transform: scale(0.5);
     }
+
     100% {
       opacity: 1;
       transform: scale(1);
@@ -148,7 +156,7 @@
   --muted-foreground: #282e32;
   --badge: #B2B3AE;
   --badge-foreground: #282e32;
-  --badge-hover: #c4633e;
+  --badge-hover: #0E100F;
   --badge-hover-foreground: #ffffff;
   --accent: #ababa3;
   --accent-foreground: #282e32;
@@ -193,7 +201,7 @@
 }
 
 .dark {
-  --background: #282e32;
+  --background: #101010;
   --foreground: #e0ddd1;
   --card: #323a3f;
   --card-foreground: #e0ddd1;
@@ -207,7 +215,7 @@
   --muted-foreground: #ababa3;
   --badge: #3a4044;
   --badge-foreground: #e0ddd1;
-  --badge-hover: #aa532e;
+  --badge-hover: #0E100F;
   --badge-hover-foreground: #ffffff;
   --accent: #ababa3;
   --accent-foreground: #282e32;
@@ -257,6 +265,7 @@ body {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -266,6 +275,7 @@ body {
   .font-favorit {
     font-family: 'Favorit', sans-serif;
   }
+
   .font-monorama {
     font-family: 'Monorama', monospace;
   }
