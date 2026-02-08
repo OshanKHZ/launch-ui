@@ -171,58 +171,60 @@ export default function TechStackCarousel({ baseSpeed = 80 }: FilmCarouselProps)
     });
 
     return (
-        <div className="w-screen relative left-1/2 -translate-x-1/2 py-4">
-            {/* Tooltip Portal */}
-            {mounted && createPortal(
-                <AnimatePresence>
-                    {hoveredLogo && (
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.8 }}
-                            style={{
-                                left: springX,
-                                top: springY,
-                                position: 'fixed',
-                                zIndex: 9999,
-                                pointerEvents: 'none',
-                                x: 16,
-                                y: 16,
-                            }}
-                            className="bg-[#0E100F] border border-zinc-800 text-white text-xs px-3 py-1.5 rounded-md font-mono shadow-xl uppercase tracking-wider"
-                        >
-                            {hoveredLogo}
-                        </motion.div>
-                    )}
-                </AnimatePresence>,
-                document.body
-            )}
-
-            {/* Container "Preto" (bg-foreground) ajustado com padding menor */}
-            <div className="relative flex w-full flex-col items-center justify-center overflow-hidden bg-foreground py-2">
-                <div className="flex overflow-hidden w-full">
-                    <motion.div
-                        ref={carouselRef}
-                        className="flex min-w-full shrink-0 items-center gap-2 px-1"
-                        style={{ x }}
-                    >
-                        {[...logos, ...logos, ...logos, ...logos].map((logo, index) => (
-                            <div
-                                key={index}
-                                className="relative flex h-28 w-52 shrink-0 items-center justify-center rounded-md bg-background cursor-pointer group"
-                                onMouseEnter={() => setHoveredLogo(logo.name)}
-                                onMouseLeave={() => setHoveredLogo(null)}
+        <section className="py-10">
+            <div className="max-w-container mx-auto px-6">
+                {/* Tooltip Portal */}
+                {mounted && createPortal(
+                    <AnimatePresence>
+                        {hoveredLogo && (
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.8 }}
+                                style={{
+                                    left: springX,
+                                    top: springY,
+                                    position: 'fixed',
+                                    zIndex: 9999,
+                                    pointerEvents: 'none',
+                                    x: 16,
+                                    y: 16,
+                                }}
+                                className="bg-[#0E100F] border border-zinc-800 text-white text-xs px-3 py-1.5 rounded-md font-mono shadow-xl uppercase tracking-wider"
                             >
-                                {logo.isImage ? (
-                                    <img src={logo.src} alt={logo.name} className={cn("object-contain transition-transform duration-300 group-hover:scale-105 opacity-80 group-hover:opacity-100", logo.className)} />
-                                ) : (
-                                    <img src={logo.src} alt={logo.name} className={cn("object-contain transition-transform duration-300 group-hover:scale-105 brightness-0 opacity-80 group-hover:opacity-100", logo.className)} />
-                                )}
-                            </div>
-                        ))}
-                    </motion.div>
+                                {hoveredLogo}
+                            </motion.div>
+                        )}
+                    </AnimatePresence>,
+                    document.body
+                )}
+
+                {/* Container "Preto" (bg-foreground) adjustado com padding menor e mask mais sutil */}
+                <div className="relative flex w-full flex-col items-center justify-center overflow-hidden bg-foreground py-2 [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+                    <div className="flex overflow-hidden w-full">
+                        <motion.div
+                            ref={carouselRef}
+                            className="flex min-w-full shrink-0 items-center gap-2 px-1"
+                            style={{ x }}
+                        >
+                            {[...logos, ...logos, ...logos, ...logos].map((logo, index) => (
+                                <div
+                                    key={index}
+                                    className="relative flex h-28 w-52 shrink-0 items-center justify-center rounded-md bg-background cursor-pointer group"
+                                    onMouseEnter={() => setHoveredLogo(logo.name)}
+                                    onMouseLeave={() => setHoveredLogo(null)}
+                                >
+                                    {logo.isImage ? (
+                                        <img src={logo.src} alt={logo.name} className={cn("object-contain transition-transform duration-300 group-hover:scale-105 opacity-80 group-hover:opacity-100", logo.className)} />
+                                    ) : (
+                                        <img src={logo.src} alt={logo.name} className={cn("object-contain transition-transform duration-300 group-hover:scale-105 brightness-0 opacity-80 group-hover:opacity-100", logo.className)} />
+                                    )}
+                                </div>
+                            ))}
+                        </motion.div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
     );
 }

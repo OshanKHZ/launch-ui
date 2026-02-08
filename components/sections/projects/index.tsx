@@ -40,13 +40,13 @@ const projects: Project[] = [
   },
   {
     title: "Supavisor",
-    category: "Supabase Tool",
-    description: "Minimalist portfolio for an award-winning architecture firm. Focus on large typography, whitespace, and smooth transitions.",
+    category: "SQL Linter",
+    description: "Fast SQL linter for Supabase migrations. Detects RLS issues, performance bottlenecks, and generates automatic fixes for better DX.",
     src: "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2700&auto=format&fit=crop",
-    link: "https://google.com",
-    code: "https://github.com",
-    tech: ["Vue", "Nuxt", "Storyblok"],
-    role: "Full Stack Developer"
+    link: "https://www.npmjs.com/package/supavisor", // Placeholder for NPM link request
+    code: "https://github.com/OshanKHZ/supavisor",
+    tech: ["TypeScript", "Node.js", "Postgres"],
+    role: "Creator & Maintainer"
   },
   {
     title: "Stephany Rocha",

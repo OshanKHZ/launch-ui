@@ -323,7 +323,7 @@ export default function Navbar({
               ),
             )}
             <motion.button
-              className="shrink-0 hidden md:flex group size-10 items-center justify-center rounded-md hover:bg-transparent"
+              className="shrink-0 hidden md:flex group size-10 items-center justify-center rounded-md hover:bg-transparent cursor-pointer"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3, ease: [0.87, 0, 0.13, 1] }}
             >
