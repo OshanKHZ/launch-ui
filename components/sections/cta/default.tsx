@@ -1,34 +1,34 @@
-import { type VariantProps } from "class-variance-authority";
 import { ReactNode } from "react";
 
-import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
-import { Button, buttonVariants } from "../../ui/button";
+import { ActionButton } from "../../ui/action-button";
 import Glow from "../../ui/glow";
 import { Section } from "../../ui/section";
 
 interface CTAButtonProps {
   href: string;
-  text: string;
-  variant?: VariantProps<typeof buttonVariants>["variant"];
+  label: string;
+  variant?: "outline" | "solid" | "cta";
   icon?: ReactNode;
   iconRight?: ReactNode;
 }
 
 interface CTAProps {
   title?: string;
+  description?: string;
   buttons?: CTAButtonProps[] | false;
   className?: string;
 }
 
 export default function CTA({
-  title = "Start building",
+  title = "Turning complex problems into simple solutions.",
+  description = "Focused on building software that matters. Open to agency work, freelance projects, and full-time remote roles. Let's create something people will actually use.",
   buttons = [
     {
-      href: siteConfig.getStartedUrl,
-      text: "Get Started",
-      variant: "default",
+      href: "mailto:lucas.oshan@gmail.com",
+      label: "Let's work together",
+      variant: "cta",
     },
   ],
   className,
@@ -39,21 +39,21 @@ export default function CTA({
         <h2 className="max-w-[640px] text-3xl leading-tight font-semibold sm:text-5xl sm:leading-tight">
           {title}
         </h2>
+        {description && (
+          <p className="max-w-[500px] text-base sm:text-lg text-muted-foreground">
+            {description}
+          </p>
+        )}
         {buttons !== false && buttons.length > 0 && (
           <div className="flex justify-center gap-4">
             {buttons.map((button, index) => (
-              <Button
+              <ActionButton
                 key={index}
-                variant={button.variant || "default"}
-                size="lg"
-                asChild
-              >
-                <a href={button.href}>
-                  {button.icon}
-                  {button.text}
-                  {button.iconRight}
-                </a>
-              </Button>
+                href={button.href}
+                label={button.label}
+                variant={button.variant || "solid"}
+                target="_self"
+              />
             ))}
           </div>
         )}

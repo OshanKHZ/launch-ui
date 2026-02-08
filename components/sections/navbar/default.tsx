@@ -110,7 +110,7 @@ function AnimatedLink({
         className="relative z-10 text-muted-foreground transition-colors"
         style={{
           color: isHovered ? "rgba(255, 255, 255, 0.6)" : undefined,
-          opacity: isHovered ? 0.6 : 0.7
+          opacity: typeof index === "string" ? 1 : (isHovered ? 0.6 : 0.7)
         }}
       >
         [{index}]
@@ -246,7 +246,6 @@ export default function Navbar({
   name = "Launch UI",
   homeUrl = siteConfig.url,
   mobileLinks = [
-    { text: "Getting Started", href: siteConfig.url },
     { text: "Components", href: siteConfig.url },
     { text: "Documentation", href: siteConfig.url },
   ],
@@ -285,9 +284,6 @@ export default function Navbar({
                 >
                   <GripIcon size={18} className="text-foreground group-hover:text-white transition-colors" />
                 </a>
-                <AnimatedLink href="#getting-started" index={0}>
-                  GETTING STARTED
-                </AnimatedLink>
                 <AnimatedLink href="#components" index={"📍"}>
                   RJ, BRAZIL
                 </AnimatedLink>

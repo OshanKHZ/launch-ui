@@ -1,111 +1,73 @@
-import { ReactNode } from "react";
+import { Linkedin, Github, Instagram } from "lucide-react";
 
-import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
-import LaunchUI from "../../logos/launch-ui";
-import {
-  Footer,
-  FooterBottom,
-  FooterColumn,
-  FooterContent,
-} from "../../ui/footer";
-import { ModeToggle } from "../../ui/mode-toggle";
-
-interface FooterLink {
-  text: string;
+function SocialLink({
+  href,
+  children,
+  icon: Icon
+}: {
   href: string;
-}
-
-interface FooterColumnProps {
-  title: string;
-  links: FooterLink[];
+  children: React.ReactNode;
+  icon: React.ComponentType<{ className?: string }>;
+}) {
+  return (
+    <a
+      href={href}
+      className="flex items-center gap-2 text-base font-dm-mono tracking-tight text-foreground hover:text-primary transition-colors duration-200"
+    >
+      <Icon className="w-4 h-4" />
+      {children}
+    </a>
+  );
 }
 
 interface FooterProps {
-  logo?: ReactNode;
-  name?: string;
-  columns?: FooterColumnProps[];
-  copyright?: string;
-  policies?: FooterLink[];
-  showModeToggle?: boolean;
   className?: string;
+  email?: string;
+  socialLinks?: {
+    instagram?: string;
+    linkedin?: string;
+    github?: string;
+  };
 }
 
 export default function FooterSection({
-  logo = <LaunchUI />,
-  name = "Launch UI",
-  columns = [
-    {
-      title: "Product",
-      links: [
-        { text: "Changelog", href: siteConfig.url },
-        { text: "Documentation", href: siteConfig.url },
-      ],
-    },
-    {
-      title: "Company",
-      links: [
-        { text: "About", href: siteConfig.url },
-        { text: "Careers", href: siteConfig.url },
-        { text: "Blog", href: siteConfig.url },
-      ],
-    },
-    {
-      title: "Contact",
-      links: [
-        { text: "Discord", href: siteConfig.url },
-        { text: "Twitter", href: siteConfig.url },
-        { text: "Github", href: siteConfig.links.github },
-      ],
-    },
-  ],
-  copyright = "© 2025 Mikołaj Dobrucki. All rights reserved",
-  policies = [
-    { text: "Privacy Policy", href: siteConfig.url },
-    { text: "Terms of Service", href: siteConfig.url },
-  ],
-  showModeToggle = true,
+  email = "lucas.oshan@gmail.com",
+  socialLinks,
   className,
 }: FooterProps) {
+  const links = socialLinks || {
+    instagram: "https://instagram.com/lucas.oshan",
+    linkedin: "https://linkedin.com/in/lucasoshan",
+    github: "https://github.com/lucasshan",
+  };
+
   return (
-    <footer className={cn("bg-background w-full px-4", className)}>
+    <footer className={cn("bg-background w-full px-2 md:px-6 py-12", className)}>
       <div className="max-w-container mx-auto">
-        <Footer>
-          <FooterContent>
-            <FooterColumn className="col-span-2 sm:col-span-3 md:col-span-1">
-              <div className="flex items-center gap-2">
-                {logo}
-                <h3 className="text-xl font-bold">{name}</h3>
-              </div>
-            </FooterColumn>
-            {columns.map((column, index) => (
-              <FooterColumn key={index}>
-                <h3 className="text-md pt-1 font-semibold">{column.title}</h3>
-                {column.links.map((link, linkIndex) => (
-                  <a
-                    key={linkIndex}
-                    href={link.href}
-                    className="text-muted-foreground text-sm"
-                  >
-                    {link.text}
-                  </a>
-                ))}
-              </FooterColumn>
-            ))}
-          </FooterContent>
-          <FooterBottom>
-            <div>{copyright}</div>
-            <div className="flex items-center gap-4">
-              {policies.map((policy, index) => (
-                <a key={index} href={policy.href}>
-                  {policy.text}
-                </a>
-              ))}
-              {showModeToggle && <ModeToggle />}
-            </div>
-          </FooterBottom>
-        </Footer>
+        <div className="grid grid-cols-12 gap-6">
+          {/* Divisor from col 2 to col 11 */}
+          <div className="col-span-12 md:col-span-10 md:col-start-2">
+            <div className="border-t-2 border-foreground/30" />
+          </div>
+
+          {/* First Column - aligned with col 2 start */}
+          <div className="col-span-12 md:col-span-3 md:col-start-2 flex flex-col gap-3">
+            {/* Email */}
+            <a
+              href={`mailto:${email}`}
+              className="text-foreground font-dm-mono text-base hover:text-primary transition-colors uppercase"
+            >
+              {email}
+            </a>
+
+            {/* Social Links */}
+            <SocialLink href={links.instagram!} icon={Instagram}>INSTAGRAM</SocialLink>
+            <SocialLink href={links.linkedin!} icon={Linkedin}>LINKEDIN</SocialLink>
+            <SocialLink href={links.github!} icon={Github}>GITHUB</SocialLink>
+          </div>
+        </div>
       </div>
     </footer>
   );

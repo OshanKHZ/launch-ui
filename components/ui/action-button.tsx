@@ -8,7 +8,7 @@ interface ActionButtonProps {
     href: string;
     label: string;
     Icon?: LucideIcon;
-    variant?: "outline" | "solid";
+    variant?: "outline" | "solid" | "cta";
     className?: string;
     target?: string;
 }
@@ -37,6 +37,9 @@ export function ActionButton({
 
                 // Variant: Solid (Code) - Becomes Primary (Orange) on hover
                 variant === "solid" && "bg-foreground text-background hover:bg-primary hover:text-primary-foreground hover:border-primary",
+
+                // Variant: CTA - Starts Primary (Orange), becomes White on hover
+                variant === "cta" && "bg-primary text-primary-foreground hover:bg-white hover:text-black hover:border-white",
 
                 className
             )}

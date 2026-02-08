@@ -18,14 +18,14 @@ export default function Home() {
       <LayoutLines />
       <Navbar />
       <Hero />
-      <Logos />
-      <Items />
-      <Stats />
+      {/* <Logos /> */}
+      {/* <Items /> */}
+      {/* <Stats /> */}
       <Skills />
       <TechStackCarousel />
       <Projects />
-      <Pricing />
-      <FAQ />
+      {/* <Pricing /> */}
+      {/* <FAQ /> */}
       <CTA />
       <Footer />
     </main>
