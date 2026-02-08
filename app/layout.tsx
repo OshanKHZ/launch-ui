@@ -3,7 +3,7 @@ import "@/app/globals.css";
 import type { Metadata } from "next";
 
 import { ThemeProvider } from "@/components/contexts/theme-provider";
-import { inter } from "@/lib/fonts";
+import { favorit } from "@/lib/fonts";
 
 import { siteConfig } from "../config/site";
 
@@ -65,8 +65,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" style={{ colorScheme: "dark" }} className="dark">
-      <body className={`${inter.className} bg-background antialiased`}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${favorit.className} bg-background antialiased`}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
