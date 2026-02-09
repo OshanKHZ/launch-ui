@@ -206,8 +206,8 @@ function RouletteLink({ href, text, className }: { href: string; text: string; c
           initial={{ y: "-150%" }}
           animate={{ y: isHovered ? "0%" : "-150%" }}
           transition={{
-            duration: 0.3,
-            ease: [0.25, 0.1, 0.25, 1],
+            duration: 0.6,
+            ease: [0.87, 0, 0.13, 1],
           }}
           className="text-primary font-mono font-bold h-[1em] flex items-center"
         >
@@ -219,8 +219,8 @@ function RouletteLink({ href, text, className }: { href: string; text: string; c
             initial={{ y: 0 }}
             animate={{ y: isHovered ? `-${spins}em` : "0em" }}
             transition={{
-              duration: 0.3,
-              ease: [0.25, 0.1, 0.25, 1],
+              duration: 0.6,
+              ease: [0.87, 0, 0.13, 1],
             }}
           >
             {Array.from({ length: spins + 1 }).map((_, i) => (
@@ -242,8 +242,8 @@ function RouletteLink({ href, text, className }: { href: string; text: string; c
           initial={{ y: "-150%" }}
           animate={{ y: isHovered ? "0%" : "-150%" }}
           transition={{
-            duration: 0.3,
-            ease: [0.25, 0.1, 0.25, 1],
+            duration: 0.6,
+            ease: [0.87, 0, 0.13, 1],
           }}
           className="text-primary font-mono font-bold h-[1em] flex items-center"
         >

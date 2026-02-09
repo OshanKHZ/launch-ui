@@ -3,7 +3,7 @@ import "@/app/globals.css";
 import type { Metadata } from "next";
 
 import { ThemeProvider } from "@/components/contexts/theme-provider";
-import { favorit, dmMono } from "@/lib/fonts";
+import { favorit, dmMono, robotoFlex } from "@/lib/fonts";
 
 import { siteConfig } from "../config/site";
 
@@ -66,7 +66,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${favorit.className} ${dmMono.variable} bg-background antialiased`}>
+      <body className={`${favorit.className} ${dmMono.variable} ${robotoFlex.variable} bg-background antialiased`}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
