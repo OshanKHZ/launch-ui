@@ -3,8 +3,9 @@
 import { cn } from "@/lib/utils";
 import { SectionHeader } from "@/components/ui/section-header";
 import { useEffect, useRef } from "react";
-import VariableProximity from "@/components/ui/variable-proximity";
-import { motion, useScroll, useTransform } from "framer-motion";
+// import VariableProximity from "@/components/ui/variable-proximity";
+import { motion, useScroll, useTransform, useSpring } from "motion/react";
+import ScrollRevealText from "@/components/ui/scroll-reveal-text";
 
 const cards = [
     {
@@ -36,7 +37,14 @@ export default function Services() {
         target: targetRef,
     });
 
-    const x = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]);
+    const smoothProgress = useSpring(scrollYProgress, {
+        stiffness: 200,
+        damping: 20,
+        mass: 0.5
+    });
+
+    const x = useTransform(smoothProgress, [0, 1], ["0%", "-50%"]);
+    const textProgress = useTransform(smoothProgress, [0, 0.5], [0, 1]);
 
     useEffect(() => {
         const script = document.createElement("script");
@@ -59,20 +67,12 @@ export default function Services() {
 
                         {/* Main Text */}
                         <div ref={containerRef} className="col-span-12 md:col-span-7 relative z-10">
-                            <h2
+                            <ScrollRevealText
+                                text="We engineer high-performance systems and AI-driven solutions designed to scale, deliver real metrics, and never just for show."
                                 className="text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight leading-[1]"
                                 style={{ fontFamily: 'var(--font-roboto-flex), sans-serif' }}
-                            >
-                                <VariableProximity
-                                    label="We engineer high-performance systems and AI-driven solutions designed to scale, deliver real metrics, and never just for show."
-                                    className="cursor-pointer"
-                                    fromFontVariationSettings="'wght' 400, 'opsz' 9"
-                                    toFontVariationSettings="'wght' 900, 'opsz' 40"
-                                    radius={100}
-                                    falloff="linear"
-                                    containerRef={containerRef as any}
-                                />
-                            </h2>
+                                progress={textProgress}
+                            />
                         </div>
 
                         {/* Lottie Animation */}
