@@ -1,10 +1,10 @@
 "use client";
 
-import { Linkedin, Instagram } from "lucide-react";
-
 import { cn } from "@/lib/utils";
 import { ArrowUpIcon } from "@/components/icons/arrow-up";
 import { GithubIcon } from "@/components/icons/social-github";
+import { InstagramIcon } from "@/components/icons/social-instagram";
+import { LinkedinIcon } from "@/components/icons/social-linkedin";
 
 function SocialLink({
   href,
@@ -67,8 +67,8 @@ export default function FooterSection({
             </a>
 
             {/* Social Links */}
-            <SocialLink href={links.instagram!} icon={Instagram}>INSTAGRAM</SocialLink>
-            <SocialLink href={links.linkedin!} icon={Linkedin}>LINKEDIN</SocialLink>
+            <SocialLink href={links.instagram!} icon={InstagramIcon}>INSTAGRAM</SocialLink>
+            <SocialLink href={links.linkedin!} icon={LinkedinIcon}>LINKEDIN</SocialLink>
             <SocialLink href={links.github!} icon={GithubIcon}>GITHUB</SocialLink>
           </div>
 

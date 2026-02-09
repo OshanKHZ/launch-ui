@@ -324,11 +324,13 @@ export default function Navbar({
               className="shrink-0 hidden md:flex group size-10 items-center justify-center rounded-md hover:bg-transparent cursor-pointer"
               variants={{ hover: { scale: 1.05 } }}
               whileHover="hover"
+              animate={isMenuOpen ? "hover" : "initial"}
+              data-state={isMenuOpen ? "open" : "closed"}
               transition={{ duration: 0.3, ease: [0.87, 0, 0.13, 1] }}
               onClick={() => setIsMenuOpen(true)}
             >
               <ArrowCircleTopIcon
-                className="rotate-[-135deg] transition-transform duration-300 group-hover:rotate-[-180deg] text-[#aa532e]"
+                className="rotate-[-135deg] transition-transform duration-300 group-hover:rotate-[-180deg] group-data-[state=open]:rotate-[-180deg] text-[#aa532e]"
                 size={24}
               />
             </motion.button>

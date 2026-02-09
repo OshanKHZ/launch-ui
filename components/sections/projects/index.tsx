@@ -137,7 +137,7 @@ const Card = ({ i, title, category, description, src, link, code, tech, role, ta
         <div className="md:col-span-6 h-full flex flex-col justify-between bg-background relative z-10">
           {/* Header inside Right Col */}
           <div className="w-full flex justify-between items-center pl-6 pr-6">
-            <h2 className="text-2xl md:text-4xl font-mono uppercase tracking-tighter font-bold leading-none mt-[-0.2em]">{title}</h2>
+            <h2 className="text-2xl md:text-4xl font-mono uppercase tracking-tighter font-bold leading-none">{title}</h2>
             <span className="font-mono text-xs tracking-widest uppercase hidden md:block text-muted-foreground">{category}</span>
           </div>
 
