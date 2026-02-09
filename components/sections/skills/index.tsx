@@ -17,10 +17,10 @@ function ProjectCard({ children, className, isLarge = false, liveUrl, codeUrl }:
   return (
     <div className={cn("relative p-1 group/card", isLarge ? "col-span-3 row-span-2" : "col-span-3", className)}>
       {/* Cantoneiras nas 4 pontas - fixas fora do conteúdo */}
-      <div className="absolute top-0 left-0 w-3 h-3 border-l-2 border-t-2 border-foreground/60 pointer-events-none" />
-      <div className="absolute top-0 right-0 w-3 h-3 border-r-2 border-t-2 border-foreground/60 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-3 h-3 border-l-2 border-b-2 border-foreground/60 pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-3 h-3 border-r-2 border-b-2 border-foreground/60 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-3 h-3 border-l-2 border-t-2 border-foreground/60 pointer-events-none transition-transform duration-300 group-hover/card:-translate-x-0.5 group-hover/card:-translate-y-0.5" />
+      <div className="absolute top-0 right-0 w-3 h-3 border-r-2 border-t-2 border-foreground/60 pointer-events-none transition-transform duration-300 group-hover/card:translate-x-0.5 group-hover/card:-translate-y-0.5" />
+      <div className="absolute bottom-0 left-0 w-3 h-3 border-l-2 border-b-2 border-foreground/60 pointer-events-none transition-transform duration-300 group-hover/card:-translate-x-0.5 group-hover/card:translate-y-0.5" />
+      <div className="absolute bottom-0 right-0 w-3 h-3 border-r-2 border-b-2 border-foreground/60 pointer-events-none transition-transform duration-300 group-hover/card:translate-x-0.5 group-hover/card:translate-y-0.5" />
       {children}
 
       {/* Buttons Overlay */}
@@ -62,14 +62,38 @@ export default function Skills() {
         <BentoGrid className="gap-3">
           {/* Esquerda - 2 retângulos grandes (3 col cada, 2 linhas) */}
           <ProjectCard isLarge>
-            <div className="bg-card/50 hover:bg-card transition-colors duration-500 w-full h-full flex flex-col justify-between p-8">
-              <span className="text-muted-foreground uppercase tracking-widest text-sm font-medium">AI & Intelligence</span>
+            <div className="bg-card/50 hover:bg-card transition-colors duration-500 w-full h-full flex flex-col justify-between p-6">
+              {/* Top Section: Text */}
+              <div className="flex flex-col gap-2 mb-4">
+                <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter text-foreground leading-[0.9]">
+                  AI<br />
+                  Engineering
+                </h3>
+                <p className="text-sm text-muted-foreground font-mono mt-2">
+                  Building the next generation of autonomous agents & intelligent systems.
+                </p>
+              </div>
+
+              {/* Bottom Section: Simple Photo Rectangle */}
+              <div className="w-full h-32 bg-zinc-900/50 border border-white/5 rounded-none" />
             </div>
           </ProjectCard>
 
           <ProjectCard isLarge>
-            <div className="bg-card/50 hover:bg-card transition-colors duration-500 w-full h-full flex items-center justify-center">
-              <span className="text-card-foreground">Fullstack & Design</span>
+            <div className="bg-card/50 hover:bg-card transition-colors duration-500 w-full h-full flex flex-col justify-between p-6">
+              {/* Top Section: Text */}
+              <div className="flex flex-col gap-2 mb-4">
+                <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter text-foreground leading-[0.9]">
+                  Fullstack<br />
+                  Product
+                </h3>
+                <p className="text-sm text-muted-foreground font-mono mt-2">
+                  End-to-end excellence. From pixel-perfect design to scalable backend architecture.
+                </p>
+              </div>
+
+              {/* Bottom Section: Simple Photo Rectangle */}
+              <div className="w-full h-32 bg-zinc-900/50 border border-white/5 rounded-none" />
             </div>
           </ProjectCard>
 

@@ -191,7 +191,7 @@ function ThemeSelector() {
 
 function RouletteLink({ href, text, className }: { href: string; text: string; className?: string }) {
   const [isHovered, setIsHovered] = useState(false);
-  const spins = 5;
+  const spins = 1;
 
   return (
     <a
@@ -199,23 +199,57 @@ function RouletteLink({ href, text, className }: { href: string; text: string; c
       className={className}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      style={{ position: "relative", overflow: "hidden", display: "inline-block", height: "1em" }}
+      style={{ position: "relative", overflow: "hidden", height: "1em" }}
     >
-      <motion.div
-        style={{ display: "flex", flexDirection: "column" }}
-        initial={{ y: 0 }}
-        animate={{ y: isHovered ? `-${spins}em` : "0em" }}
-        transition={{
-          duration: 0.5,
-          ease: [0.25, 0.1, 0.25, 1],
-        }}
-      >
-        {Array.from({ length: spins + 1 }).map((_, i) => (
-          <span key={i} style={{ height: "1em", display: "flex", alignItems: "center" }}>
-            {text}
-          </span>
-        ))}
-      </motion.div>
+      <div className="flex items-center justify-center gap-[1px] h-full">
+        <motion.span
+          initial={{ y: "-150%" }}
+          animate={{ y: isHovered ? "0%" : "-150%" }}
+          transition={{
+            duration: 0.3,
+            ease: [0.25, 0.1, 0.25, 1],
+          }}
+          className="text-primary font-mono font-bold h-[1em] flex items-center"
+        >
+          [
+        </motion.span>
+        <div className="h-[1em] overflow-hidden relative">
+          <motion.div
+            style={{ display: "flex", flexDirection: "column" }}
+            initial={{ y: 0 }}
+            animate={{ y: isHovered ? `-${spins}em` : "0em" }}
+            transition={{
+              duration: 0.3,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+          >
+            {Array.from({ length: spins + 1 }).map((_, i) => (
+              <span
+                key={i}
+                className={i === 1 ? "text-primary font-bold" : ""}
+                style={{
+                  height: "1em",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                {text}
+              </span>
+            ))}
+          </motion.div>
+        </div>
+        <motion.span
+          initial={{ y: "-150%" }}
+          animate={{ y: isHovered ? "0%" : "-150%" }}
+          transition={{
+            duration: 0.3,
+            ease: [0.25, 0.1, 0.25, 1],
+          }}
+          className="text-primary font-mono font-bold h-[1em] flex items-center"
+        >
+          ]
+        </motion.span>
+      </div>
     </a>
   );
 }
