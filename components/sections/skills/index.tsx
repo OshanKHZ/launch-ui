@@ -61,38 +61,101 @@ export default function Skills() {
         <SectionHeader title="Skills" />
         <BentoGrid className="gap-3">
           {/* Esquerda - 2 retângulos grandes (3 col cada, 2 linhas) */}
-          <ProjectCard isLarge liveUrl="#" codeUrl="#">
-            <div className="bg-card min-h-[400px] w-full h-full flex items-center justify-center">
-              <span className="text-card-foreground">Skill A1 (Large)</span>
+          <ProjectCard isLarge>
+            <div className="bg-card/50 hover:bg-card transition-colors duration-500 w-full h-full flex flex-col justify-between p-8">
+              <span className="text-muted-foreground uppercase tracking-widest text-sm font-medium">AI & Intelligence</span>
             </div>
           </ProjectCard>
+
           <ProjectCard isLarge>
-            <div className="bg-card min-h-[400px] w-full h-full flex items-center justify-center">
-              <span className="text-card-foreground">Skill A2 (Large)</span>
+            <div className="bg-card/50 hover:bg-card transition-colors duration-500 w-full h-full flex items-center justify-center">
+              <span className="text-card-foreground">Fullstack & Design</span>
             </div>
           </ProjectCard>
 
           {/* Direita - 4 retângulos pequenos (3 col cada, 1 linha) - linha 1 */}
           <ProjectCard>
-            <div className="bg-card min-h-[194px] w-full h-full flex items-center justify-center">
-              <span className="text-card-foreground">Skill A3</span>
+            <div className="bg-card/50 hover:bg-card transition-colors duration-500 w-full h-full flex flex-col justify-between p-5">
+              {/* Top Section */}
+              <div className="flex flex-col gap-1">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground/80">Operations</span>
+                <h3 className="text-xl font-black uppercase tracking-tight text-foreground leading-[0.9]">
+                  Workflow<br />
+                  Automation
+                </h3>
+              </div>
+
+              {/* Bottom Section */}
+              <div className="flex items-end justify-between w-full mt-auto pt-4">
+                <p className="text-[10px] text-muted-foreground font-mono leading-tight max-w-[60%]">
+                  Streamlined business processes.
+                </p>
+                <div className="w-12 h-12 bg-zinc-800 border border-white/10 shrink-0" />
+              </div>
             </div>
           </ProjectCard>
+
           <ProjectCard>
-            <div className="bg-card min-h-[194px] w-full h-full flex items-center justify-center">
-              <span className="text-card-foreground">Skill A4</span>
+            <div className="bg-card/50 hover:bg-card transition-colors duration-500 w-full h-full flex flex-col justify-between p-5">
+              {/* Top Section */}
+              <div className="flex flex-col gap-1">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground/80">Connectivity</span>
+                <h3 className="text-xl font-black uppercase tracking-tight text-foreground leading-[0.9]">
+                  Integrations<br />
+                  & APIs
+                </h3>
+              </div>
+
+              {/* Bottom Section */}
+              <div className="flex items-end justify-between w-full mt-auto pt-4">
+                <p className="text-[10px] text-muted-foreground font-mono leading-tight max-w-[60%]">
+                  Connecting diverse tools into unified ecosystems.
+                </p>
+                <div className="w-12 h-12 bg-zinc-800 border border-white/10 shrink-0" />
+              </div>
             </div>
           </ProjectCard>
 
           {/* Direita - 4 retângulos pequenos (3 col cada, 1 linha) - linha 2 */}
           <ProjectCard>
-            <div className="bg-card min-h-[194px] w-full h-full flex items-center justify-center">
-              <span className="text-card-foreground">Skill B3</span>
+            <div className="bg-card/50 hover:bg-card transition-colors duration-500 w-full h-full flex flex-col justify-between p-5">
+              {/* Top Section */}
+              <div className="flex flex-col gap-1">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground/80">Leadership</span>
+                <h3 className="text-xl font-black uppercase tracking-tight text-foreground leading-[0.9]">
+                  Project<br />
+                  Management
+                </h3>
+              </div>
+
+              {/* Bottom Section */}
+              <div className="flex items-end justify-between w-full mt-auto pt-4">
+                <p className="text-[10px] text-muted-foreground font-mono leading-tight max-w-[60%]">
+                  Agile delivery with a strong owner's mindset.
+                </p>
+                <div className="w-12 h-12 bg-zinc-800 border border-white/10 shrink-0" />
+              </div>
             </div>
           </ProjectCard>
+
           <ProjectCard>
-            <div className="bg-card min-h-[194px] w-full h-full flex items-center justify-center">
-              <span className="text-card-foreground">Skill B4</span>
+            <div className="bg-[#0E100F] hover:bg-zinc-950 transition-colors duration-500 w-full h-full flex flex-col justify-between p-5 border border-white/5">
+              {/* Top Section */}
+              <div className="flex flex-col gap-1">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500">Strategy</span>
+                <h3 className="text-xl font-black uppercase tracking-tight text-[#CDC9B9] leading-[0.9]">
+                  Tech<br />
+                  Advisory
+                </h3>
+              </div>
+
+              {/* Bottom Section */}
+              <div className="flex items-end justify-between w-full mt-auto pt-4">
+                <p className="text-[10px] text-zinc-500 font-mono leading-tight max-w-[60%]">
+                  Design of scalable, sovereign & AI-driven ecosystems.
+                </p>
+                <div className="w-12 h-12 bg-zinc-900 border border-zinc-800 shrink-0" />
+              </div>
             </div>
           </ProjectCard>
 
