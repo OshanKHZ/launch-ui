@@ -36,7 +36,7 @@ export default function Services() {
         target: targetRef,
     });
 
-    const x = useTransform(scrollYProgress, [0, 1], ["1%", "-75%"]);
+    const x = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]);
 
     useEffect(() => {
         const script = document.createElement("script");
@@ -50,7 +50,7 @@ export default function Services() {
     }, []);
 
     return (
-        <section ref={targetRef} id="services" className="relative h-[300vh] bg-[#1E1C1B] text-white">
+        <section ref={targetRef} id="services" className="relative h-[200vh] bg-[#1E1C1B] text-white">
             <div className="sticky top-0 flex h-screen flex-col overflow-hidden">
                 {/* Intro Section */}
                 <div className="pt-12 pb-0 max-w-container mx-auto px-6 w-full shrink-0">
