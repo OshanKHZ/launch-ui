@@ -3,7 +3,7 @@
 import { type VariantProps } from "class-variance-authority";
 import { Menu } from "lucide-react";
 import { useState, useEffect, useRef, type ReactNode } from "react";
-import { motion } from "motion/react";
+import { motion, useScroll, AnimatePresence } from "motion/react";
 
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
@@ -24,7 +24,7 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from "../../ui/sheet";
 import { NavigationMenu } from "./navigation-menu";
 
-const easing = [0.87, 0, 0.13, 1];
+const easing: any = [0.87, 0, 0.13, 1];
 const duration = 0.35;
 
 interface DecryptedTextProps {
@@ -298,111 +298,149 @@ export default function Navbar({
   showNavigation = true,
   className,
 }: NavbarProps) {
+  const { scrollY } = useScroll();
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  return (
-    <header className={cn("sticky top-0 z-50 -mb-4 pb-2", className)}>
-      <div className="absolute left-0 h-30 w-full bg-gradient-to-b from-background from-45% to-transparent"></div>
-      <div className="relative mx-auto max-w-container px-2 md:px-6">
-        <NavbarComponent className="py-2">
-          <NavbarLeft>
-            {/* <a
-              href={homeUrl}
-              className="flex items-center gap-2 text-xl font-bold"
-            >
-              {logo}
-              {name}
-            </a> */}
-            {showNavigation && (
-              <div className="flex items-center gap-1 font-mono text-base tracking-tight leading-none font-semibold">
+  useEffect(() => {
+    return scrollY.on("change", (latest) => {
+      setIsScrolled(latest > 50);
+    });
+  }, [scrollY]);
 
-                <AnimatedLink href="#components" index={"📍"}>
-                  RJ, BRAZIL
-                </AnimatedLink>
-                <ThemeSelector />
-              </div>
-            )}
-          </NavbarLeft>
-          <NavbarRight>
-            {actions.map((action, index) =>
-              action.isButton ? (
-                <Button
-                  key={index}
-                  variant={action.variant || "default"}
-                  asChild
-                >
-                  <a href={action.href}>
-                    {action.icon}
+  return (
+    <>
+      <motion.header
+        className={cn("fixed top-0 w-full z-50 -mb-4 pb-2 transition-all duration-300", className)}
+        initial={{ opacity: 1, y: 0 }}
+        animate={{
+          opacity: isScrolled ? 0 : 1,
+          y: isScrolled ? -20 : 0,
+          pointerEvents: isScrolled ? "none" : "auto"
+        }}
+      >
+        <div className="absolute left-0 h-30 w-full bg-gradient-to-b from-background from-45% to-transparent"></div>
+        <div className="relative mx-auto max-w-container px-2 md:px-6">
+          <NavbarComponent className="py-2">
+            <NavbarLeft>
+              {showNavigation && (
+                <div className="flex items-center gap-1 font-mono text-base tracking-tight leading-none font-semibold">
+
+                  <AnimatedLink href="#components" index={"📍"}>
+                    RJ, BRAZIL
+                  </AnimatedLink>
+                  <ThemeSelector />
+                </div>
+              )}
+            </NavbarLeft>
+            <NavbarRight>
+              {actions.map((action, index) =>
+                action.isButton ? (
+                  <Button
+                    key={index}
+                    variant={action.variant || "default"}
+                    asChild
+                  >
+                    <a href={action.href}>
+                      {action.icon}
+                      {action.text}
+                      {action.iconRight}
+                    </a>
+                  </Button>
+                ) : action.text === "/" ? (
+                  <a
+                    key={index}
+                    href={action.href}
+                    className="hidden md:block tracking-tight uppercase text-xl rotate-[20deg] font-mono font-normal"
+                  >
                     {action.text}
-                    {action.iconRight}
                   </a>
-                </Button>
-              ) : action.text === "/" ? (
-                <a
-                  key={index}
-                  href={action.href}
-                  className="hidden md:block tracking-tight uppercase text-xl rotate-[20deg] font-mono font-normal"
-                >
-                  {action.text}
-                </a>
-              ) : (
-                <RouletteLink
-                  key={index}
-                  href={action.href}
-                  text={action.text}
-                  className="hidden md:block tracking-tight uppercase text-lg"
+                ) : (
+                  <RouletteLink
+                    key={index}
+                    href={action.href}
+                    text={action.text}
+                    className="hidden md:block tracking-tight uppercase text-lg"
+                  />
+                ),
+              )}
+              <motion.button
+                className="shrink-0 hidden md:flex group size-10 items-center justify-center rounded-md hover:bg-transparent cursor-pointer"
+                variants={{ hover: { scale: 1.05 } }}
+                whileHover="hover"
+                animate={isMenuOpen ? "hover" : "initial"}
+                data-state={isMenuOpen ? "open" : "closed"}
+                transition={{ duration: 0.3, ease: [0.87, 0, 0.13, 1] }}
+                onClick={() => setIsMenuOpen(true)}
+              >
+                <ArrowCircleTopIcon
+                  className="rotate-[-135deg] transition-transform duration-300 group-hover:rotate-[-180deg] group-data-[state=open]:rotate-[-180deg] text-[#aa532e]"
+                  size={24}
                 />
-              ),
-            )}
-            <motion.button
-              className="shrink-0 hidden md:flex group size-10 items-center justify-center rounded-md hover:bg-transparent cursor-pointer"
-              variants={{ hover: { scale: 1.05 } }}
-              whileHover="hover"
-              animate={isMenuOpen ? "hover" : "initial"}
-              data-state={isMenuOpen ? "open" : "closed"}
-              transition={{ duration: 0.3, ease: [0.87, 0, 0.13, 1] }}
+              </motion.button>
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="shrink-0 md:hidden"
+                  >
+                    <Menu className="size-5" />
+                    <span className="sr-only">Toggle navigation menu</span>
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="right">
+                  <nav className="grid gap-6 text-lg font-medium">
+                    <a
+                      href={homeUrl}
+                      className="flex items-center gap-2 text-xl font-bold"
+                    >
+                      <span>{name}</span>
+                    </a>
+                    {mobileLinks.map((link, index) => (
+                      <a
+                        key={index}
+                        href={link.href}
+                        className="text-muted-foreground hover:text-foreground"
+                      >
+                        {link.text}
+                      </a>
+                    ))}
+                  </nav>
+                </SheetContent>
+              </Sheet>
+            </NavbarRight>
+          </NavbarComponent>
+        </div>
+      </motion.header>
+
+      {/* Floating Menu Button */}
+      <AnimatePresence>
+        {isScrolled && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.3 }}
+            className="fixed top-6 right-6 z-50"
+          >
+            <Button
+              variant="secondary"
+              size="icon"
+              className="group rounded-md shadow-lg bg-[#aa532e] hover:bg-[#aa532e]/90 backdrop-blur-md border border-white/10 w-12 h-12 cursor-pointer"
               onClick={() => setIsMenuOpen(true)}
             >
-              <ArrowCircleTopIcon
-                className="rotate-[-135deg] transition-transform duration-300 group-hover:rotate-[-180deg] group-data-[state=open]:rotate-[-180deg] text-[#aa532e]"
-                size={24}
-              />
-            </motion.button>
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="shrink-0 md:hidden"
-                >
-                  <Menu className="size-5" />
-                  <span className="sr-only">Toggle navigation menu</span>
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="right">
-                <nav className="grid gap-6 text-lg font-medium">
-                  <a
-                    href={homeUrl}
-                    className="flex items-center gap-2 text-xl font-bold"
-                  >
-                    <span>{name}</span>
-                  </a>
-                  {mobileLinks.map((link, index) => (
-                    <a
-                      key={index}
-                      href={link.href}
-                      className="text-muted-foreground hover:text-foreground"
-                    >
-                      {link.text}
-                    </a>
-                  ))}
-                </nav>
-              </SheetContent>
-            </Sheet>
-          </NavbarRight>
-        </NavbarComponent>
-      </div>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8">
+                <path d="M5 8H13.75" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-400 ease-[cubic-bezier(0.87,0,0.13,1)] group-hover:translate-x-[2px]" />
+                <path d="M5 12H19" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M10.25 16L19 16" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-400 ease-[cubic-bezier(0.87,0,0.13,1)] delay-100 group-hover:-translate-x-[2px]" />
+              </svg>
+            </Button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <NavigationMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
-    </header>
+    </>
   );
 }

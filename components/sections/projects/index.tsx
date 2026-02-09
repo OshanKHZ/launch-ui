@@ -115,7 +115,7 @@ const Card = ({ i, title, category, description, src, link, code, tech, role, ta
   return (
     <div
       ref={container}
-      className="h-[370px] sticky flex items-start justify-center p-2 md:p-6"
+      className="h-[370px] sticky flex items-start justify-center px-2 pb-2 md:px-6 md:pb-6 pt-0"
       style={{ top: `calc(4rem + ${i * 50}px)` }}
     >
       <motion.div

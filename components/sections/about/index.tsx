@@ -13,7 +13,7 @@ export default function About() {
                 <div className="max-w-container mx-auto">
                     <SectionHeader title="About" />
 
-                    <div className="grid grid-cols-12 gap-y-12 md:gap-y-0 mt-8">
+                    <div className="grid grid-cols-12 gap-y-12 md:gap-y-0">
                         <div className="col-span-12 md:col-span-9">
                             <h2 className="text-4xl md:text-5xl lg:text-7xl font-normal tracking-tight leading-[1]">
                                 I'm a multidisciplinary developer and designer obsessed with crafting polished, high-performance digital experiences. I bridge the gap between design and engineering.
