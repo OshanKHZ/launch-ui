@@ -20,7 +20,7 @@ export default function Services() {
     }, []);
 
     return (
-        <section id="services" className="pt-16 pb-32 bg-[#131313] text-white">
+        <section id="services" className="pt-16 pb-32 bg-[#1E1C1B] text-white">
             <div className="max-w-container mx-auto px-6">
                 <div className="grid grid-cols-12 gap-y-12 md:gap-y-0 relative items-center">
 
