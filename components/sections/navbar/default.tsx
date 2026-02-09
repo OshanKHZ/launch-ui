@@ -22,6 +22,7 @@ import {
   NavbarRight,
 } from "../../ui/navbar";
 import { Sheet, SheetContent, SheetTrigger } from "../../ui/sheet";
+import { NavigationMenu } from "./navigation-menu";
 
 const easing = [0.87, 0, 0.13, 1];
 const duration = 0.35;
@@ -263,6 +264,8 @@ export default function Navbar({
   showNavigation = true,
   className,
 }: NavbarProps) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <header className={cn("sticky top-0 z-50 -mb-4 pb-2", className)}>
       <div className="absolute left-0 h-30 w-full bg-gradient-to-b from-background from-45% to-transparent"></div>
@@ -322,6 +325,7 @@ export default function Navbar({
               variants={{ hover: { scale: 1.05 } }}
               whileHover="hover"
               transition={{ duration: 0.3, ease: [0.87, 0, 0.13, 1] }}
+              onClick={() => setIsMenuOpen(true)}
             >
               <ArrowCircleTopIcon
                 className="rotate-[-135deg] transition-transform duration-300 group-hover:rotate-[-180deg] text-[#aa532e]"
@@ -362,6 +366,7 @@ export default function Navbar({
           </NavbarRight>
         </NavbarComponent>
       </div>
+      <NavigationMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
     </header>
   );
 }

@@ -1,6 +1,10 @@
-import { Linkedin, Github, Instagram } from "lucide-react";
+"use client";
+
+import { Linkedin, Instagram } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import { ArrowUpIcon } from "@/components/icons/arrow-up";
+import { GithubIcon } from "@/components/icons/social-github";
 
 function SocialLink({
   href,
@@ -9,12 +13,12 @@ function SocialLink({
 }: {
   href: string;
   children: React.ReactNode;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: React.ComponentType<{ className?: string; onMouseEnter?: () => void; onMouseLeave?: () => void }>;
 }) {
   return (
     <a
       href={href}
-      className="flex items-center gap-2 text-base font-dm-mono tracking-tight text-foreground hover:text-primary transition-colors duration-200"
+      className="group flex items-center gap-2 text-base font-dm-mono tracking-tight text-foreground hover:text-primary transition-colors duration-200"
     >
       <Icon className="w-4 h-4" />
       {children}
@@ -65,7 +69,23 @@ export default function FooterSection({
             {/* Social Links */}
             <SocialLink href={links.instagram!} icon={Instagram}>INSTAGRAM</SocialLink>
             <SocialLink href={links.linkedin!} icon={Linkedin}>LINKEDIN</SocialLink>
-            <SocialLink href={links.github!} icon={Github}>GITHUB</SocialLink>
+            <SocialLink href={links.github!} icon={GithubIcon}>GITHUB</SocialLink>
+          </div>
+
+          {/* Second Column */}
+          <div className="col-span-12 md:col-span-3 md:col-start-6 flex flex-col gap-3">
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="group flex items-center gap-2 text-base font-dm-mono tracking-tight text-foreground hover:text-primary transition-colors duration-200 cursor-pointer uppercase"
+            >
+              <ArrowUpIcon className="w-4 h-4" />
+              Back to top
+            </button>
+          </div>
+
+          {/* Third Column */}
+          <div className="col-span-12 md:col-span-3 md:col-start-9 flex flex-col gap-3">
+            {/* Empty for now */}
           </div>
         </div>
       </div>
