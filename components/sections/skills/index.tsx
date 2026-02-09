@@ -145,17 +145,17 @@ export default function Skills() {
             <div className="bg-card/50 hover:bg-card transition-colors duration-500 w-full h-full flex flex-col justify-between p-5">
               {/* Top Section */}
               <div className="flex flex-col gap-1">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground/80">Leadership</span>
+                <span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground/80">Product</span>
                 <h3 className="text-xl font-black uppercase tracking-tight text-foreground leading-[0.9]">
-                  Project<br />
-                  Management
+                  UI/UX<br />
+                  Design
                 </h3>
               </div>
 
               {/* Bottom Section */}
               <div className="flex items-end justify-between w-full mt-auto pt-4">
                 <p className="text-[10px] text-muted-foreground font-mono leading-tight max-w-[60%]">
-                  Agile delivery with a strong owner's mindset.
+                  An engineering approach to design, capable of solving business problems in unexpected ways.
                 </p>
                 <div className="w-12 h-12 bg-zinc-800 border border-white/10 shrink-0" />
               </div>
@@ -180,6 +180,47 @@ export default function Skills() {
                 </p>
                 <div className="w-12 h-12 bg-zinc-900 border border-zinc-800 shrink-0" />
               </div>
+            </div>
+          </ProjectCard>
+
+          {/* Linha 3 - 2 retângulos médios (6 col cada) */}
+          <ProjectCard className="col-span-6">
+            <div className="bg-card/50 hover:bg-card transition-colors duration-500 w-full h-full flex items-center justify-between p-6">
+              {/* Left Section: Text */}
+              <div className="flex flex-col justify-center gap-2 max-w-[50%]">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground/80">Data</span>
+                <h3 className="text-2xl font-black uppercase tracking-tight text-foreground leading-[0.9]">
+                  Database<br />
+                  Architecture
+                </h3>
+
+                <p className="text-[10px] text-muted-foreground font-mono leading-tight mt-2">
+                  Designing scalable, high-performance data models for data-intensive applications.
+                </p>
+              </div>
+
+              {/* Right Section: Image Placeholder */}
+              <div className="w-24 h-24 bg-zinc-800 border border-white/10 shrink-0" />
+            </div>
+          </ProjectCard>
+
+          <ProjectCard className="col-span-6">
+            <div className="bg-card/50 hover:bg-card transition-colors duration-500 w-full h-full flex items-center justify-between p-6">
+              {/* Left Section: Text */}
+              <div className="flex flex-col justify-center gap-2 max-w-[50%]">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground/80">Reliability</span>
+                <h3 className="text-2xl font-black uppercase tracking-tight text-foreground leading-[0.9]">
+                  DevOps &<br />
+                  Infra
+                </h3>
+
+                <p className="text-[10px] text-muted-foreground font-mono leading-tight mt-2">
+                  Robust CI/CD pipelines and sovereign cloud architectures for maximum uptime.
+                </p>
+              </div>
+
+              {/* Right Section: Image Placeholder */}
+              <div className="w-24 h-24 bg-zinc-800 border border-white/10 shrink-0" />
             </div>
           </ProjectCard>
 
