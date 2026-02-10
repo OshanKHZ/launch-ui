@@ -1,10 +1,14 @@
 "use client";
 
-import { type ReactNode, useRef } from "react";
+import { type ReactNode, useRef, useState } from "react";
+import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { BentoGrid } from "@/components/ui/bento-grid";
 import { SectionHeader } from "@/components/ui/section-header";
 import VariableProximity from "@/components/ui/variable-proximity";
+
+const easing = [0.87, 0, 0.13, 1];
+const duration = 0.5;
 
 import { ExternalLink, Github } from "lucide-react";
 
@@ -14,21 +18,58 @@ interface ProjectCardProps {
   isLarge?: boolean;
   liveUrl?: string;
   codeUrl?: string;
+  disableHover?: boolean;
 }
 
-function ProjectCard({ children, className, isLarge = false, liveUrl, codeUrl }: ProjectCardProps) {
+function ProjectCard({ children, className, isLarge = false, liveUrl, codeUrl, disableHover = false }: ProjectCardProps) {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    <div className={cn("relative p-1 group/card", isLarge ? "col-span-3 row-span-2" : "col-span-3", className)}>
-      {/* Cantoneiras nas 4 pontas - fixas fora do conteúdo */}
-      <div className="absolute top-0 left-0 w-3 h-3 border-l-2 border-t-2 border-foreground/60 pointer-events-none transition-transform duration-300 group-hover/card:-translate-x-0.5 group-hover/card:-translate-y-0.5" />
-      <div className="absolute top-0 right-0 w-3 h-3 border-r-2 border-t-2 border-foreground/60 pointer-events-none transition-transform duration-300 group-hover/card:translate-x-0.5 group-hover/card:-translate-y-0.5" />
-      <div className="absolute bottom-0 left-0 w-3 h-3 border-l-2 border-b-2 border-foreground/60 pointer-events-none transition-transform duration-300 group-hover/card:-translate-x-0.5 group-hover/card:translate-y-0.5" />
-      <div className="absolute bottom-0 right-0 w-3 h-3 border-r-2 border-b-2 border-foreground/60 pointer-events-none transition-transform duration-300 group-hover/card:translate-x-0.5 group-hover/card:translate-y-0.5" />
-      {children}
+    <div
+      className={cn("relative p-1 group/card h-full", isLarge ? "col-span-3 row-span-2" : "col-span-3", className)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Cantoneiras nas 4 pontas - FORA, z-50 para sempre ficar visíveis */}
+      <div className="absolute top-0 left-0 w-3 h-3 border-l-2 border-t-2 border-foreground/60 group-hover/card:border-primary pointer-events-none transition-all duration-500 ease-out group-hover/card:-translate-x-0.5 group-hover/card:-translate-y-0.5 z-50" />
+      <div className="absolute top-0 right-0 w-3 h-3 border-r-2 border-t-2 border-foreground/60 group-hover/card:border-primary pointer-events-none transition-all duration-500 ease-out group-hover/card:translate-x-0.5 group-hover/card:-translate-y-0.5 z-50" />
+      <div className="absolute bottom-0 left-0 w-3 h-3 border-l-2 border-b-2 border-foreground/60 group-hover/card:border-primary pointer-events-none transition-all duration-500 ease-out group-hover/card:-translate-x-0.5 group-hover/card:translate-y-0.5 z-50" />
+      <div className="absolute bottom-0 right-0 w-3 h-3 border-r-2 border-b-2 border-foreground/60 group-hover/card:border-primary pointer-events-none transition-all duration-500 ease-out group-hover/card:translate-x-0.5 group-hover/card:translate-y-0.5 z-50" />
+
+      {/* Container interno com overflow-hidden */}
+      <div className="relative overflow-hidden h-full">
+        {/* Elastic Wave Overlay - múltiplas fatias com delays escalonados */}
+        {!disableHover && (
+          <div className="absolute inset-0 z-20 flex">
+            {[0, 1, 2, 3, 4, 5, 6].map((index) => {
+              // Calcula o delay baseado na distância do centro (índice 3)
+              const distanceFromCenter = Math.abs(index - 3);
+              const delay = distanceFromCenter * 0.05; // 50ms por "step" de distância do centro
+
+              return (
+                <motion.div
+                  key={index}
+                  className="flex-1 bg-foreground"
+                  initial={{ y: "-100%" }}
+                  animate={{ y: isHovered ? "0%" : "-100%" }}
+                  transition={{
+                    duration,
+                    ease: easing,
+                    delay: isHovered ? delay : 0 // delay apenas no hover in, não no out
+                  }}
+                />
+              );
+            })}
+          </div>
+        )}
+
+        {/* Content */}
+        <div className="relative z-10 h-full">{children}</div>
+      </div>
 
       {/* Buttons Overlay */}
       {(liveUrl || codeUrl) && (
-        <div className="absolute bottom-5 right-5 flex gap-3 z-20">
+        <div className="absolute bottom-5 right-5 flex gap-3 z-50">
           {liveUrl && (
             <a
               href={liveUrl}
@@ -179,7 +220,7 @@ export default function Skills() {
               </div>
             </ProjectCard>
 
-            <ProjectCard>
+            <ProjectCard disableHover>
               <div className="bg-[#0E100F] hover:bg-zinc-950 transition-colors duration-500 w-full h-full flex flex-col justify-between p-5 border border-white/5">
                 {/* Top Section */}
                 <div className="flex flex-col gap-1">
