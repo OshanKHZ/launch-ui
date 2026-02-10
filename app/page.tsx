@@ -4,6 +4,9 @@ import Navbar from "../components/sections/navbar/default";
 import { LayoutLines } from "../components/ui/layout-lines";
 import dynamic from "next/dynamic";
 
+// Hero is above the fold, so we import it directly
+import Hero from "../components/sections/hero";
+
 // Lazy load sections below the fold for better initial load performance
 const Projects = dynamic(() => import("../components/sections/projects").then(mod => ({ default: mod.default })), {
   loading: () => <div className="h-screen bg-background" />,
@@ -30,6 +33,7 @@ export default function Home() {
     <main className="bg-background text-foreground min-h-screen w-full">
       <LayoutLines />
       <Navbar />
+      <Hero />
       <Projects />
       <About />
       <Services />
