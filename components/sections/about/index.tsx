@@ -13,7 +13,7 @@ export default function About() {
     });
 
     // Map scroll progress to typing progress (adjusted range for better UX)
-    const textProgress = useTransform(scrollYProgress, [0.10, 0.50], [0, 1]);
+    const textProgress = useTransform(scrollYProgress, [0.20, 0.50], [0, 1]);
 
     return (
         <section ref={targetRef} className="relative bg-[#1E1C1B] -mt-[20vh]">

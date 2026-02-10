@@ -333,7 +333,6 @@ export default function Navbar({
           pointerEvents: isScrolled ? "none" : "auto"
         }}
       >
-        <div className="absolute left-0 h-30 w-full bg-gradient-to-b from-background from-45% to-transparent"></div>
         <div className="relative mx-auto max-w-container px-2 md:px-6">
           <NavbarComponent className="py-2">
             <NavbarLeft>

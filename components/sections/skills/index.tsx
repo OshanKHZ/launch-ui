@@ -11,7 +11,7 @@ import ScrollRevealText from "@/components/ui/scroll-reveal-text";
 const easing: [number, number, number, number] = [0.87, 0, 0.13, 1];
 const duration = 0.5;
 
-const skillsDetails: Record<string, { title: string; items: Array<{ title: string; description: string }> }> = {
+const skillsDetails: Record<string, { title: string; description?: string; items?: Array<{ title: string; description: string }> }> = {
   "AI Engineering": {
     title: "AI Engineering",
     items: [
@@ -32,39 +32,19 @@ const skillsDetails: Record<string, { title: string; items: Array<{ title: strin
   },
   "Workflow Automation": {
     title: "Workflow Automation",
-    items: [
-      { title: "PROCESS AUTOMATION", description: "Automate repetitive tasks and gain productivity." },
-      { title: "BUSINESS LOGIC", description: "Model business rules in automated workflows." },
-      { title: "DATA FLOW", description: "Orchestrate data flow between different systems." },
-      { title: "AUTONOMOUS AGENTS", description: "Agents that execute complex tasks autonomously." },
-    ],
+    description: "I've built intelligent automation systems that orchestrate complex business processes across multiple departments and platforms. From translating intricate business rules into scalable automated workflows to developing autonomous agents that learn and adapt independently, I've helped organizations save hundreds of hours monthly while reducing manual errors by over 90%. My solutions ensure seamless data synchronization and integrity across all systems.",
   },
   "Integrations & APIs": {
     title: "Integrations & APIs",
-    items: [
-      { title: "API DESIGN", description: "Creating well-documented and performant RESTful and GraphQL APIs." },
-      { title: "THIRD-PARTY INTEGRATIONS", description: "Integrating with external services robustly." },
-      { title: "WEBHOOKS", description: "Configure real-time communication between systems." },
-      { title: "AUTHENTICATION", description: "OAuth, JWT, SSO – security in system integration." },
-    ],
+    description: "I've architected and built enterprise-grade API ecosystems that connect diverse systems into unified platforms. With expertise in RESTful and GraphQL APIs serving thousands of concurrent users, I've implemented robust authentication layers using OAuth2, JWT, and SSO. My integration work includes real-time webhook systems processing millions of events daily, all backed by comprehensive error handling, retry logic, and monitoring to ensure 99.9% uptime.",
   },
   "UI/UX Design": {
     title: "UI/UX Design",
-    items: [
-      { title: "DESIGN SYSTEMS", description: "Creating reusable and consistent component libraries." },
-      { title: "USER EXPERIENCE", description: "Designing intuitive and user-focused experiences." },
-      { title: "VISUAL DESIGN", description: "Beautiful and functional interfaces that communicate the brand." },
-      { title: "RESPONSIVE DESIGN", description: "Perfect experience on mobile, tablet and desktop." },
-    ],
+    description: "I've designed and developed comprehensive design systems that scale across products while maintaining perfect visual consistency and brand identity. My approach combines user research, A/B testing, and data-driven insights to craft intuitive experiences that consistently increase engagement and conversion rates. Every interface I build is pixel-perfect and responsive, adapting fluidly across mobile, tablet, and desktop while meeting all accessibility standards.",
   },
   "Tech Advisory": {
     title: "Tech Advisory",
-    items: [
-      { title: "TECHNICAL STRATEGY", description: "Define technological roadmap aligned with business objectives." },
-      { title: "ARCHITECTURE ADVISORY", description: "Review and improve existing system architectures." },
-      { title: "DIGITAL TRANSFORMATION", description: "Helping companies adopt modern technologies." },
-      { title: "TECH STACK SELECTION", description: "Choosing the right technologies for each project." },
-    ],
+    description: "I've guided companies through strategic technology transformations, from defining roadmaps that align engineering with business goals to modernizing legacy systems without disrupting operations. My advisory work has helped organizations scale efficiently from MVP to millions of users while reducing infrastructure costs by up to 50%. I carefully evaluate and select optimal tech stacks that balance innovation with stability, performance, and long-term maintainability.",
   },
   "Database Architecture": {
     title: "Database Architecture",
@@ -149,21 +129,32 @@ function ProjectCard({ children, className, isLarge = false, liveUrl, codeUrl, d
             animate={{ opacity: isHovered ? 1 : 0 }}
             transition={{ delay: 0.3, duration: 0.2 }}
           >
-            {/* Items */}
-            <div className="space-y-3">
-              {skillsDetails[skillName].items.map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 10 }}
-                  transition={{ delay: 0.35 + i * 0.05, duration: 0.3 }}
-                  className="flex flex-col gap-1"
-                >
-                  <span className="text-sm font-bold uppercase tracking-wider text-primary">{item.title}</span>
-                  <span className="text-xs font-mono text-background/80 leading-tight">{item.description}</span>
-                </motion.div>
-              ))}
-            </div>
+            {/* Single Description or Items */}
+            {skillsDetails[skillName].description ? (
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 10 }}
+                transition={{ delay: 0.35, duration: 0.3 }}
+                className="text-sm font-mono text-background/90 leading-relaxed"
+              >
+                {skillsDetails[skillName].description}
+              </motion.p>
+            ) : (
+              <div className="space-y-3">
+                {skillsDetails[skillName].items?.map((item, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 10 }}
+                    transition={{ delay: 0.35 + i * 0.05, duration: 0.3 }}
+                    className="flex flex-col gap-1"
+                  >
+                    <span className="text-sm font-bold uppercase tracking-wider text-primary">{item.title}</span>
+                    <span className="text-xs font-mono text-background/80 leading-tight">{item.description}</span>
+                  </motion.div>
+                ))}
+              </div>
+            )}
           </motion.div>
         )}
 
@@ -261,7 +252,7 @@ export default function Skills() {
             </ProjectCard>
 
             {/* Direita - 4 retângulos pequenos (3 col cada, 1 linha) - linha 1 */}
-            <ProjectCard>
+            <ProjectCard skillName="Workflow Automation">
               <div className="bg-card/50 hover:bg-card transition-colors duration-500 w-full h-full flex flex-col justify-between p-5">
                 {/* Top Section */}
                 <div className="flex flex-col gap-1">
@@ -282,7 +273,7 @@ export default function Skills() {
               </div>
             </ProjectCard>
 
-            <ProjectCard>
+            <ProjectCard skillName="Integrations & APIs">
               <div className="bg-card/50 hover:bg-card transition-colors duration-500 w-full h-full flex flex-col justify-between p-5">
                 {/* Top Section */}
                 <div className="flex flex-col gap-1">
