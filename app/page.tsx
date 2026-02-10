@@ -1,7 +1,6 @@
 import CTA from "../components/sections/cta/default";
 import Footer from "../components/sections/footer/default";
 import Navbar from "../components/sections/navbar/default";
-import Skills from "../components/sections/skills";
 import { LayoutLines } from "../components/ui/layout-lines";
 import dynamic from "next/dynamic";
 
@@ -18,6 +17,10 @@ const Services = dynamic(() => import("../components/sections/services/index").t
   loading: () => <div className="h-screen bg-background" />,
 });
 
+const Skills = dynamic(() => import("../components/sections/skills").then(mod => ({ default: mod.default })), {
+  loading: () => <div className="h-screen bg-background" />,
+});
+
 const About = dynamic(() => import("@/components/sections/about/index").then(mod => ({ default: mod.default })), {
   loading: () => <div className="h-screen bg-background" />,
 });
@@ -27,11 +30,11 @@ export default function Home() {
     <main className="bg-background text-foreground min-h-screen w-full">
       <LayoutLines />
       <Navbar />
-      <Skills />
-      <TechStackCarousel />
       <Projects />
-      <Services />
+      <TechStackCarousel />
       <About />
+      <Services />
+      <Skills />
       <CTA />
       <Footer />
     </main>

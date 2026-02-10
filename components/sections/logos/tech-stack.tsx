@@ -13,14 +13,14 @@ const logos = [
     {
         name: "React",
         src: "/logos/react.svg",
-        className: "h-14 w-auto",
+        className: "h-16 w-auto",
         width: 56,
         height: 56,
     },
     {
         name: "Next.js",
         src: "/logos/nextjs.svg",
-        className: "h-14 w-auto grayscale contrast-200 mix-blend-multiply",
+        className: "h-14 w-auto",
         width: 56,
         height: 56,
     },
@@ -34,58 +34,58 @@ const logos = [
     {
         name: "Python",
         src: "/logos/python.svg",
-        className: "h-14 w-auto",
+        className: "h-16 w-auto",
         width: 56,
         height: 56,
     },
     {
         name: "PostgreSQL",
         src: "/logos/postgresql.svg",
-        className: "h-16 w-auto grayscale contrast-[100] mix-blend-multiply",
+        className: "h-16 w-auto",
         width: 64,
         height: 64,
     },
     {
         name: "n8n",
         src: "/logos/n8n.svg",
-        className: "h-14 w-auto grayscale contrast-200 brightness-0",
+        className: "h-18 w-auto",
         width: 56,
         height: 56,
     },
     {
         name: "Docker",
         src: "/logos/docker.svg",
-        className: "h-22 w-auto grayscale contrast-200 brightness-0",
-        width: 88,
-        height: 88,
+        className: "h-20 w-auto",
+        width: 56,
+        height: 56,
     },
     {
         name: "Git",
         src: "/logos/git.svg",
-        className: "h-14 w-auto grayscale contrast-200 brightness-0",
+        className: "h-16 w-auto",
         width: 56,
         height: 56,
     },
     {
         name: "Redis",
         src: "/logos/redis.svg",
-        className: "h-16 w-auto grayscale brightness-50 contrast-200 mix-blend-multiply",
-        width: 64,
-        height: 64,
+        className: "h-14 w-auto",
+        width: 56,
+        height: 56,
     },
     {
         name: "Claude Code",
         src: "/logos/claude.svg",
-        className: "h-16 w-auto grayscale brightness-50 contrast-200 mix-blend-multiply",
-        width: 64,
-        height: 64,
+        className: "h-16 w-auto",
+        width: 56,
+        height: 56,
     },
     {
         name: "Supabase",
         src: "/logos/supabase.svg",
-        className: "h-18 w-auto grayscale brightness-50 contrast-400 mix-blend-multiply",
-        width: 72,
-        height: 72,
+        className: "h-16 w-auto",
+        width: 56,
+        height: 56,
     },
 ];
 
@@ -211,7 +211,7 @@ export default function TechStackCarousel({ baseSpeed = 80 }: FilmCarouselProps)
     });
 
     return (
-        <section ref={sectionRef} className="py-10">
+        <section ref={sectionRef} className="py-16">
             <div className="max-w-container mx-auto px-6">
                 {/* Tooltip Portal */}
                 {mounted && createPortal(
@@ -250,16 +250,20 @@ export default function TechStackCarousel({ baseSpeed = 80 }: FilmCarouselProps)
                             {[...logos, ...logos, ...logos, ...logos].map((logo, index) => (
                                 <div
                                     key={`${logo.name}-${index}`}
-                                    className="relative flex h-28 w-52 shrink-0 items-center justify-center rounded-md bg-background cursor-pointer group"
+                                    className="relative flex h-28 w-52 shrink-0 items-center justify-center rounded-md bg-background cursor-pointer group text-foreground"
                                     onMouseEnter={() => setHoveredLogo(logo.name)}
                                     onMouseLeave={() => setHoveredLogo(null)}
                                 >
+                                    {/* Subtle glow effect behind logo */}
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                        <div className="w-12 h-12 bg-foreground/5 blur-2xl rounded-full" />
+                                    </div>
                                     <Image
                                         src={logo.src}
                                         alt={logo.name}
                                         width={logo.width}
                                         height={logo.height}
-                                        className={cn("object-contain transition-transform duration-300 group-hover:scale-105 opacity-80 group-hover:opacity-100", logo.className)}
+                                        className={cn("object-contain transition-transform duration-300 group-hover:scale-105 opacity-80 group-hover:opacity-100 relative z-10", logo.className)}
                                     />
                                 </div>
                             ))}

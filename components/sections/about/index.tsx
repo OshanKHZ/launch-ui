@@ -6,9 +6,9 @@ import { SectionHeader } from "@/components/ui/section-header";
 
 export default function About() {
     return (
-        <section className="relative bg-[#1E1C1B] z-30 -mt-[10vh]">
+        <section className="relative bg-[#1E1C1B] -mt-[10vh]">
             <div
-                className="bg-background rounded-t-[5rem] text-foreground relative w-full pt-32 pb-32 px-6"
+                className="bg-background text-foreground relative w-full pt-32 pb-32 px-6"
             >
                 <div className="max-w-container mx-auto">
                     <SectionHeader title="About" />

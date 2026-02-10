@@ -90,7 +90,7 @@ export default function Projects() {
         })}
       </div>
       {/* Spacer at bottom */}
-      <div className="h-[20vh]" />
+      <div className="h-[10vh]" />
     </section>
   );
 }

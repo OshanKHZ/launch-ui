@@ -68,7 +68,7 @@ export default function Services() {
                         {/* Main Text */}
                         <div ref={containerRef} className="col-span-12 md:col-span-7 relative z-10">
                             <ScrollRevealText
-                                text="We engineer high-performance systems and AI-driven solutions designed to scale, deliver real metrics, and never just for show."
+                                text="I engineer high-performance systems and AI-driven solutions designed to scale, deliver real metrics, and never just for show."
                                 className="text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight leading-[1]"
                                 style={{ fontFamily: 'var(--font-roboto-flex), sans-serif' }}
                                 progress={textProgress}

@@ -1,47 +1,26 @@
-import { forwardRef, useMemo, useRef, useEffect, useCallback } from 'react';
+import { forwardRef, useMemo, useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
 
-function useAnimationFrame(callback: (time: number) => void, isEnabled = true) {
-    const requestRef = useRef<number>(0);
-    const previousTimeRef = useRef<number | undefined>(undefined);
-    const callbackRef = useRef(callback);
-
-    // Keep callback ref updated
+function useAnimationFrame(callback: () => void) {
     useEffect(() => {
-        callbackRef.current = callback;
-    }, [callback]);
-
-    const animate = useCallback((time: number) => {
-        if (previousTimeRef.current !== undefined && isEnabled) {
-            const deltaTime = time - previousTimeRef.current;
-            callbackRef.current(deltaTime);
-        }
-        previousTimeRef.current = time;
-        requestRef.current = requestAnimationFrame(animate);
-    }, [isEnabled]);
-
-    useEffect(() => {
-        if (!isEnabled) return;
-        requestRef.current = requestAnimationFrame(animate);
-        return () => {
-            if (requestRef.current) cancelAnimationFrame(requestRef.current);
+        let frameId: number;
+        const loop = () => {
+            callback();
+            frameId = requestAnimationFrame(loop);
         };
-    }, [isEnabled, animate]);
+        frameId = requestAnimationFrame(loop);
+        return () => cancelAnimationFrame(frameId);
+    }, [callback]);
 }
 
-function useMousePositionRef(containerRef: React.RefObject<HTMLElement>) {
+function useMousePositionRef(containerRef: React.RefObject<HTMLElement | null>) {
     const positionRef = useRef({ x: 0, y: 0 });
-    const containerRectRef = useRef<DOMRect | null>(null);
 
     useEffect(() => {
         const updatePosition = (x: number, y: number) => {
-            // Cache container rect and update only on resize
-            if (!containerRectRef.current && containerRef?.current) {
-                containerRectRef.current = containerRef.current.getBoundingClientRect();
-            }
-
-            if (containerRectRef.current) {
-                positionRef.current = { x: x - containerRectRef.current.left, y: y - containerRectRef.current.top };
+            if (containerRef?.current) {
+                const rect = containerRef.current.getBoundingClientRect();
+                positionRef.current = { x: x - rect.left, y: y - rect.top };
             } else {
                 positionRef.current = { x, y };
             }
@@ -53,17 +32,11 @@ function useMousePositionRef(containerRef: React.RefObject<HTMLElement>) {
             updatePosition(touch.clientX, touch.clientY);
         };
 
-        const handleResize = () => {
-            containerRectRef.current = null; // Reset cache on resize
-        };
-
-        window.addEventListener('mousemove', handleMouseMove, { passive: true });
-        window.addEventListener('touchmove', handleTouchMove, { passive: true });
-        window.addEventListener('resize', handleResize, { passive: true });
+        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('touchmove', handleTouchMove);
         return () => {
             window.removeEventListener('mousemove', handleMouseMove);
             window.removeEventListener('touchmove', handleTouchMove);
-            window.removeEventListener('resize', handleResize);
         };
     }, [containerRef]);
 
@@ -79,7 +52,7 @@ interface VariableProximityProps {
     className?: string;
     onClick?: () => void;
     style?: React.CSSProperties;
-    containerRef: React.RefObject<HTMLElement>;
+    containerRef: React.RefObject<HTMLElement | null>;
 }
 
 const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((props, ref) => {
@@ -99,9 +72,7 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
     const letterRefs = useRef<(HTMLSpanElement | null)[]>([]);
     const interpolatedSettingsRef = useRef<string[]>([]);
     const mousePositionRef = useMousePositionRef(containerRef);
-    const letterPositionsRef = useRef<Array<{ x: number; y: number } | null>>([]);
-    const containerRectRef = useRef<DOMRect | null>(null);
-    const lastUpdateRef = useRef(0);
+    const lastPositionRef = useRef<{ x: number | null; y: number | null }>({ x: null, y: null });
 
     const parsedSettings = useMemo(() => {
         const parseSettings = (settingsStr: string) =>
@@ -140,53 +111,31 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
         }
     };
 
-    // Cache letter positions - only recalculates when needed
-    const updateLetterPositions = useCallback(() => {
-        if (!containerRef?.current) return false;
-
-        const newContainerRect = containerRef.current.getBoundingClientRect();
-        const needsUpdate = !containerRectRef.current ||
-            Math.abs(newContainerRect.left - containerRectRef.current.left) > 1 ||
-            Math.abs(newContainerRect.top - containerRectRef.current.top) > 1;
-
-        if (!needsUpdate && letterPositionsRef.current.every(pos => pos !== null)) {
-            return false;
-        }
-
-        containerRectRef.current = newContainerRect;
-
-        letterRefs.current.forEach((letterRef) => {
-            if (!letterRef) return;
-            const rect = letterRef.getBoundingClientRect();
-            const letterCenterX = rect.left + rect.width / 2 - newContainerRect.left;
-            const letterCenterY = rect.top + rect.height / 2 - newContainerRect.top;
-            letterPositionsRef.current[letterRefs.current.indexOf(letterRef)] = { x: letterCenterX, y: letterCenterY };
-        });
-
-        return true;
-    }, [containerRef]);
-
-    // Throttle updates to max 60fps
-    useAnimationFrame((_deltaTime) => {
-        const now = performance.now();
-        if (now - lastUpdateRef.current < 16) return; // Throttle to ~60fps
-        lastUpdateRef.current = now;
-
+    useAnimationFrame(() => {
         if (!containerRef?.current) return;
+        const { x, y } = mousePositionRef.current;
 
-        // Update positions with cache
-        updateLetterPositions();
+        if (lastPositionRef.current.x === x && lastPositionRef.current.y === y) {
+            // return; // Skip optimization for now to ensure reactivity if needed, or keep it per user request.
+            // User request has this optimization.
+            return;
+        }
+        lastPositionRef.current = { x, y };
+
+        const containerRect = containerRef.current.getBoundingClientRect();
 
         letterRefs.current.forEach((letterRef, index) => {
-            if (!letterRef || !letterPositionsRef.current[index]) return;
+            if (!letterRef) return;
 
-            const letterCenter = letterPositionsRef.current[index]!;
+            const rect = letterRef.getBoundingClientRect();
+            const letterCenterX = rect.left + rect.width / 2 - containerRect.left;
+            const letterCenterY = rect.top + rect.height / 2 - containerRect.top;
 
             const distance = calculateDistance(
                 mousePositionRef.current.x,
                 mousePositionRef.current.y,
-                letterCenter.x,
-                letterCenter.y
+                letterCenterX,
+                letterCenterY
             );
 
             if (distance >= radius) {
@@ -228,7 +177,7 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
                         const currentLetterIndex = letterIndex++;
                         return (
                             <motion.span
-                                key={index}
+                                key={currentLetterIndex}
                                 ref={el => {
                                     letterRefs.current[currentLetterIndex] = el;
                                 }}
