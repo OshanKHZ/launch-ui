@@ -8,8 +8,83 @@ import { SectionHeader } from "@/components/ui/section-header";
 import VariableProximity from "@/components/ui/variable-proximity";
 import ScrollRevealText from "@/components/ui/scroll-reveal-text";
 
-const easing = [0.87, 0, 0.13, 1];
+const easing: [number, number, number, number] = [0.87, 0, 0.13, 1];
 const duration = 0.5;
+
+const skillsDetails: Record<string, { title: string; items: Array<{ title: string; description: string }> }> = {
+  "AI Engineering": {
+    title: "AI Engineering",
+    items: [
+      { title: "AI AGENTS", description: "Autonomous systems that plan, execute and deliver tasks without human intervention." },
+      { title: "RAG", description: "Integration of internal/external databases for smarter and more contextual responses." },
+      { title: "PROMPT ENGINEERING", description: "The art of guiding AI models with precision and creativity." },
+      { title: "AI TOOL STACKING", description: "Combining multiple AI tools to build scalable workflows." },
+    ],
+  },
+  "Fullstack Product": {
+    title: "Fullstack Product",
+    items: [
+      { title: "END-TO-END DEVELOPMENT", description: "From frontend to backend, integrating all application layers." },
+      { title: "SYSTEM ARCHITECTURE", description: "Designing scalable systems ready to grow." },
+      { title: "SCALABILITY", description: "Optimizing performance and preparing infrastructure to support millions of users." },
+      { title: "CI/CD PIPELINES", description: "Complete automation of deploy, tests and monitoring." },
+    ],
+  },
+  "Workflow Automation": {
+    title: "Workflow Automation",
+    items: [
+      { title: "PROCESS AUTOMATION", description: "Automate repetitive tasks and gain productivity." },
+      { title: "BUSINESS LOGIC", description: "Model business rules in automated workflows." },
+      { title: "DATA FLOW", description: "Orchestrate data flow between different systems." },
+      { title: "AUTONOMOUS AGENTS", description: "Agents that execute complex tasks autonomously." },
+    ],
+  },
+  "Integrations & APIs": {
+    title: "Integrations & APIs",
+    items: [
+      { title: "API DESIGN", description: "Creating well-documented and performant RESTful and GraphQL APIs." },
+      { title: "THIRD-PARTY INTEGRATIONS", description: "Integrating with external services robustly." },
+      { title: "WEBHOOKS", description: "Configure real-time communication between systems." },
+      { title: "AUTHENTICATION", description: "OAuth, JWT, SSO – security in system integration." },
+    ],
+  },
+  "UI/UX Design": {
+    title: "UI/UX Design",
+    items: [
+      { title: "DESIGN SYSTEMS", description: "Creating reusable and consistent component libraries." },
+      { title: "USER EXPERIENCE", description: "Designing intuitive and user-focused experiences." },
+      { title: "VISUAL DESIGN", description: "Beautiful and functional interfaces that communicate the brand." },
+      { title: "RESPONSIVE DESIGN", description: "Perfect experience on mobile, tablet and desktop." },
+    ],
+  },
+  "Tech Advisory": {
+    title: "Tech Advisory",
+    items: [
+      { title: "TECHNICAL STRATEGY", description: "Define technological roadmap aligned with business objectives." },
+      { title: "ARCHITECTURE ADVISORY", description: "Review and improve existing system architectures." },
+      { title: "DIGITAL TRANSFORMATION", description: "Helping companies adopt modern technologies." },
+      { title: "TECH STACK SELECTION", description: "Choosing the right technologies for each project." },
+    ],
+  },
+  "Database Architecture": {
+    title: "Database Architecture",
+    items: [
+      { title: "DATA MODELING", description: "Structuring data efficiently and scalable." },
+      { title: "PERFORMANCE OPTIMIZATION", description: "Optimizing queries, indexes and caching." },
+      { title: "REPLICATION & SHARDING", description: "Configuring data replication and partitioning." },
+      { title: "DATA GOVERNANCE", description: "Access policies, backup and data compliance." },
+    ],
+  },
+  "DevOps & Infra": {
+    title: "DevOps & Infra",
+    items: [
+      { title: "DOCKER", description: "Containerizing applications for portability and scalability." },
+      { title: "CLOUD ARCHITECTURE", description: "AWS, GCP, Azure – cloud infrastructure." },
+      { title: "CI/CD", description: "Automated integration and deploy pipelines." },
+      { title: "MONITORING", description: "Prometheus, Grafana – complete system observability." },
+    ],
+  },
+};
 
 import { ExternalLink, Github } from "lucide-react";
 
@@ -21,9 +96,10 @@ interface ProjectCardProps {
   codeUrl?: string;
   disableHover?: boolean;
   overlayColor?: string;
+  skillName?: string;
 }
 
-function ProjectCard({ children, className, isLarge = false, liveUrl, codeUrl, disableHover = false, overlayColor = "bg-foreground" }: ProjectCardProps) {
+function ProjectCard({ children, className, isLarge = false, liveUrl, codeUrl, disableHover = false, overlayColor = "bg-foreground", skillName }: ProjectCardProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -63,6 +139,32 @@ function ProjectCard({ children, className, isLarge = false, liveUrl, codeUrl, d
               );
             })}
           </div>
+        )}
+
+        {/* Conteúdo detalhado - aparece completo após o wave */}
+        {skillName && skillsDetails[skillName] && (
+          <motion.div
+            className="absolute inset-0 z-30 p-6 flex flex-col justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: isHovered ? 1 : 0 }}
+            transition={{ delay: 0.3, duration: 0.2 }}
+          >
+            {/* Items */}
+            <div className="space-y-3">
+              {skillsDetails[skillName].items.map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 10 }}
+                  transition={{ delay: 0.35 + i * 0.05, duration: 0.3 }}
+                  className="flex flex-col gap-1"
+                >
+                  <span className="text-sm font-bold uppercase tracking-wider text-primary">{item.title}</span>
+                  <span className="text-xs font-mono text-background/80 leading-tight">{item.description}</span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         )}
 
         {/* Content */}
@@ -122,7 +224,7 @@ export default function Skills() {
           <SectionHeader title="Skills" />
           <BentoGrid className="gap-3">
             {/* Esquerda - 2 retângulos grandes (3 col cada, 2 linhas) */}
-            <ProjectCard isLarge>
+            <ProjectCard isLarge skillName="AI Engineering">
               <div className="bg-card/50 hover:bg-card transition-colors duration-500 w-full h-full flex flex-col justify-between p-6">
                 {/* Top Section: Text */}
                 <div className="flex flex-col gap-2 mb-4">
@@ -140,7 +242,7 @@ export default function Skills() {
               </div>
             </ProjectCard>
 
-            <ProjectCard isLarge>
+            <ProjectCard isLarge skillName="Fullstack Product">
               <div className="bg-card/50 hover:bg-card transition-colors duration-500 w-full h-full flex flex-col justify-between p-6">
                 {/* Top Section: Text */}
                 <div className="flex flex-col gap-2 mb-4">
@@ -202,7 +304,7 @@ export default function Skills() {
             </ProjectCard>
 
             {/* Direita - 4 retângulos pequenos (3 col cada, 1 linha) - linha 2 */}
-            <ProjectCard>
+            <ProjectCard skillName="UI/UX Design">
               <div className="bg-card/50 hover:bg-card transition-colors duration-500 w-full h-full flex flex-col justify-between p-5">
                 {/* Top Section */}
                 <div className="flex flex-col gap-1">
@@ -223,7 +325,7 @@ export default function Skills() {
               </div>
             </ProjectCard>
 
-            <ProjectCard overlayColor="bg-primary">
+            <ProjectCard overlayColor="bg-primary" skillName="Tech Advisory">
               <div className="bg-[#0E100F] hover:bg-zinc-950 transition-colors duration-500 w-full h-full flex flex-col justify-between p-5 border border-white/5">
                 {/* Top Section */}
                 <div className="flex flex-col gap-1">
@@ -245,7 +347,7 @@ export default function Skills() {
             </ProjectCard>
 
             {/* Linha 3 - 2 retângulos médios (6 col cada) */}
-            <ProjectCard className="col-span-6">
+            <ProjectCard className="col-span-6" skillName="Database Architecture">
               <div className="bg-card/50 hover:bg-card transition-colors duration-500 w-full h-full flex items-center justify-between p-6">
                 {/* Left Section: Text */}
                 <div className="flex flex-col justify-center gap-2 max-w-[50%]">
@@ -265,7 +367,7 @@ export default function Skills() {
               </div>
             </ProjectCard>
 
-            <ProjectCard className="col-span-6">
+            <ProjectCard className="col-span-6" skillName="DevOps & Infra">
               <div className="bg-card/50 hover:bg-card transition-colors duration-500 w-full h-full flex items-center justify-between p-6">
                 {/* Left Section: Text */}
                 <div className="flex flex-col justify-center gap-2 max-w-[50%]">
