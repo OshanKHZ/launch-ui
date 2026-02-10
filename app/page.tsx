@@ -31,10 +31,10 @@ export default function Home() {
       <LayoutLines />
       <Navbar />
       <Projects />
-      <TechStackCarousel />
       <About />
       <Services />
       <Skills />
+      <TechStackCarousel />
       <CTA />
       <Footer />
     </main>

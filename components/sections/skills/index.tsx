@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { BentoGrid } from "@/components/ui/bento-grid";
 import { SectionHeader } from "@/components/ui/section-header";
 import VariableProximity from "@/components/ui/variable-proximity";
+import ScrollRevealText from "@/components/ui/scroll-reveal-text";
 
 const easing = [0.87, 0, 0.13, 1];
 const duration = 0.5;
@@ -19,9 +20,10 @@ interface ProjectCardProps {
   liveUrl?: string;
   codeUrl?: string;
   disableHover?: boolean;
+  overlayColor?: string;
 }
 
-function ProjectCard({ children, className, isLarge = false, liveUrl, codeUrl, disableHover = false }: ProjectCardProps) {
+function ProjectCard({ children, className, isLarge = false, liveUrl, codeUrl, disableHover = false, overlayColor = "bg-foreground" }: ProjectCardProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -49,7 +51,7 @@ function ProjectCard({ children, className, isLarge = false, liveUrl, codeUrl, d
               return (
                 <motion.div
                   key={index}
-                  className="flex-1 bg-foreground"
+                  className={`flex-1 ${overlayColor}`}
                   initial={{ y: "-100%" }}
                   animate={{ y: isHovered ? "0%" : "-100%" }}
                   transition={{
@@ -108,7 +110,8 @@ export default function Skills() {
           <div className="flex justify-center mb-10 overflow-hidden py-4 px-4 md:px-20">
             <VariableProximity
               label="Crafting digital experiences that merge art and technology, creating solutions that are as beautiful as they are functional."
-              className="text-4xl md:text-5xl font-black tracking-normal text-foreground leading-tight text-center cursor-default"
+              className="text-4xl md:text-5xl font-normal tracking-tight leading-[1] text-foreground text-center cursor-default"
+              style={{ fontFamily: 'var(--font-roboto-flex), sans-serif' }}
               fromFontVariationSettings="'wght' 400, 'wdth' 100"
               toFontVariationSettings="'wght' 900, 'wdth' 115"
               containerRef={containerRef}
@@ -220,7 +223,7 @@ export default function Skills() {
               </div>
             </ProjectCard>
 
-            <ProjectCard disableHover>
+            <ProjectCard overlayColor="bg-primary">
               <div className="bg-[#0E100F] hover:bg-zinc-950 transition-colors duration-500 w-full h-full flex flex-col justify-between p-5 border border-white/5">
                 {/* Top Section */}
                 <div className="flex flex-col gap-1">
