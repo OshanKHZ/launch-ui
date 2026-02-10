@@ -4,6 +4,7 @@ import { type VariantProps } from "class-variance-authority";
 import { Menu } from "lucide-react";
 import { useState, useEffect, useRef, type ReactNode } from "react";
 import { motion, useScroll, AnimatePresence } from "motion/react";
+import { useTheme } from "next-themes";
 
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
@@ -140,7 +141,19 @@ function AnimatedLink({
 
 function ThemeSelector() {
   const [isHovered, setIsHovered] = useState(false);
-  const [theme, setTheme] = useState("System");
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
+
+  // Prevent hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
+  const displayTheme = theme === "system" ? "System" : theme === "dark" ? "Dark" : "Light";
 
   return (
     <DropdownMenu>
@@ -149,7 +162,7 @@ function ThemeSelector() {
           className="flex items-center gap-1.5 bg-badge/50 backdrop-blur-md border border-badge/50 px-3 py-1.5 h-8 relative overflow-hidden rounded-[2px] cursor-pointer"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          aria-label={`Current theme: ${theme}. Click to change theme.`}
+          aria-label={`Current theme: ${displayTheme}. Click to change theme.`}
         >
           <span
             className="relative z-10"
@@ -168,7 +181,7 @@ function ThemeSelector() {
           >
             {" "}
             <DecryptedText
-              text={theme.toUpperCase()}
+              text={displayTheme.toUpperCase()}
               speed={35}
               isActive={isHovered}
             />
@@ -182,9 +195,9 @@ function ThemeSelector() {
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start">
-        <DropdownMenuItem onClick={() => setTheme("Light")}>Light</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("Dark")}>Dark</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("System")}>System</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("light")}>Light</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("dark")}>Dark</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("system")}>System</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

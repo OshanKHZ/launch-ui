@@ -240,7 +240,7 @@ export default function TechStackCarousel({ baseSpeed = 80 }: FilmCarouselProps)
                 )}
 
                 {/* Container "Preto" (bg-foreground) adjustado com padding menor e mask mais sutil */}
-                <div className="relative flex w-full flex-col items-center justify-center overflow-hidden bg-foreground py-2 [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+                <div className="relative flex w-full flex-col items-center justify-center overflow-hidden bg-foreground dark:bg-primary py-2 [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
                     <div className="flex overflow-hidden w-full">
                         <motion.div
                             ref={carouselRef}
