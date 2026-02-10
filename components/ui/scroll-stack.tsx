@@ -246,7 +246,6 @@ const ScrollStack = ({
 
                 if (deltaTime > 0) {
                     const calculatedVelocity = deltaY / deltaTime;
-                    console.log('Dispatching velocity event:', calculatedVelocity);
                     window.dispatchEvent(new CustomEvent('lenis-velocity', {
                         detail: { velocity: calculatedVelocity }
                     }));
@@ -293,7 +292,6 @@ const ScrollStack = ({
 
                 if (deltaTime > 0) {
                     const calculatedVelocity = deltaY / deltaTime;
-                    console.log('Dispatching velocity event:', calculatedVelocity);
                     window.dispatchEvent(new CustomEvent('lenis-velocity', {
                         detail: { velocity: calculatedVelocity }
                     }));

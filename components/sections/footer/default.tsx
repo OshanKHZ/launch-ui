@@ -48,7 +48,7 @@ export default function FooterSection({
   };
 
   return (
-    <footer className={cn("bg-background w-full px-2 md:px-6 py-12", className)}>
+    <footer className={cn("bg-background w-full px-2 md:px-6 py-6", className)}>
       <div className="max-w-container mx-auto">
         <div className="grid grid-cols-12 gap-6">
           {/* Divisor from col 2 to col 11 */}
@@ -86,6 +86,13 @@ export default function FooterSection({
           {/* Third Column */}
           <div className="col-span-12 md:col-span-3 md:col-start-9 flex flex-col gap-3">
             {/* Empty for now */}
+          </div>
+
+          {/* Copyright - small and centered below */}
+          <div className="col-span-12 flex justify-center items-center pt-3">
+            <p className="text-foreground/60 font-dm-mono text-xs tracking-tight uppercase">
+              © 2026 Lucas Oshan
+            </p>
           </div>
         </div>
       </div>

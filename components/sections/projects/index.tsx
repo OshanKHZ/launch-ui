@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, MotionValue } from "motion/react";
 import { ExternalLink, Github } from "lucide-react";
+import Image from "next/image";
 import { ActionButton } from "@/components/ui/action-button";
 import { SectionHeader } from "@/components/ui/section-header";
 
@@ -124,11 +125,14 @@ const Card = ({ i, title, category, description, src, link, code, tech, role, ta
         {/* Left Image - 6 Cols */}
         <div className="md:col-span-6 h-full relative overflow-hidden group border-r border-border">
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors z-10" />
-          <motion.div style={{ scale: imageScale }} className="w-full h-full">
-            <img
+          <motion.div style={{ scale: imageScale }} className="w-full h-full relative">
+            <Image
               src={src}
               alt={title}
-              className="object-cover w-full h-full"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              priority={i === 0}
             />
           </motion.div>
         </div>
