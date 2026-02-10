@@ -12,70 +12,70 @@ type SectionRef = HTMLElement | null;
 const logos = [
     {
         name: "React",
-        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2560px-React-icon.svg.png",
+        src: "/logos/react.svg",
         className: "h-14 w-auto",
         width: 56,
         height: 56,
     },
     {
         name: "Next.js",
-        src: "https://svgl.app/library/nextjs_icon_dark.svg",
+        src: "/logos/nextjs.svg",
         className: "h-14 w-auto grayscale contrast-200 mix-blend-multiply",
         width: 56,
         height: 56,
     },
     {
         name: "TypeScript",
-        src: "https://cdn.simpleicons.org/typescript",
+        src: "/logos/typescript.svg",
         className: "h-14 w-auto",
         width: 56,
         height: 56,
     },
     {
         name: "Python",
-        src: "https://cdn.simpleicons.org/python",
+        src: "/logos/python.svg",
         className: "h-14 w-auto",
         width: 56,
         height: 56,
     },
     {
         name: "PostgreSQL",
-        src: "https://www.svgrepo.com/show/306591/postgresql.svg",
+        src: "/logos/postgresql.svg",
         className: "h-16 w-auto grayscale contrast-[100] mix-blend-multiply",
         width: 64,
         height: 64,
     },
     {
         name: "n8n",
-        src: "https://upload.wikimedia.org/wikipedia/commons/5/53/N8n-logo-new.svg",
+        src: "/logos/n8n.svg",
         className: "h-14 w-auto grayscale contrast-200 brightness-0",
         width: 56,
         height: 56,
     },
     {
         name: "Docker",
-        src: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Docker-svgrepo-com.svg",
+        src: "/logos/docker.svg",
         className: "h-22 w-auto grayscale contrast-200 brightness-0",
         width: 88,
         height: 88,
     },
     {
         name: "Git",
-        src: "https://upload.wikimedia.org/wikipedia/commons/a/ad/Git-icon-black.svg",
+        src: "/logos/git.svg",
         className: "h-14 w-auto grayscale contrast-200 brightness-0",
         width: 56,
         height: 56,
     },
     {
         name: "Redis",
-        src: "https://www.svgrepo.com/show/303460/redis-logo.svg",
+        src: "/logos/redis.svg",
         className: "h-16 w-auto grayscale brightness-50 contrast-200 mix-blend-multiply",
         width: 64,
         height: 64,
     },
     {
         name: "Claude Code",
-        src: "https://upload.wikimedia.org/wikipedia/commons/b/b0/Claude_AI_symbol.svg",
+        src: "/logos/claude.svg",
         className: "h-16 w-auto grayscale brightness-50 contrast-200 mix-blend-multiply",
         width: 64,
         height: 64,
@@ -260,7 +260,6 @@ export default function TechStackCarousel({ baseSpeed = 80 }: FilmCarouselProps)
                                         width={logo.width}
                                         height={logo.height}
                                         className={cn("object-contain transition-transform duration-300 group-hover:scale-105 opacity-80 group-hover:opacity-100", logo.className)}
-                                        unoptimized
                                     />
                                 </div>
                             ))}

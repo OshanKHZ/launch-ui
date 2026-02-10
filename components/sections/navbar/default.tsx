@@ -145,10 +145,11 @@ function ThemeSelector() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <a
+        <button
           className="flex items-center gap-1.5 bg-badge/50 backdrop-blur-md border border-badge/50 px-3 py-1.5 h-8 relative overflow-hidden rounded-[2px] cursor-pointer"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
+          aria-label={`Current theme: ${theme}. Click to change theme.`}
         >
           <span
             className="relative z-10"
@@ -178,7 +179,7 @@ function ThemeSelector() {
             animate={{ width: isHovered ? "100%" : "0%" }}
             transition={{ duration: 0.35, ease: [0.87, 0, 0.13, 1] }}
           />
-        </a>
+        </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start">
         <DropdownMenuItem onClick={() => setTheme("Light")}>Light</DropdownMenuItem>
@@ -429,12 +430,14 @@ export default function Navbar({
               size="icon"
               className="group rounded-md shadow-lg bg-[#aa532e] hover:bg-[#aa532e]/90 backdrop-blur-md border border-white/10 w-12 h-12 cursor-pointer"
               onClick={() => setIsMenuOpen(true)}
+              aria-label="Open menu"
             >
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" aria-hidden="true">
                 <path d="M5 8H13.75" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-400 ease-[cubic-bezier(0.87,0,0.13,1)] group-hover:translate-x-[2px]" />
                 <path d="M5 12H19" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 <path d="M10.25 16L19 16" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-400 ease-[cubic-bezier(0.87,0,0.13,1)] delay-100 group-hover:-translate-x-[2px]" />
               </svg>
+              <span className="sr-only">Open menu</span>
             </Button>
           </motion.div>
         )}
