@@ -1,10 +1,22 @@
 "use client";
 
 import { SectionHeader } from "@/components/ui/section-header";
+import { useRef } from "react";
+import { useScroll, useTransform } from "motion/react";
+import ScrollTypingText from "@/components/ui/scroll-typing-text";
 
 export default function About() {
+    const targetRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: targetRef,
+        offset: ["start end", "end start"]
+    });
+
+    // Map scroll progress to typing progress (adjusted range for better UX)
+    const textProgress = useTransform(scrollYProgress, [0.10, 0.50], [0, 1]);
+
     return (
-        <section className="relative bg-[#1E1C1B] -mt-[20vh]">
+        <section ref={targetRef} className="relative bg-[#1E1C1B] -mt-[20vh]">
             <div
                 className="bg-background text-foreground relative w-full pt-32 pb-32 px-6"
             >
@@ -19,11 +31,12 @@ export default function About() {
                                 <br />
                                 one line at a time.
                             </h2>
-                            <p className="text-base md:text-lg text-muted-foreground font-mono leading-relaxed">
-                                I'm a multidisciplinary developer and designer obsessed with crafting polished,
-                                high-performance digital experiences. I bridge the gap between design and engineering,
-                                creating solutions that are as beautiful as they are functional.
-                            </p>
+                            <ScrollTypingText
+                                text="I'm a multidisciplinary developer and designer obsessed with crafting polished, high-performance digital experiences. I bridge the gap between design and engineering, creating solutions that are as beautiful as they are functional."
+                                className="text-base md:text-lg text-muted-foreground font-mono leading-relaxed"
+                                progress={textProgress}
+                                showCursor={true}
+                            />
                         </div>
 
                         {/* Right Column - Photo Placeholder */}
