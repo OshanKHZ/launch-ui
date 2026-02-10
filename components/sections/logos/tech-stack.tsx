@@ -211,7 +211,7 @@ export default function TechStackCarousel({ baseSpeed = 80 }: FilmCarouselProps)
     });
 
     return (
-        <section ref={sectionRef} className="py-2">
+        <section ref={sectionRef} className="py-1">
             <div className="max-w-container mx-auto px-6">
                 {/* Tooltip Portal */}
                 {mounted && createPortal(
