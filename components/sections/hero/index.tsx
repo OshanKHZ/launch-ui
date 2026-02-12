@@ -26,7 +26,7 @@ export default function Hero() {
     const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
     return (
-        <section className="relative bg-background min-h-screen flex items-center justify-center" id="hero">
+        <section className="relative bg-background min-h-screen flex items-start justify-center pt-24 md:pt-32" id="hero">
             {/* Social Links - Bottom Left */}
             <motion.div
                 className="fixed bottom-8 left-8 z-50 flex flex-col gap-8"
@@ -83,25 +83,18 @@ export default function Hero() {
                 </motion.div>
             </motion.div>
 
-            <div className="max-w-container mx-auto px-6 py-20">
-                <div className="flex flex-col items-center justify-center text-center">
-                    <motion.h1
-                        className="text-6xl md:text-8xl lg:text-9xl font-mono uppercase tracking-tighter font-bold leading-none mb-6"
+            <div className="max-w-container mx-auto px-6 w-full">
+                <div className="grid grid-cols-12 gap-4">
+                    <motion.div
+                        className="col-span-12 md:col-start-2 md:col-span-5 flex flex-col justify-center"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                     >
-                        Lucas Oshan
-                    </motion.h1>
-
-                    <motion.p
-                        className="text-xl md:text-2xl lg:text-3xl text-muted-foreground font-mono uppercase tracking-wider max-w-3xl"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                    >
-                        Full Stack Developer
-                    </motion.p>
+                        <p className="text-2xl md:text-4xl lg:text-5xl font-semibold tracking-tight leading-[1.1] indent-12 md:indent-24 text-foreground">
+                            Hello, my name is Lucas Oshan. I&apos;m a <span className="text-primary">Full Stack Developer</span> based in Rio de Janeiro, Brazil.
+                        </p>
+                    </motion.div>
                 </div>
             </div>
         </section>

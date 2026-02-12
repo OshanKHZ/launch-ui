@@ -32,19 +32,19 @@ const skillsDetails: Record<string, { title: string; description?: string; items
   },
   "Workflow Automation": {
     title: "Workflow Automation",
-    description: "I've built intelligent automation systems that orchestrate complex business processes across multiple departments and platforms. From translating intricate business rules into scalable automated workflows to developing autonomous agents that learn and adapt independently, I've helped organizations save hundreds of hours monthly while reducing manual errors by over 90%. My solutions ensure seamless data synchronization and integrity across all systems.",
+    description: "Intelligent automation orchestrating complex processes to eliminate manual errors and save hundreds of hours.",
   },
   "Integrations & APIs": {
     title: "Integrations & APIs",
-    description: "I've architected and built enterprise-grade API ecosystems that connect diverse systems into unified platforms. With expertise in RESTful and GraphQL APIs serving thousands of concurrent users, I've implemented robust authentication layers using OAuth2, JWT, and SSO. My integration work includes real-time webhook systems processing millions of events daily, all backed by comprehensive error handling, retry logic, and monitoring to ensure 99.9% uptime.",
+    description: "Enterprise-grade API ecosystems connecting systems with robust security and real-time processing.",
   },
   "UI/UX Design": {
     title: "UI/UX Design",
-    description: "I've designed and developed comprehensive design systems that scale across products while maintaining perfect visual consistency and brand identity. My approach combines user research, A/B testing, and data-driven insights to craft intuitive experiences that consistently increase engagement and conversion rates. Every interface I build is pixel-perfect and responsive, adapting fluidly across mobile, tablet, and desktop while meeting all accessibility standards.",
+    description: "Comprehensive design systems and data-driven interfaces that scale with perfect visual consistency.",
   },
   "Tech Advisory": {
     title: "Tech Advisory",
-    description: "I've guided companies through strategic technology transformations, from defining roadmaps that align engineering with business goals to modernizing legacy systems without disrupting operations. My advisory work has helped organizations scale efficiently from MVP to millions of users while reducing infrastructure costs by up to 50%. I carefully evaluate and select optimal tech stacks that balance innovation with stability, performance, and long-term maintainability.",
+    description: "Strategic guidance for technology transformations, optimizing infrastructure and modernizing legacy systems.",
   },
   "Database Architecture": {
     title: "Database Architecture",
@@ -135,7 +135,7 @@ function ProjectCard({ children, className, isLarge = false, liveUrl, codeUrl, d
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 10 }}
                 transition={{ delay: 0.35, duration: 0.3 }}
-                className="text-sm font-mono text-background/90 leading-relaxed"
+                className="text-base font-bold font-mono text-background leading-relaxed"
               >
                 {skillsDetails[skillName].description}
               </motion.p>

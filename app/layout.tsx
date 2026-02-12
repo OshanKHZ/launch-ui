@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 
 import { ThemeProvider } from "@/components/contexts/theme-provider";
 import { favorit, dmMono, robotoFlex } from "@/lib/fonts";
+import SmoothScroll from "@/components/ui/smooth-scroll";
 
 import { siteConfig } from "../config/site";
 
@@ -67,7 +68,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${favorit.className} ${dmMono.variable} ${robotoFlex.variable} bg-background antialiased`}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <SmoothScroll>{children}</SmoothScroll>
+        </ThemeProvider>
       </body>
     </html>
   );

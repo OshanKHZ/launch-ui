@@ -1,11 +1,11 @@
 'use client';
 
-import { useEffect, useRef, useState, createElement, useMemo, useCallback } from 'react';
+import { useEffect, useRef, useState, createElement, useMemo, useCallback, ElementType } from 'react';
 import { gsap } from 'gsap';
 
 interface TextTypeProps {
     text: string | string[];
-    as?: keyof JSX.IntrinsicElements;
+    as?: ElementType;
     typingSpeed?: number;
     initialDelay?: number;
     pauseDuration?: number;
