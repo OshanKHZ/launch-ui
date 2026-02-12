@@ -15,6 +15,7 @@ interface CTAButtonProps {
   variant?: "outline" | "solid" | "cta";
   icon?: ReactNode;
   iconRight?: ReactNode;
+  glareEffect?: boolean;
 }
 
 interface CTAProps {
@@ -31,7 +32,8 @@ export default function CTA({
     {
       href: "mailto:lucas.oshan@gmail.com",
       label: "Let's work together",
-      variant: "cta",
+      variant: "solid",
+      glareEffect: true,
     },
   ],
   className,
@@ -66,6 +68,7 @@ export default function CTA({
                 variant={buttons[0].variant || "solid"}
                 target="_self"
                 className="inline-flex"
+                shimmerEffect={buttons[0].glareEffect}
                 IconRight={ArrowUpRight}
               />
             )}

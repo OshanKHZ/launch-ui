@@ -92,7 +92,20 @@ export default function Hero() {
                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                     >
                         <p className="text-2xl md:text-4xl lg:text-5xl font-semibold tracking-tight leading-[1.1] indent-12 md:indent-24 text-foreground">
-                            Hello, my name is Lucas Oshan. I&apos;m a <span className="text-primary">Full Stack Developer</span> based in Rio de Janeiro, Brazil.
+                            Hello, my name is Lucas Oshan. I&apos;m a <span className="relative inline px-2 overflow-hidden">
+                                <motion.span
+                                    className="absolute inset-0 bg-primary/80"
+                                    initial={{ scaleX: 0 }}
+                                    animate={{ scaleX: 1 }}
+                                    transition={{
+                                        duration: 0.6,
+                                        delay: 1,
+                                        ease: [0.22, 1, 0.36, 1]
+                                    }}
+                                    style={{ transformOrigin: 'left' }}
+                                />
+                                <span className="relative">Full Stack Developer</span>
+                            </span> based in Rio de Janeiro, Brazil.
                         </p>
                     </motion.div>
                 </div>

@@ -20,6 +20,16 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: "Bee2Bee",
+    category: "AI Multi-Agent System",
+    description: "Built the indexing engine with tree-sitter AST parsing, dual embedding system, and intelligent chunking. Developed custom n8n nodes and architected the RAG pipeline for semantic code search with context-aware retrieval.",
+    src: "/projects-thumbnail/bee2bee-thumb.webp",
+    link: "https://bee2bee-nine.vercel.app/login",
+    code: "https://github.com/OshanKHZ/bee2bee-indexer",
+    tech: ["Next.js 14", "Python", "tree-sitter", "RAG", "n8n"],
+    role: "Frontend & AI Infrastructure"
+  },
+  {
     title: "Custom CRM",
     category: "SaaS",
     description: "A revolutionary AI platform that transforms how we interact with data. Built with performance and scalability in mind using the latest web technologies.",
@@ -33,7 +43,7 @@ const projects: Project[] = [
     title: "Participa DF",
     category: "Government Ombudsman",
     description: "Digital experience platform for a leading creative agency. Features immersive animations, WebGL interactions, and a custom CMS.",
-    src: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?q=80&w=2700&auto=format&fit=crop",
+    src: "/projects-thumbnail/participa-df-thumb.webp",
     link: "https://google.com",
     code: "https://github.com",
     tech: ["React", "WebGL", "GSAP"],
@@ -53,7 +63,7 @@ const projects: Project[] = [
     title: "Stephany Rocha",
     category: "E-Commerce",
     description: "Modern e-commerce solution with real-time inventory, seamless checkout, and a highly optimized mobile experience.",
-    src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2700&auto=format&fit=crop",
+    src: "/projects-thumbnail/stephanyrocha-thumb.webp",
     link: "https://google.com",
     code: "https://github.com",
     tech: ["Shopify", "React", "Tailwind"],
@@ -110,7 +120,8 @@ const Card = ({ i, title, category, description, src, link, code, tech, role, ta
     offset: ["start end", "start start"]
   });
 
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1.3, 1]);
+  // Removed imageScale effect - images stay static now
+
   //   const scale = useTransform(progress, range, [1, targetScale]); // Re-enable if using parent progress
 
   return (
@@ -125,16 +136,17 @@ const Card = ({ i, title, category, description, src, link, code, tech, role, ta
         {/* Left Image - 6 Cols */}
         <div className="md:col-span-6 h-full relative overflow-hidden group border-r border-border">
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors z-10" />
-          <motion.div style={{ scale: imageScale }} className="w-full h-full relative">
+          <div className="w-full h-full relative">
             <Image
               src={src}
               alt={title}
               fill
+              quality={95}
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 50vw"
               priority={i === 0}
             />
-          </motion.div>
+          </div>
         </div>
 
         {/* Right Content - 6 Cols */}
