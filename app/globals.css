@@ -277,6 +277,10 @@ body {
   line-height: 1.1em;
 }
 
+html {
+  scroll-behavior: auto !important;
+}
+
 @layer base {
   * {
     @apply border-border;

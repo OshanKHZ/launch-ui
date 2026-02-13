@@ -34,19 +34,19 @@ const projects: Project[] = [
     category: "SaaS",
     description: "A revolutionary AI platform that transforms how we interact with data. Built with performance and scalability in mind using the latest web technologies.",
     src: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=2574&auto=format&fit=crop",
-    link: "https://google.com",
+    link: "",
     code: "https://github.com",
     tech: ["Next.js", "OpenAI", "Supabase"],
     role: "Full Stack Developer"
   },
   {
     title: "Participa DF",
-    category: "Government Ombudsman",
-    description: "Digital experience platform for a leading creative agency. Features immersive animations, WebGL interactions, and a custom CMS.",
+    category: "Civic Tech PWA",
+    description: "A Progressive Web App (PWA) for the Federal District Ombudsman to facilitate citizen feedback. Features offline-first architecture, universal accessibility (WCAG 2.1 AA), and multi-channel reporting (text, audio, video) with secure identity protection.",
     src: "/projects-thumbnail/participa-df-thumb.webp",
-    link: "https://google.com",
-    code: "https://github.com",
-    tech: ["React", "WebGL", "GSAP"],
+    link: "https://participa.df.gov.br",
+    code: "https://github.com/OshanKHZ/participa-df-pwa",
+    tech: ["Next.js 16", "TypeScript", "Tailwind", "Drizzle ORM", "PWA"],
     role: "Frontend Developer"
   },
   {
@@ -163,7 +163,12 @@ const Card = ({ i, title, category, description, src, link, code, tech, role, ta
 
             {/* 1. Buttons */}
             <div className="flex items-center gap-4 mb-6">
-              <ActionButton href={link} label="Live Site" Icon={ExternalLink} variant="outline" />
+              <ActionButton
+                href={link}
+                label="Live Site"
+                Icon={ExternalLink}
+                variant={link === "" || link === "#" ? "disabled" : "outline"}
+              />
               <ActionButton href={code} label="Source Code" Icon={Github} variant="solid" />
             </div>
 

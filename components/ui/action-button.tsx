@@ -10,7 +10,7 @@ interface ActionButtonProps {
     label: string;
     Icon?: LucideIcon;
     IconRight?: LucideIcon;
-    variant?: "outline" | "solid" | "cta";
+    variant?: "outline" | "solid" | "cta" | "disabled";
     className?: string;
     target?: string;
 }
@@ -26,6 +26,21 @@ export function ActionButton({
     shimmerEffect = false
 }: ActionButtonProps & { shimmerEffect?: boolean }) {
     const overlayRef = useRef<HTMLDivElement>(null);
+
+    if (variant === "disabled") {
+        return (
+            <div
+                className={cn(
+                    "flex items-center gap-2 px-3 py-1.5 text-xs font-mono uppercase font-bold tracking-wider border border-dashed border-muted-foreground/40 text-muted-foreground/50 cursor-not-allowed opacity-70 select-none",
+                    className
+                )}
+            >
+                {Icon && <Icon size={12} />}
+                <span>{label}</span>
+                {IconRight && <IconRight size={12} />}
+            </div>
+        );
+    }
 
     const animateIn = () => {
         const el = overlayRef.current;
