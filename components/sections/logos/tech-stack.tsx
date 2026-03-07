@@ -87,6 +87,20 @@ const logos = [
         width: 56,
         height: 56,
     },
+    {
+        name: "Google Cloud",
+        src: "/logos/google-cloud.svg",
+        className: "h-16 w-auto",
+        width: 56,
+        height: 56,
+    },
+    {
+        name: "Databricks",
+        src: "/logos/azure-databricks.svg",
+        className: "h-16 w-auto",
+        width: 56,
+        height: 56,
+    },
 ];
 
 interface FilmCarouselProps {

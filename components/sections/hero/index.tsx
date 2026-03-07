@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
+import MouseScrollIndicator from "@/components/ui/mouse-scroll-indicator";
 
 const socialLinks = [
     {
@@ -110,6 +111,9 @@ export default function Hero() {
                     </motion.div>
                 </div>
             </div>
+
+            {/* Mouse Scroll Indicator */}
+            <MouseScrollIndicator />
         </section>
     );
 }

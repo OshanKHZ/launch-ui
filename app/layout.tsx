@@ -2,7 +2,7 @@ import "@/app/globals.css";
 
 import type { Metadata } from "next";
 
-import { ThemeProvider } from "@/components/contexts/theme-provider";
+import { ThemeProvider } from "@/app/contexts/theme-provider";
 import { favorit, dmMono, robotoFlex } from "@/lib/fonts";
 import SmoothScroll from "@/components/ui/smooth-scroll";
 import ClickSpark from "@/components/ui/click-spark";

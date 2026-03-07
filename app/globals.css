@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap");
 
 @import "tailwindcss";
-@import "../styles/utils.css";
+@import "./styles/utils.css";
 
 @import "tw-animate-css";
 
@@ -360,4 +360,73 @@ html {
 /* Down Arrow */
 ::-webkit-scrollbar-button:single-button:vertical:increment {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23aa532e'%3E%3Cpath d='M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z'/%3E%3C/svg%3E");
+}
+
+/* Mouse scroll dot animation — 60fps, 90f loop */
+@keyframes mouse-dot-scroll {
+
+  /* f0: start invisible */
+  0% {
+    opacity: 0;
+    transform: translateY(0px);
+    animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+  }
+
+  /* f5: fade in complete */
+  5.6% {
+    opacity: 1;
+    transform: translateY(0px);
+    animation-timing-function: cubic-bezier(0.25, 0, 0.25, 1);
+  }
+
+  /* f19: peak of rise — subtler, -1px only */
+  21.1% {
+    opacity: 1;
+    transform: translateY(-1px);
+    animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+  }
+
+  /* f21: pause 2f at peak */
+  23.3% {
+    opacity: 1;
+    transform: translateY(-1px);
+    animation-timing-function: cubic-bezier(0.4, 0, 0.8, 0.6);
+  }
+
+  /* f48: overshoot bottom — 6.5px, barely past final */
+  53.3% {
+    opacity: 1;
+    transform: translateY(6.5px);
+    animation-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
+  }
+
+  /* f50: pause 2f at bottom */
+  55.6% {
+    opacity: 1;
+    transform: translateY(6.5px);
+    animation-timing-function: cubic-bezier(0.0, 0, 0.4, 1);
+  }
+
+  /* f60: settle at final position — 5.5px */
+  66.7% {
+    opacity: 1;
+    transform: translateY(5.5px);
+    animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+  }
+
+  /* f75: fade out */
+  83.3% {
+    opacity: 0;
+    transform: translateY(5.5px);
+  }
+
+  /* f90: reset for loop */
+  100% {
+    opacity: 0;
+    transform: translateY(0px);
+  }
+}
+
+.mouse-dot {
+  animation: mouse-dot-scroll 2.5s linear infinite;
 }

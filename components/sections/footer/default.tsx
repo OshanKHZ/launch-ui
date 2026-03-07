@@ -85,15 +85,12 @@ export default function FooterSection({
 
           {/* Third Column */}
           <div className="col-span-12 md:col-span-3 md:col-start-9 flex flex-col gap-3">
-            {/* Empty for now */}
-          </div>
-
-          {/* Copyright - small and centered below */}
-          <div className="col-span-12 flex justify-center items-center pt-3">
-            <p className="text-foreground/60 font-dm-mono text-xs tracking-tight uppercase">
-              © 2026 Lucas Oshan
+            <p className="text-foreground/70 font-dm-mono text-sm uppercase tracking-tight">
+              Developed By: <span className="underline underline-offset-4 decoration-foreground/30 text-foreground">Lucas Oshan</span>
             </p>
           </div>
+
+
         </div>
       </div>
     </footer>
