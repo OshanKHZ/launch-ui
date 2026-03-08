@@ -2,32 +2,37 @@
 
 import { cn } from "@/lib/utils";
 import { SectionHeader } from "@/components/ui/section-header";
-import { useEffect, useRef } from "react";
-// import VariableProximity from "@/components/ui/variable-proximity";
+import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "motion/react";
 import ClickSpark from "@/components/ui/click-spark";
 import ScrollRevealText from "@/components/ui/scroll-reveal-text";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 const cards = [
     {
         id: "01",
-        title: "UX/UI DESIGN",
-        description: "Digital product experiences that engage, convert, and keep users coming back. Every interface is crafted to bridge user needs with business goals—clear, functional, and beautiful.",
+        title: "DATA ENGINEERING & CLOUD",
+        description: "A reliable, auditable data infrastructure. Your raw data becomes structured pipelines — migrated, transformed, and governed across cloud providers. You get clean data, at scale, you can actually trust.",
     },
     {
         id: "02",
-        title: "AI UX",
-        description: "AI-driven experiences that help users work smarter, faster, and with confidence. Whether AI is the product or just powering part of it, what matters most is how it feels to use.",
+        title: "AI & AUTOMATION",
+        description: "Hours back in your team's day. Repetitive workflows become intelligent automations — from no-code n8n flows to custom AI agents. You get systems that work while you sleep.",
     },
     {
         id: "03",
-        title: "DIGITAL PRODUCT STRATEGY",
-        description: "From first principles to launch, we help teams navigate ambiguity, align faster, and build with purpose. High clarity, low friction, and maximum impact.",
+        title: "SOFTWARE DEVELOPMENT",
+        description: "A production-ready product, not a prototype. Whether a full web app, internal tool, or API integration — you get something deployed, documented, and built to last beyond the handoff.",
     },
     {
         id: "04",
-        title: "FULL STACK DEV",
-        description: "Robust, scalable, and secure applications built with modern technologies. We handle everything from the database to the frontend, ensuring a seamless experience.",
+        title: "UI/UX DESIGN",
+        description: "Interfaces your users actually understand. From wireframes to high-fidelity design systems — you get a product that looks premium, feels intuitive, and converts. Design that earns trust on first glance.",
+    },
+    {
+        id: "05",
+        title: "CONSULTING & STRATEGY",
+        description: "A clear path forward. Whether you're stuck on architecture, scaling a team, or modernizing a legacy system — you get a technical partner who maps the problem, defines the plan, and stays accountable.",
     },
 ];
 
@@ -44,19 +49,8 @@ export default function Services() {
         mass: 0.5
     });
 
-    const x = useTransform(smoothProgress, [0, 1], ["0%", "-50%"]);
+    const x = useTransform(smoothProgress, [0, 1], ["0%", "-60%"]);
     const textProgress = useTransform(smoothProgress, [0, 0.5], [0, 1]);
-
-    useEffect(() => {
-        const script = document.createElement("script");
-        script.src = "https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.11/dist/dotlottie-wc.js";
-        script.type = "module";
-        document.body.appendChild(script);
-
-        return () => {
-            document.body.removeChild(script);
-        };
-    }, []);
 
     return (
         <section ref={targetRef} id="services" className="relative h-[200vh] bg-[#1E1C1B] text-white">
@@ -71,7 +65,7 @@ export default function Services() {
                             {/* Main Text */}
                             <div ref={containerRef} className="col-span-12 md:col-span-7 relative z-10">
                                 <ScrollRevealText
-                                    text="I engineer high-performance systems and AI-driven solutions designed to scale, deliver real metrics, and never just for show."
+                                    text="Whatever the stack, whatever the scale — you get something that works, that's built to last, and that actually moves the needle."
                                     className="text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight leading-[1]"
                                     style={{ fontFamily: 'var(--font-roboto-flex), sans-serif' }}
                                     progress={textProgress}
@@ -80,8 +74,7 @@ export default function Services() {
 
                             {/* Lottie Animation */}
                             <div className="col-span-12 md:col-start-8 md:col-span-5 flex justify-end relative z-10">
-                                {/* @ts-ignore */}
-                                <dotlottie-wc
+                                <DotLottieReact
                                     src="https://lottie.host/ed042078-bbd7-49fa-b8c1-5b7e8c0d4fc0/N3HOcqgg87.lottie"
                                     style={{ width: "200px", height: "200px" }}
                                     autoplay

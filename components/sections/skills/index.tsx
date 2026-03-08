@@ -194,7 +194,7 @@ function ProjectCard({ children, className, isLarge = false, liveUrl, codeUrl, d
 }
 
 export default function Skills() {
-  const containerRef = useRef<any>(null);
+  const containerRef = useRef<HTMLElement>(null);
 
   return (
     <section ref={containerRef} id="skills" className="relative bg-[#1E1C1B] z-20 -mt-[10vh]">

@@ -365,15 +365,15 @@ html {
 /* Mouse scroll dot animation — 60fps, 90f loop */
 @keyframes mouse-dot-scroll {
 
-  /* f0: start invisible */
+  /* f0: start invisible — fade-in via 5 steps of 20% each */
   0% {
     opacity: 0;
     transform: translateY(0px);
-    animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+    animation-timing-function: steps(5, end);
   }
 
-  /* f5: fade in complete */
-  5.6% {
+  /* f5: fade in complete — 5f × 60fps × 2.5s = 3.33% */
+  3.33% {
     opacity: 1;
     transform: translateY(0px);
     animation-timing-function: cubic-bezier(0.25, 0, 0.25, 1);
@@ -429,4 +429,5 @@ html {
 
 .mouse-dot {
   animation: mouse-dot-scroll 2.5s linear infinite;
+  will-change: transform, opacity;
 }

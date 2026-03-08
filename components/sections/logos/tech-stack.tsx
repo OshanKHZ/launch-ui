@@ -264,7 +264,7 @@ export default function TechStackCarousel({ baseSpeed = 80 }: FilmCarouselProps)
                             {[...logos, ...logos, ...logos, ...logos].map((logo, index) => (
                                 <div
                                     key={`${logo.name}-${index}`}
-                                    className="relative flex h-28 w-52 shrink-0 items-center justify-center rounded-md bg-background cursor-pointer group text-foreground"
+                                    className="relative flex h-16 w-32 sm:h-20 sm:w-40 md:h-28 md:w-52 shrink-0 items-center justify-center rounded-md bg-background cursor-pointer group text-foreground"
                                     onMouseEnter={() => setHoveredLogo(logo.name)}
                                     onMouseLeave={() => setHoveredLogo(null)}
                                 >
@@ -277,7 +277,7 @@ export default function TechStackCarousel({ baseSpeed = 80 }: FilmCarouselProps)
                                         alt={logo.name}
                                         width={logo.width}
                                         height={logo.height}
-                                        className={cn("object-contain transition-transform duration-300 group-hover:scale-105 opacity-80 group-hover:opacity-100 relative z-10", logo.className)}
+                                        className={cn("object-contain transition-transform duration-300 group-hover:scale-105 opacity-80 group-hover:opacity-100 relative z-10 max-h-11 sm:max-h-14 md:max-h-none", logo.className)}
                                     />
                                 </div>
                             ))}

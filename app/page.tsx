@@ -1,7 +1,6 @@
 import CTA from "../components/sections/cta/default";
 import Footer from "../components/sections/footer/default";
 import Navbar from "../components/sections/navbar/default";
-import { LayoutLines } from "../components/ui/layout-lines";
 import dynamic from "next/dynamic";
 
 // Hero is above the fold, so we import it directly
@@ -31,7 +30,6 @@ const About = dynamic(() => import("@/components/sections/about/index").then(mod
 export default function Home() {
   return (
     <main className="bg-background text-foreground min-h-screen w-full">
-      <LayoutLines />
       <Navbar />
       <Hero />
       <Projects />

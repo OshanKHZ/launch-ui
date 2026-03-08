@@ -1,9 +1,8 @@
 "use client";
 
 import { SectionHeader } from "@/components/ui/section-header";
-import { useRef, useState } from "react";
-import { useScroll, useTransform, motion, AnimatePresence } from "motion/react";
-import ScrollTypingText from "@/components/ui/scroll-typing-text";
+import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 
 const services = [
@@ -130,17 +129,10 @@ function AccordionItem({
 }
 
 export default function About() {
-    const targetRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: targetRef,
-        offset: ["start end", "end start"]
-    });
     const [openItem, setOpenItem] = useState<string | null>(null);
 
-    const textProgress = useTransform(scrollYProgress, [0.20, 0.50], [0, 1]);
-
     return (
-        <section ref={targetRef} className="relative bg-[#1E1C1B] -mt-[20vh]">
+        <section className="relative bg-[#1E1C1B] -mt-[20vh]">
             <div className="bg-background text-foreground relative w-full pt-32 pb-32 px-6">
                 <div className="max-w-container mx-auto">
                     <SectionHeader title="About" />

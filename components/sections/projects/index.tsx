@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform, MotionValue } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { ExternalLink, Github } from "lucide-react";
 import Image from "next/image";
 import { ActionButton } from "@/components/ui/action-button";
@@ -61,13 +61,13 @@ const projects: Project[] = [
   },
   {
     title: "Stephany Rocha",
-    category: "E-Commerce",
-    description: "Modern e-commerce solution with real-time inventory, seamless checkout, and a highly optimized mobile experience.",
+    category: "Landing Page",
+    description: "Landing page for a psychologist, designed to convey trust, warmth, and professionalism. Focused on clear service presentation, emotional connection with the visitor, and optimized conversion for scheduling consultations.",
     src: "/projects-thumbnail/stephanyrocha-thumb.webp",
     link: "https://google.com",
     code: "https://github.com",
-    tech: ["Shopify", "React", "Tailwind"],
-    role: "Frontend Developer"
+    tech: ["Next.js", "Tailwind", "Figma"],
+    role: "Designer & Frontend Developer"
   }
 ];
 
@@ -90,9 +90,6 @@ export default function Projects() {
               key={i}
               i={i}
               {...project}
-              progress={null} // We handle internal progress if needed, or pass from parent.
-              // Actually simplest is sticky stacking without parent scroll link for now.
-              range={[i * 0.25, 1]}
               targetScale={targetScale}
               total={projects.length}
             />
@@ -107,8 +104,6 @@ export default function Projects() {
 
 interface CardProps extends Project {
   i: number;
-  progress: MotionValue<number> | null;
-  range: [number, number];
   targetScale: number;
   total: number;
 }
