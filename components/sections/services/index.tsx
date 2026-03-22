@@ -6,7 +6,6 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "motion/react";
 import ClickSpark from "@/components/ui/click-spark";
 import ScrollRevealText from "@/components/ui/scroll-reveal-text";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 const cards = [
     {
@@ -72,15 +71,6 @@ export default function Services() {
                                 />
                             </div>
 
-                            {/* Lottie Animation */}
-                            <div className="col-span-12 md:col-start-8 md:col-span-5 flex justify-end relative z-10">
-                                <DotLottieReact
-                                    src="https://lottie.host/ed042078-bbd7-49fa-b8c1-5b7e8c0d4fc0/N3HOcqgg87.lottie"
-                                    style={{ width: "200px", height: "200px" }}
-                                    autoplay
-                                    loop
-                                />
-                            </div>
 
                             {/* Divider Line */}
                             <div className="col-span-12 mt-6">

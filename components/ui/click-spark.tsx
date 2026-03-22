@@ -43,6 +43,8 @@ const ClickSpark = ({
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const sparksRef = useRef<Spark[]>([]);
     const startTimeRef = useRef<number | null>(null);
+    const animationIdRef = useRef<number>(0);
+    const isDrawingRef = useRef(false);
 
     const { theme, resolvedTheme } = useTheme();
 
@@ -109,29 +111,25 @@ const ClickSpark = ({
         [easing]
     );
 
+    // Draw loop — only runs while sparks are active
+    const drawRef = useRef<(timestamp: number) => void>(() => { });
+
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
 
-        let animationId: number;
-
-        const draw = (timestamp: number) => {
-            if (!startTimeRef.current) {
-                startTimeRef.current = timestamp;
-            }
+        drawRef.current = (timestamp: number) => {
+            if (!startTimeRef.current) startTimeRef.current = timestamp;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             sparksRef.current = sparksRef.current.filter((spark) => {
                 const elapsed = timestamp - spark.startTime;
-                if (elapsed >= duration) {
-                    return false;
-                }
+                if (elapsed >= duration) return false;
 
                 const progress = elapsed / duration;
                 const eased = easeFunc(progress);
-
                 const distance = eased * sparkRadius * extraScale;
                 const lineLength = sparkSize * (1 - eased);
 
@@ -140,7 +138,7 @@ const ClickSpark = ({
                 const x2 = spark.x + (distance + lineLength) * Math.cos(spark.angle);
                 const y2 = spark.y + (distance + lineLength) * Math.sin(spark.angle);
 
-                ctx.strokeStyle = spark.color; // Use individual spark color
+                ctx.strokeStyle = spark.color;
                 ctx.lineWidth = 2;
                 ctx.beginPath();
                 ctx.moveTo(x1, y1);
@@ -150,22 +148,20 @@ const ClickSpark = ({
                 return true;
             });
 
-            animationId = requestAnimationFrame(draw);
+            if (sparksRef.current.length > 0) {
+                // More sparks to draw — continue loop
+                animationIdRef.current = requestAnimationFrame(drawRef.current);
+            } else {
+                // All sparks done — stop loop until next click
+                isDrawingRef.current = false;
+                startTimeRef.current = null;
+            }
         };
-
-        animationId = requestAnimationFrame(draw);
 
         return () => {
-            cancelAnimationFrame(animationId);
+            cancelAnimationFrame(animationIdRef.current);
         };
-    }, [
-        sparkSize,
-        sparkRadius,
-        sparkCount,
-        duration,
-        easeFunc,
-        extraScale,
-    ]);
+    }, [sparkSize, sparkRadius, duration, easeFunc, extraScale]);
 
     // Helper to determine if a color is light or dark
     const isDarkColor = (color: string) => {
@@ -232,6 +228,12 @@ const ClickSpark = ({
         }));
 
         sparksRef.current.push(...newSparks);
+
+        // Start the draw loop only if not already running
+        if (!isDrawingRef.current) {
+            isDrawingRef.current = true;
+            animationIdRef.current = requestAnimationFrame(drawRef.current);
+        }
     };
 
     return (

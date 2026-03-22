@@ -4,6 +4,7 @@ import { SectionHeader } from "@/components/ui/section-header";
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
+import { EASE_OUT_EXPO } from "@/lib/animations";
 
 const services = [
     {
@@ -102,7 +103,7 @@ function AccordionItem({
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                        transition={{ duration: 0.3, ease: EASE_OUT_EXPO }}
                         className="overflow-hidden"
                     >
                         <div className="pb-3">

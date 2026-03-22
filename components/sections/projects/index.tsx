@@ -115,21 +115,17 @@ const Card = ({ i, title, category, description, src, link, code, tech, role, ta
     offset: ["start end", "start start"]
   });
 
-  // Removed imageScale effect - images stay static now
-
-  //   const scale = useTransform(progress, range, [1, targetScale]); // Re-enable if using parent progress
-
   return (
     <div
       ref={container}
-      className="h-[370px] sticky flex items-start justify-center px-2 pb-2 md:px-6 md:pb-6 pt-0"
+      className="h-[520px] md:h-[370px] sticky flex items-start justify-center px-2 pb-2 md:px-6 md:pb-6 pt-0"
       style={{ top: `calc(4rem + ${i * 50}px)` }}
     >
       <motion.div
         className="w-full h-full md:h-[350px] grid grid-cols-1 md:grid-cols-12 bg-background border-t-2 border-foreground overflow-hidden relative pt-4"
       >
         {/* Left Image - 6 Cols */}
-        <div className="md:col-span-6 h-full relative overflow-hidden group border-r border-border">
+        <div className="md:col-span-6 h-[180px] md:h-full relative overflow-hidden group border-r border-border">
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors z-10" />
           <div className="w-full h-full relative">
             <Image
@@ -147,17 +143,30 @@ const Card = ({ i, title, category, description, src, link, code, tech, role, ta
         {/* Right Content - 6 Cols */}
         <div className="md:col-span-6 h-full flex flex-col justify-between bg-background relative z-10">
           {/* Header inside Right Col */}
-          <div className="w-full flex justify-between items-center pl-6 pr-6">
-            <h2 className="text-2xl md:text-4xl font-mono uppercase tracking-tighter font-bold leading-none">{title}</h2>
-            <span className="font-mono text-xs tracking-widest uppercase hidden md:block text-muted-foreground">{category}</span>
+          <div className="w-full flex justify-between items-center gap-3 pl-6 pr-6">
+            <h2 className="text-lg md:text-4xl font-mono uppercase tracking-tighter font-bold leading-none shrink-0">{title}</h2>
+            <div className="flex items-center gap-2">
+              {/* Buttons on mobile - right of title */}
+              <div className="flex items-center gap-1.5 md:hidden">
+                <ActionButton
+                  href={link}
+                  label="Live"
+                  Icon={ExternalLink}
+                  variant={link === "" || link === "#" ? "disabled" : "outline"}
+                  size="sm"
+                />
+                <ActionButton href={code} label="Code" Icon={Github} variant="solid" size="sm" />
+              </div>
+              <span className="font-mono text-xs tracking-widest uppercase text-muted-foreground">{category}</span>
+            </div>
           </div>
 
           <div className="flex-1 flex flex-col pl-6 pr-6 pb-0">
             {/* Spacer to push everything to bottom */}
             <div className="flex-1" />
 
-            {/* 1. Buttons */}
-            <div className="flex items-center gap-4 mb-6">
+            {/* 1. Buttons - desktop only */}
+            <div className="hidden md:flex items-center gap-4 mb-6">
               <ActionButton
                 href={link}
                 label="Live Site"

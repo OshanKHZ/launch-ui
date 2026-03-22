@@ -41,7 +41,33 @@ export default function CTA({
   return (
     <Section className={cn("group relative overflow-hidden", className)}>
       <div className="max-w-container relative z-10 mx-auto">
-        <div className="grid grid-cols-12 gap-4">
+
+        {/* Mobile layout */}
+        <div className="flex flex-col gap-6 md:hidden">
+          <span className="text-xs font-mono text-muted-foreground/60 uppercase tracking-wider">
+            GET IN TOUCH
+          </span>
+          <h2 className="text-2xl leading-snug font-semibold">
+            {title}
+          </h2>
+          <p className="text-base text-muted-foreground leading-relaxed">
+            {description}
+          </p>
+          {buttons !== false && buttons.length > 0 && (
+            <ActionButton
+              href={buttons[0].href}
+              label={buttons[0].label}
+              variant={buttons[0].variant || "solid"}
+              target="_self"
+              className="w-full justify-center"
+              shimmerEffect={buttons[0].glareEffect}
+              IconRight={ArrowUpRight}
+            />
+          )}
+        </div>
+
+        {/* Desktop layout */}
+        <div className="hidden md:grid grid-cols-12 gap-4">
           {/* Título + Descrição - colunas 2-6 */}
           <div className="col-span-5 col-start-2 row-start-1 flex flex-col gap-3">
             <h2 className="text-2xl leading-snug font-semibold sm:text-4xl sm:leading-snug">
@@ -74,6 +100,7 @@ export default function CTA({
             )}
           </div>
         </div>
+
       </div>
       <div className="absolute top-0 left-0 h-full w-full translate-y-[1rem] opacity-80 transition-all duration-500 ease-in-out group-hover:translate-y-[-2rem] group-hover:opacity-100">
         <Glow variant="bottom" />

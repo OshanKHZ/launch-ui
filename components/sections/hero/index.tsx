@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "motion/react";
+import { EASE_OUT_EXPO } from "@/lib/animations";
 import Image from "next/image";
 import MouseScrollIndicator from "@/components/ui/mouse-scroll-indicator";
 
@@ -101,7 +102,7 @@ export default function Hero() {
                                     transition={{
                                         duration: 0.6,
                                         delay: 1,
-                                        ease: [0.22, 1, 0.36, 1]
+                                        ease: EASE_OUT_EXPO
                                     }}
                                     style={{ transformOrigin: 'left' }}
                                 />

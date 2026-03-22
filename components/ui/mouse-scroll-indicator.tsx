@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from "motion/react";
 import { useEffect, useState } from "react";
+import { EASE_OUT_EXPO } from "@/lib/animations";
 
 /**
  * Mouse scroll indicator with a looping dot animation at 30fps.
@@ -30,7 +31,7 @@ export default function MouseScrollIndicator() {
             className="hidden md:flex absolute bottom-10 left-1/2 -translate-x-1/2 flex-col items-center z-40"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.8, delay: 1.2, ease: EASE_OUT_EXPO }}
             style={{ opacity: containerOpacity }}
         >
             {/* Mouse body + animated dot */}

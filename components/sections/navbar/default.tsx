@@ -7,6 +7,7 @@ import { motion, useScroll, AnimatePresence } from "motion/react";
 import { useTheme } from "next-themes";
 
 import { siteConfig } from "@/config/site";
+import { EASE_IN_OUT_QUINT, DURATION_DEFAULT } from "@/lib/animations";
 import { cn } from "@/lib/utils";
 
 import { GripIcon, ArrowCircleTopIcon } from "../../icons";
@@ -25,8 +26,7 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from "../../ui/sheet";
 import { NavigationMenu } from "./navigation-menu";
 
-const easing: any = [0.87, 0, 0.13, 1];
-const duration = 0.35;
+const duration = DURATION_DEFAULT;
 
 interface DecryptedTextProps {
   text: string;
@@ -120,7 +120,7 @@ function AnimatedLink({
       <motion.span
         className="relative z-10"
         animate={{ color: isHovered ? "rgb(255 255 255)" : "hsl(var(--badge-foreground))" }}
-        transition={{ duration, ease: easing }}
+        transition={{ duration, ease: EASE_IN_OUT_QUINT }}
       >
         {" "}
         <DecryptedText
@@ -133,7 +133,7 @@ function AnimatedLink({
         className="absolute inset-y-0 left-0 bg-badge-hover"
         initial={{ width: "0%" }}
         animate={{ width: isHovered ? "100%" : "0%" }}
-        transition={{ duration, ease: easing }}
+        transition={{ duration, ease: EASE_IN_OUT_QUINT }}
       />
     </a>
   );
@@ -190,7 +190,7 @@ function ThemeSelector() {
             className="absolute inset-y-0 left-0 bg-badge-hover"
             initial={{ width: "0%" }}
             animate={{ width: isHovered ? "100%" : "0%" }}
-            transition={{ duration: 0.35, ease: [0.87, 0, 0.13, 1] }}
+            transition={{ duration: DURATION_DEFAULT, ease: EASE_IN_OUT_QUINT }}
           />
         </button>
       </DropdownMenuTrigger>
@@ -221,7 +221,7 @@ function RouletteLink({ href, text, className }: { href: string; text: string; c
           animate={{ y: isHovered ? "0%" : "-150%" }}
           transition={{
             duration: 0.6,
-            ease: [0.87, 0, 0.13, 1],
+            ease: EASE_IN_OUT_QUINT,
           }}
           className="text-primary font-mono font-bold h-[1em] flex items-center"
         >
@@ -234,7 +234,7 @@ function RouletteLink({ href, text, className }: { href: string; text: string; c
             animate={{ y: isHovered ? `-${spins}em` : "0em" }}
             transition={{
               duration: 0.6,
-              ease: [0.87, 0, 0.13, 1],
+              ease: EASE_IN_OUT_QUINT,
             }}
           >
             {Array.from({ length: spins + 1 }).map((_, i) => (
@@ -257,7 +257,7 @@ function RouletteLink({ href, text, className }: { href: string; text: string; c
           animate={{ y: isHovered ? "0%" : "-150%" }}
           transition={{
             duration: 0.6,
-            ease: [0.87, 0, 0.13, 1],
+            ease: EASE_IN_OUT_QUINT,
           }}
           className="text-primary font-mono font-bold h-[1em] flex items-center"
         >
@@ -295,19 +295,15 @@ export default function Navbar({
   name = "Launch UI",
   homeUrl = siteConfig.url,
   mobileLinks = [
-    { text: "Components", href: siteConfig.url },
-    { text: "Documentation", href: siteConfig.url },
+    { text: "Projects", href: "#projects" },
+    { text: "About", href: "#about" },
+    { text: "Services", href: "#services" },
+    { text: "Contact", href: "mailto:lucas.oshan@gmail.com" },
   ],
   actions = [
     { text: "Projects", href: "#projects", isButton: false },
     { text: "/", href: "#", isButton: false },
     { text: "About Me", href: "#about", isButton: false },
-    // {
-    //   text: "Get Started",
-    //   href: siteConfig.url,
-    //   isButton: true,
-    //   variant: "default",
-    // },
   ],
   showNavigation = true,
   className,

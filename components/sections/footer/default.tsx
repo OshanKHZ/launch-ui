@@ -48,32 +48,66 @@ export default function FooterSection({
   };
 
   return (
-    <footer className={cn("bg-background w-full px-2 md:px-6 py-6", className)}>
+    <footer className={cn("bg-background w-full px-4 md:px-6 py-6", className)}>
       <div className="max-w-container mx-auto">
-        <div className="grid grid-cols-12 gap-6">
+
+        {/* Mobile layout */}
+        <div className="flex flex-col gap-5 md:hidden">
+          {/* Divisor */}
+          <div className="border-t-2 border-foreground/30" />
+
+          {/* Email */}
+          <a
+            href={`mailto:${email}`}
+            className="text-foreground font-dm-mono text-sm hover:text-primary transition-colors uppercase break-all"
+          >
+            {email}
+          </a>
+
+          {/* Social Links */}
+          <div className="flex flex-col gap-2.5">
+            <SocialLink href={links.instagram!} icon={InstagramIcon}>INSTAGRAM</SocialLink>
+            <SocialLink href={links.linkedin!} icon={LinkedinIcon}>LINKEDIN</SocialLink>
+            <SocialLink href={links.github!} icon={GithubIcon}>GITHUB</SocialLink>
+          </div>
+
+          {/* Bottom row: Back to top | Developed By */}
+          <div className="border-t border-foreground/10 pt-4 flex items-center justify-between gap-4">
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="flex items-center gap-1.5 text-xs font-dm-mono tracking-tight text-foreground hover:text-primary transition-colors duration-200 cursor-pointer uppercase"
+            >
+              <ArrowUpIcon className="w-3.5 h-3.5" />
+              Back to top
+            </button>
+            <p className="text-foreground/60 font-dm-mono text-xs uppercase tracking-tight text-right">
+              By <span className="text-foreground">Lucas Oshan</span>
+            </p>
+          </div>
+        </div>
+
+        {/* Desktop layout */}
+        <div className="hidden md:grid grid-cols-12 gap-6">
           {/* Divisor from col 2 to col 11 */}
-          <div className="col-span-12 md:col-span-10 md:col-start-2">
+          <div className="col-span-10 col-start-2">
             <div className="border-t-2 border-foreground/30" />
           </div>
 
-          {/* First Column - aligned with col 2 start */}
-          <div className="col-span-12 md:col-span-3 md:col-start-2 flex flex-col gap-3">
-            {/* Email */}
+          {/* First Column */}
+          <div className="col-span-3 col-start-2 flex flex-col gap-3">
             <a
               href={`mailto:${email}`}
               className="text-foreground font-dm-mono text-base hover:text-primary transition-colors uppercase"
             >
               {email}
             </a>
-
-            {/* Social Links */}
             <SocialLink href={links.instagram!} icon={InstagramIcon}>INSTAGRAM</SocialLink>
             <SocialLink href={links.linkedin!} icon={LinkedinIcon}>LINKEDIN</SocialLink>
             <SocialLink href={links.github!} icon={GithubIcon}>GITHUB</SocialLink>
           </div>
 
           {/* Second Column */}
-          <div className="col-span-12 md:col-span-3 md:col-start-6 flex flex-col gap-3">
+          <div className="col-span-3 col-start-6 flex flex-col gap-3">
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               className="group flex items-center gap-2 text-base font-dm-mono tracking-tight text-foreground hover:text-primary transition-colors duration-200 cursor-pointer uppercase"
@@ -84,14 +118,13 @@ export default function FooterSection({
           </div>
 
           {/* Third Column */}
-          <div className="col-span-12 md:col-span-3 md:col-start-9 flex flex-col gap-3">
+          <div className="col-span-3 col-start-9 flex flex-col gap-3">
             <p className="text-foreground/70 font-dm-mono text-sm uppercase tracking-tight">
               Developed By: <span className="underline underline-offset-4 decoration-foreground/30 text-foreground">Lucas Oshan</span>
             </p>
           </div>
-
-
         </div>
+
       </div>
     </footer>
   );

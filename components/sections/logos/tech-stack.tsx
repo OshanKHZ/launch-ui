@@ -101,6 +101,20 @@ const logos = [
         width: 56,
         height: 56,
     },
+    {
+        name: "Kafka",
+        src: "/logos/kafka.svg",
+        className: "h-16 w-auto",
+        width: 56,
+        height: 56,
+    },
+    {
+        name: "Airflow",
+        src: "/logos/airflow.svg",
+        className: "h-16 w-auto",
+        width: 56,
+        height: 56,
+    },
 ];
 
 interface FilmCarouselProps {
@@ -226,7 +240,7 @@ export default function TechStackCarousel({ baseSpeed = 80 }: FilmCarouselProps)
 
     return (
         <section ref={sectionRef} className="py-1">
-            <div className="max-w-container mx-auto px-6">
+            <div>
                 {/* Tooltip Portal */}
                 {mounted && createPortal(
                     <AnimatePresence>

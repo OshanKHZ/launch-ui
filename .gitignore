@@ -39,3 +39,6 @@ next-env.d.ts
 # pro
 /app/pro/
 /components/pro/
+
+# pnpm-only project — ignore npm lockfile
+package-lock.json

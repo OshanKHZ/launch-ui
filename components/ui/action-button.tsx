@@ -13,6 +13,7 @@ interface ActionButtonProps {
     variant?: "outline" | "solid" | "cta" | "disabled";
     className?: string;
     target?: string;
+    size?: "sm" | "md";
 }
 
 export function ActionButton({
@@ -23,21 +24,24 @@ export function ActionButton({
     variant = "outline",
     className,
     target = "_blank",
-    shimmerEffect = false
+    shimmerEffect = false,
+    size = "md",
 }: ActionButtonProps & { shimmerEffect?: boolean }) {
+    const isSm = size === "sm";
     const overlayRef = useRef<HTMLDivElement>(null);
 
     if (variant === "disabled") {
         return (
             <div
                 className={cn(
-                    "flex items-center gap-2 px-3 py-1.5 text-xs font-mono uppercase font-bold tracking-wider border border-dashed border-muted-foreground/40 text-muted-foreground/50 cursor-not-allowed opacity-70 select-none",
+                    "flex items-center font-mono uppercase font-bold tracking-wider border border-dashed border-muted-foreground/40 text-muted-foreground/50 cursor-not-allowed opacity-70 select-none",
+                    isSm ? "gap-1 px-2 py-1 text-[10px]" : "gap-2 px-3 py-1.5 text-xs",
                     className
                 )}
             >
-                {Icon && <Icon size={12} />}
+                {Icon && <Icon size={isSm ? 10 : 12} />}
                 <span>{label}</span>
-                {IconRight && <IconRight size={12} />}
+                {IconRight && <IconRight size={isSm ? 10 : 12} />}
             </div>
         );
     }
@@ -67,7 +71,8 @@ export function ActionButton({
             href={href}
             target={target}
             className={cn(
-                "group/btn relative overflow-hidden flex items-center gap-2 px-3 py-1.5 text-xs font-mono uppercase font-bold tracking-wider border border-foreground transition-all duration-300",
+                "group/btn relative overflow-hidden flex items-center font-mono uppercase font-bold tracking-wider border border-foreground transition-all duration-300",
+                isSm ? "gap-1 px-2 py-1 text-[10px]" : "gap-2 px-3 py-1.5 text-xs",
 
                 // Base Hover Effects (Move + Hard Shadow in Black)
                 "hover:-translate-y-1 hover:-translate-x-1",
@@ -100,9 +105,9 @@ export function ActionButton({
                 />
             )}
 
-            {Icon && <Icon size={12} className="relative z-10" />}
+            {Icon && <Icon size={isSm ? 10 : 12} className="relative z-10" />}
             <span className="relative z-10">{label}</span>
-            {IconRight && <IconRight size={12} className="relative z-10 transition-transform duration-300 group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5" />}
+            {IconRight && <IconRight size={isSm ? 10 : 12} className="relative z-10 transition-transform duration-300 group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5" />}
         </Link>
     );
 }
