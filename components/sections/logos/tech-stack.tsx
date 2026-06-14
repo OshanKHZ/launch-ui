@@ -170,13 +170,13 @@ interface FilmCarouselProps {
     baseSpeed?: number;
 }
 
-function useElementWidth(ref: React.RefObject<HTMLDivElement | null>) {
+function useElementScrollWidth(ref: React.RefObject<HTMLDivElement | null>) {
     const [width, setWidth] = useState(0);
 
     useLayoutEffect(() => {
         function updateWidth() {
             if (ref.current) {
-                setWidth(ref.current.offsetWidth);
+                setWidth(ref.current.scrollWidth);
             }
         }
         updateWidth();
@@ -236,12 +236,12 @@ export default function TechStackCarousel({ baseSpeed = 80 }: FilmCarouselProps)
     const baseX = useMotionValue(0);
 
     const carouselRef = useRef<HTMLDivElement>(null);
-    const carouselWidth = useElementWidth(carouselRef);
+    const carouselWidth = useElementScrollWidth(carouselRef);
 
     // X position transform
     const x = useTransform(baseX, (v) => {
-        // Use half of carousel width since we have duplicated content
-        const width = carouselWidth / 2;
+        // Use one logo sequence width so the duplicated content loops seamlessly.
+        const width = carouselWidth / 4;
         if (width === 0) return "0px";
         return `${wrap(-width, 0, v)}px`;
     });
