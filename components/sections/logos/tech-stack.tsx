@@ -163,7 +163,14 @@ const logos = [
         className: "h-16 w-auto",
         width: 56,
         height: 56,
-    }
+    },
+    {
+        name: "Terraform",
+        src: "/logos/terraform.svg",
+        className: "h-16 w-auto",
+        width: 56,
+        height: 56,
+    },
 ];
 
 interface FilmCarouselProps {
