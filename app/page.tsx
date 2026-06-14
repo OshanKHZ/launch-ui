@@ -34,8 +34,8 @@ export default function Home() {
       <Hero />
       <About />
       <TechStackCarousel />
-      <Projects />
       <Services />
+      <Projects />
       {/* <Skills /> */}
       <CTA />
       <Footer />

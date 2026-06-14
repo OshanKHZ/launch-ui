@@ -150,6 +150,9 @@ export default function About() {
                                     <span className="font-black">Give me the problem.</span>{" "}
                                     <span className="font-light italic font-serif">I&apos;ll figure the rest.</span>
                                 </blockquote>
+                                <p className="text-base md:text-lg text-muted-foreground font-mono leading-relaxed">
+                                    I&apos;m a full-stack developer with a systems mindset: curious by nature, pragmatic in execution, and comfortable moving between product, business, and engineering. I like turning ambiguous problems into clear paths, clean code, documented decisions, and useful products that actually hold up in practice.
+                                </p>
                                 {/* <ScrollTypingText
                                     text="I'm a multidisciplinary developer and designer obsessed with crafting polished, high-performance digital experiences. I bridge the gap between design and engineering, creating solutions that are as beautiful as they are functional."
                                     className="text-base md:text-lg text-muted-foreground font-mono leading-relaxed"

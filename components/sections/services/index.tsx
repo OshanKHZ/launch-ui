@@ -10,28 +10,28 @@ import ScrollRevealText from "@/components/ui/scroll-reveal-text";
 const cards = [
     {
         id: "01",
-        title: "CLEAN DATA",
-        description: "A reliable, auditable data infrastructure. Your raw data becomes structured pipelines — migrated, transformed, and governed across cloud providers. You get clean data, at scale, you can actually trust.",
+        title: "CLEAR DOCUMENTATION",
+        description: "I keep a clear trail of decisions, evidence, issues, PRs, and implementation context, so the work is easy to review, maintain, and continue.",
     },
     {
         id: "02",
-        title: "LESS MANUAL WORK",
-        description: "Hours back in your team's day. Repetitive workflows become intelligent automations — from no-code n8n flows to custom AI agents. You get systems that work while you sleep.",
+        title: "CLEAN SYSTEMS",
+        description: "I write pragmatic, organized code with clear architecture, sensible taxonomy, and simple patterns that stay understandable as the product grows.",
     },
     {
         id: "03",
-        title: "CODE THAT SHIPS",
-        description: "A production-ready product, not a prototype. Whether a full web app, internal tool, or API integration — you get something deployed, documented, and built to last beyond the handoff.",
+        title: "PROCESS OPTIMIZATION",
+        description: "I map workflows, spot hidden inefficiencies, and turn manual or fragile processes into faster, cleaner systems with practical quick wins.",
     },
     {
         id: "04",
-        title: "DESIGN THAT CONVERTS",
-        description: "Interfaces your users actually understand. From wireframes to high-fidelity design systems — you get a product that looks premium, feels intuitive, and converts. Design that earns trust on first glance.",
+        title: "AUTONOMOUS OWNERSHIP",
+        description: "I can talk to business, product, and engineering, create my own issues, investigate usage, and move from ambiguity to execution without waiting for perfect instructions.",
     },
     {
         id: "05",
-        title: "CLEAR DIRECTION",
-        description: "A clear path forward. Whether you're stuck on architecture, scaling a team, or modernizing a legacy system — you get a technical partner who maps the problem, defines the plan, and stays accountable.",
+        title: "QUALITY MINDSET",
+        description: "I care about reliable delivery: validations, tests, data quality, governance, edge cases, and the small details that prevent problems later.",
     },
 ];
 
@@ -59,12 +59,12 @@ export default function Services() {
                     {/* Intro Section */}
                     <div className="pt-12 pb-0 max-w-container mx-auto px-6 w-full shrink-0">
                         <div className="grid grid-cols-12 gap-y-6 md:gap-y-0 relative items-center">
-                            <SectionHeader title="Services" className="text-primary col-span-12 mb-12" />
+                            <SectionHeader title="How I Work" className="text-primary col-span-12 mb-12" />
 
                             {/* Main Text */}
                             <div ref={containerRef} className="col-span-12 md:col-span-7 relative z-10">
                                 <ScrollRevealText
-                                    text="Whatever the stack, whatever the scale — you get something that works, that's built to last, and that actually moves the needle."
+                                    text="I turn ambiguity into documented, maintainable, and reliable systems."
                                     className="text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight leading-[1]"
                                     style={{ fontFamily: 'var(--font-roboto-flex), sans-serif' }}
                                     progress={textProgress}

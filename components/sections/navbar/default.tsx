@@ -297,7 +297,7 @@ export default function Navbar({
   mobileLinks = [
     { text: "Projects", href: "#projects" },
     { text: "About", href: "#about" },
-    { text: "Services", href: "#services" },
+    { text: "How I Work", href: "#services" },
     { text: "Contact", href: "mailto:lucas.oshan@gmail.com" },
   ],
   actions = [

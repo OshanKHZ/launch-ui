@@ -112,29 +112,31 @@ export default function Projects() {
   );
 
   return (
-    <section ref={container} className="relative bg-background" id="projects">
-      {/* Section Label */}
-      <div className="max-w-container mx-auto px-6 pt-20">
-        <SectionHeader title="FEATURED WORK" rightContent={rightContent} />
-      </div>
+    <section ref={container} className="relative bg-[#1E1C1B]" id="projects">
+      <div className="bg-background rounded-t-[5rem]">
+        {/* Section Label */}
+        <div className="max-w-container mx-auto px-6 pt-20">
+          <SectionHeader title="FEATURED WORK" rightContent={rightContent} />
+        </div>
 
-      <div className="flex flex-col">
-        {filteredProjects.map((project, i) => {
-          // Calculate scale target for stacking effect
-          const targetScale = 1 - ((filteredProjects.length - i) * 0.05);
-          return (
-            <Card
-              key={project.title}
-              i={i}
-              {...project}
-              targetScale={targetScale}
-              total={filteredProjects.length}
-            />
-          );
-        })}
+        <div className="flex flex-col">
+          {filteredProjects.map((project, i) => {
+            // Calculate scale target for stacking effect
+            const targetScale = 1 - ((filteredProjects.length - i) * 0.05);
+            return (
+              <Card
+                key={project.title}
+                i={i}
+                {...project}
+                targetScale={targetScale}
+                total={filteredProjects.length}
+              />
+            );
+          })}
+        </div>
+        {/* Spacer at bottom */}
+        <div className="h-[10vh]" />
       </div>
-      {/* Spacer at bottom */}
-      <div className="h-[10vh]" />
     </section>
   );
 }

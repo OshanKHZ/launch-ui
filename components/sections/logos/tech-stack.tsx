@@ -163,7 +163,7 @@ const logos = [
         className: "h-16 w-auto",
         width: 56,
         height: 56,
-    },
+    }
 ];
 
 interface FilmCarouselProps {
@@ -288,7 +288,7 @@ export default function TechStackCarousel({ baseSpeed = 80 }: FilmCarouselProps)
     });
 
     return (
-        <section ref={sectionRef} className="py-1">
+        <section ref={sectionRef} className="py-1 mb-16 md:mb-24">
             <div>
                 {/* Tooltip Portal */}
                 {mounted && createPortal(
