@@ -50,7 +50,7 @@ export default function Hero() {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.6, delay: 0.5 + index * 0.1, ease: [0.22, 1, 0.36, 1] }}
                     >
-                        <div className="relative size-8 group-hover:scale-110 transition-transform duration-300 opacity-60" style={{ filter: 'brightness(0) saturate(100%)' }}>
+                        <div className="relative size-8 opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" style={{ filter: 'brightness(0) saturate(100%)' }}>
                             <Image
                                 src={link.icon}
                                 alt={link.name}
@@ -61,7 +61,7 @@ export default function Hero() {
                         </div>
 
                         {/* Tooltip */}
-                        <span className="absolute left-full ml-4 px-3 py-1 bg-[#1E1C1B] text-primary text-sm font-mono uppercase tracking-wider rounded opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300 whitespace-nowrap">
+                        <span className="absolute left-full ml-4 px-3 py-1 bg-[#1E1C1B] text-white text-sm font-mono uppercase tracking-wider rounded opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300 whitespace-nowrap">
                             {link.name}
                         </span>
                     </motion.a>

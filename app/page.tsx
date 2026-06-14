@@ -32,11 +32,11 @@ export default function Home() {
     <main className="bg-background text-foreground min-h-screen w-full">
       <Navbar />
       <Hero />
-      <Projects />
       <About />
-      <Services />
-      <Skills />
       <TechStackCarousel />
+      <Projects />
+      <Services />
+      {/* <Skills /> */}
       <CTA />
       <Footer />
     </main>

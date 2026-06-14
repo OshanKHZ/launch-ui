@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { ExternalLink, Github } from "lucide-react";
 import Image from "next/image";
@@ -16,6 +16,7 @@ interface Project {
   code: string;
   tech: string[];
   role: string;
+  tab: string;
 }
 
 const projects: Project[] = [
@@ -26,18 +27,20 @@ const projects: Project[] = [
     src: "/projects-thumbnail/bee2bee-thumb.webp",
     link: "https://bee2bee-nine.vercel.app/login",
     code: "https://github.com/OshanKHZ/bee2bee-indexer",
-    tech: ["Next.js 14", "Python", "tree-sitter", "RAG", "n8n"],
-    role: "Frontend & AI Infrastructure"
+    tech: ["Python", "pgvector", "n8n"],
+    role: "Frontend & AI Infrastructure",
+    tab: "AI"
   },
   {
-    title: "Custom CRM",
+    title: "Delta-Z",
     category: "SaaS",
     description: "A revolutionary AI platform that transforms how we interact with data. Built with performance and scalability in mind using the latest web technologies.",
     src: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=2574&auto=format&fit=crop",
     link: "",
     code: "https://github.com",
-    tech: ["Next.js", "OpenAI", "Supabase"],
-    role: "Full Stack Developer"
+    tech: ["Next.js", "PostgreSQL", "Supabase", "Redis", "TypeScript", "Prisma"],
+    role: "Full Stack Developer",
+    tab: "Web"
   },
   {
     title: "Participa DF",
@@ -47,17 +50,8 @@ const projects: Project[] = [
     link: "https://participa.df.gov.br",
     code: "https://github.com/OshanKHZ/participa-df-pwa",
     tech: ["Next.js 16", "TypeScript", "Tailwind", "Drizzle ORM", "PWA"],
-    role: "Frontend Developer"
-  },
-  {
-    title: "Supavisor",
-    category: "SQL Linter",
-    description: "Developed a fast SQL linter for Supabase migrations that detects RLS issues and performance bottlenecks, generating automatic fixes to improve developer experience.",
-    src: "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2700&auto=format&fit=crop",
-    link: "https://www.npmjs.com/package/supavisor", // Placeholder for NPM link request
-    code: "https://github.com/OshanKHZ/supavisor",
-    tech: ["TypeScript", "Node.js", "Postgres"],
-    role: "Creator & Maintainer"
+    role: "Frontend Developer",
+    tab: "Web"
   },
   {
     title: "Stephany Rocha",
@@ -66,32 +60,75 @@ const projects: Project[] = [
     src: "/projects-thumbnail/stephanyrocha-thumb.webp",
     link: "https://google.com",
     code: "https://github.com",
-    tech: ["Next.js", "Tailwind", "Figma"],
-    role: "Designer & Frontend Developer"
+    tech: ["Next.js", "TypeScript", "Tailwind", "Vercel"],
+    role: "UI/UX & Full Stack Developer",
+    tab: "Web"
+  },
+  {
+    title: "Claude Code AI Kit",
+    category: "Agentic AI",
+    description: "A collection of AI agents, skills and commands designed to assist developers with various coding tasks. Includes agents for code generation, code review, and code optimization.",
+    src: "/projects-thumbnail/cc-swiss-knife.png",
+    link: "",
+    code: "https://github.com/OshanKHZ/cc-swiss-knife",
+    tech: ["Claude", "TypeScript", "Tailwind", "Vercel"],
+    role: "Creator & Maintainer",
+    tab: "AI"
+  },
+  {
+    title: "BitBadges",
+    category: "Experimental",
+    description: "8-bit style badge generator API for README files. Create pixel art badges with custom colors, logos and text.",
+    src: "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2700&auto=format&fit=crop",
+    link: "",
+    code: "https://github.com/OshanKHZ/bitbadges",
+    tech: ["TypeScript", "Express", "Vercel"],
+    role: "Creator & Maintainer",
+    tab: "Lab"
   }
 ];
 
+const TABS = ["Web", "AI", "Data", "Lab"];
+
 export default function Projects() {
   const container = useRef(null);
+  const [activeTab, setActiveTab] = useState("Web");
+
+  const filteredProjects = projects.filter(p => p.tab === activeTab);
+
+  const rightContent = (
+    <div className="flex items-center gap-1">
+      {TABS.map(tab => (
+        <button
+          key={tab}
+          onClick={() => setActiveTab(tab)}
+          className={`text-xs md:text-sm font-medium tracking-[0.02em] uppercase transition-colors whitespace-nowrap px-2.5 py-1 rounded-md ${activeTab === tab ? "bg-black text-white" : "text-muted-foreground hover:text-foreground hover:bg-black/5"
+            }`}
+        >
+          {tab}
+        </button>
+      ))}
+    </div>
+  );
 
   return (
     <section ref={container} className="relative bg-background" id="projects">
       {/* Section Label */}
       <div className="max-w-container mx-auto px-6 pt-20">
-        <SectionHeader title="Selected_Work" />
+        <SectionHeader title="FEATURED WORK" rightContent={rightContent} />
       </div>
 
       <div className="flex flex-col">
-        {projects.map((project, i) => {
+        {filteredProjects.map((project, i) => {
           // Calculate scale target for stacking effect
-          const targetScale = 1 - ((projects.length - i) * 0.05);
+          const targetScale = 1 - ((filteredProjects.length - i) * 0.05);
           return (
             <Card
-              key={i}
+              key={project.title}
               i={i}
               {...project}
               targetScale={targetScale}
-              total={projects.length}
+              total={filteredProjects.length}
             />
           );
         })}

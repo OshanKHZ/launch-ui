@@ -1,10 +1,12 @@
 "use client";
 
 import { SectionHeader } from "@/components/ui/section-header";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import { EASE_OUT_EXPO } from "@/lib/animations";
+import { Plus, Minus } from "lucide-react";
+import VariableProximity from "@/components/ui/variable-proximity";
 
 const services = [
     {
@@ -86,13 +88,13 @@ function AccordionItem({
         <div className="border-t border-foreground/15">
             <button
                 onClick={onToggle}
-                className="w-full flex items-center justify-between py-3 text-left group cursor-pointer"
+                className="w-full flex items-center justify-between py-3 px-1 md:px-2 text-left group cursor-pointer"
             >
                 <span className="text-sm font-dm-mono uppercase tracking-tight text-foreground group-hover:text-primary transition-colors duration-200">
                     {title}
                 </span>
-                <span className="text-foreground/50 group-hover:text-primary transition-colors duration-200 text-base font-light select-none">
-                    {isOpen ? "−" : "+"}
+                <span className="text-foreground/50 group-hover:text-primary transition-colors duration-200 flex items-center justify-center">
+                    {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
                 </span>
             </button>
 
@@ -106,7 +108,7 @@ function AccordionItem({
                         transition={{ duration: 0.3, ease: EASE_OUT_EXPO }}
                         className="overflow-hidden"
                     >
-                        <div className="pb-3">
+                        <div className="pb-3 px-1 md:px-2">
                             <p className="text-xs text-muted-foreground font-mono mb-2 leading-relaxed">
                                 {description}
                             </p>
@@ -131,9 +133,10 @@ function AccordionItem({
 
 export default function About() {
     const [openItem, setOpenItem] = useState<string | null>(null);
+    const containerRef = useRef<HTMLElement>(null);
 
     return (
-        <section className="relative bg-[#1E1C1B] -mt-[20vh]">
+        <section ref={containerRef} className="relative bg-background">
             <div className="bg-background text-foreground relative w-full pt-32 pb-32 px-6">
                 <div className="max-w-container mx-auto">
                     <SectionHeader title="About" />
@@ -182,6 +185,20 @@ export default function About() {
                         </div>
                     </div>
                 </div>
+
+                {/* Crafting text with proximity effect */}
+                {/* <div className="flex justify-center mt-20 overflow-hidden py-4 px-4 md:px-20">
+                    <VariableProximity
+                        label="Crafting digital experiences that merge art and technology, creating solutions that are as beautiful as they are functional."
+                        className="text-4xl md:text-5xl font-normal tracking-tight leading-[1] text-foreground text-center cursor-default"
+                        style={{ fontFamily: 'var(--font-roboto-flex), sans-serif' }}
+                        fromFontVariationSettings="'wght' 400, 'wdth' 100"
+                        toFontVariationSettings="'wght' 900, 'wdth' 115"
+                        containerRef={containerRef}
+                        radius={150}
+                        falloff="linear"
+                    />
+                </div> */}
             </div>
         </section>
     );

@@ -39,7 +39,8 @@ export default function CTA({
   className,
 }: CTAProps) {
   return (
-    <Section className={cn("group relative overflow-hidden", className)}>
+    <div className="relative bg-[#1E1C1B]">
+      <Section className={cn("group relative overflow-hidden bg-background rounded-t-[5rem]", className)}>
       <div className="max-w-container relative z-10 mx-auto">
 
         {/* Mobile layout */}
@@ -106,5 +107,6 @@ export default function CTA({
         <Glow variant="bottom" />
       </div>
     </Section>
+    </div>
   );
 }

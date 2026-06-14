@@ -10,27 +10,27 @@ import ScrollRevealText from "@/components/ui/scroll-reveal-text";
 const cards = [
     {
         id: "01",
-        title: "DATA ENGINEERING & CLOUD",
+        title: "CLEAN DATA",
         description: "A reliable, auditable data infrastructure. Your raw data becomes structured pipelines — migrated, transformed, and governed across cloud providers. You get clean data, at scale, you can actually trust.",
     },
     {
         id: "02",
-        title: "AI & AUTOMATION",
+        title: "LESS MANUAL WORK",
         description: "Hours back in your team's day. Repetitive workflows become intelligent automations — from no-code n8n flows to custom AI agents. You get systems that work while you sleep.",
     },
     {
         id: "03",
-        title: "SOFTWARE DEVELOPMENT",
+        title: "CODE THAT SHIPS",
         description: "A production-ready product, not a prototype. Whether a full web app, internal tool, or API integration — you get something deployed, documented, and built to last beyond the handoff.",
     },
     {
         id: "04",
-        title: "UI/UX DESIGN",
+        title: "DESIGN THAT CONVERTS",
         description: "Interfaces your users actually understand. From wireframes to high-fidelity design systems — you get a product that looks premium, feels intuitive, and converts. Design that earns trust on first glance.",
     },
     {
         id: "05",
-        title: "CONSULTING & STRATEGY",
+        title: "CLEAR DIRECTION",
         description: "A clear path forward. Whether you're stuck on architecture, scaling a team, or modernizing a legacy system — you get a technical partner who maps the problem, defines the plan, and stays accountable.",
     },
 ];

@@ -1,0 +1,26 @@
+<svg version="1.2" baseProfile="tiny-ps" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1493 1514" width="1493" height="1514">
+	<title>logo-informatica-svg</title>
+	<style>
+		tspan { white-space:pre }
+		.shp0 { fill: #ff4d00 } 
+		.shp1 { fill: #ff7d00 } 
+		.shp2 { fill: #001aff } 
+		.shp3 { fill: #e23400 } 
+	</style>
+	<g id="logo-informatica">
+		<g id="Logo/Informatica">
+			<g id="Group-32">
+				<g id="Layer">
+					<path id="Fill-1" class="shp0" d="M827.74 776.46L1011.72 807.24L1136.39 941.82L1119.65 1135.3L670.62 880.82L827.74 776.46Z" />
+					<path id="Fill-2" class="shp1" d="M1492.85 757.06L1119.65 1135.31L746.41 0.62L1492.85 757.06Z" />
+					<path id="Fill-3" class="shp2" d="M1244.18 757.09L670.64 880.83L686.37 601.61L1244.18 757.09Z" />
+					<path id="Fill-4" class="shp3" d="M0.01 757.11L276.54 818.94L459.42 939.22L472.78 1060.26L398.54 1161L0.01 757.11Z" />
+					<path id="Fill-5" class="shp0" d="M706.06 41.58L459.41 939.2L0 757.1L706.06 41.58Z" />
+					<path id="Fill-6" class="shp1" d="M459.42 939.22L1073.31 1182.32L746.41 1513.58L398.54 1161L459.42 939.22Z" />
+					<g id="Group-31">
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+</svg>

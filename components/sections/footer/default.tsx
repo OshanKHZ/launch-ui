@@ -120,7 +120,7 @@ export default function FooterSection({
           {/* Third Column */}
           <div className="col-span-3 col-start-9 flex flex-col gap-3">
             <p className="text-foreground/70 font-dm-mono text-sm uppercase tracking-tight">
-              Developed By: <span className="underline underline-offset-4 decoration-foreground/30 text-foreground">Lucas Oshan</span>
+              Developed and Designed By <span className="underline underline-offset-4 decoration-foreground/30 text-foreground">ME</span>
             </p>
           </div>
         </div>

@@ -275,6 +275,7 @@
 body {
   letter-spacing: -0.03em;
   line-height: 1.1em;
+  cursor: url('/pointer-cursor-black.svg') 2 2, default;
 }
 
 html {
@@ -284,6 +285,7 @@ html {
 @layer base {
   * {
     @apply border-border;
+    cursor: url('/pointer-cursor-black.svg') 2 2, auto;
   }
 
   body {
